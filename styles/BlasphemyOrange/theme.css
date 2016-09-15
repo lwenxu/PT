@@ -3,7 +3,8 @@ body
 	margin-top: 0px;
 	margin-bottom: 0px;
 	color: #000000;
-	font-family: tahoma, arial, helvetica, sans-serif;
+	background-color: white;
+	font-family: Magneto
 }
 body.inframe
 {
@@ -114,13 +115,13 @@ p.sub
 {
 	margin-bottom: 4pt
 }
-td
-{
-	border-right: #cccccc 1px solid;
-	border-top: #cccccc 1px solid;
-	border-left: #cccccc 1px solid;
-	border-bottom: #cccccc 1px solid
-}
+/*td*/
+/*{*/
+	/*border-right: #cccccc 1px solid;*/
+	/*border-top: #cccccc 1px solid;*/
+	/*border-left: #cccccc 1px solid;*/
+	/*border-bottom: #cccccc 1px solid*/
+/*}*/
 td.embedded
 {
 	border-right: medium none;
@@ -492,23 +493,25 @@ img.border
 }
 .dropmenu
 {
-	background:#F2F9FD none repeat scroll 0 0;
+	background: #00cc00 none repeat scroll 0 0;
 	border:3px solid #A6C9D7;
 	margin-top:3px;
 	opacity:0.9;
 	position:absolute;
 	text-align:left;
+
 }
 .dropmenu ul
 {
 	list-style-type: none;
 	white-space: nowrap;
-	padding:10px;
+	/*padding:10px;*/
 }
 .dropmenu ul li
 {
-	margin-left: 0px;
-	margin-right: 0px;
+	margin-left: 3px;
+	margin-right: 3px;
+	text-align: center;
 }
 ul.menu
 {
@@ -516,19 +519,20 @@ ul.menu
 	list-style-type: none;
 	white-space: nowrap;
 	text-align: center;
+
 }
 ul.menu li
 {
 	display: inline;
 	margin-left: 0px;
-	margin-right: 0px;
+	text-align: center;
 }
+
+
 ul.menu li a
 {
-	color: #2d2b2b;
-	background: url(./shade.gif) repeat-x left top;
-	border: 1px solid white;
-	background-color: #ff9718;
+	color: white;
+	background-color: #00cc00;
 	margin-right: 1px;
 	padding: 3px 7px;
 	text-decoration: none;
@@ -538,28 +542,33 @@ ul.menu li a
 	font-variant: normal;
 	text-align: center;
 	display: inline-block;
+	font-family: "Microsoft JhengHei UI";
+	margin-top: 20px;
+	margin-left: 5px;
+	height: 43px;
 }
 ul.menu li a:link
 {
-	color: #2d2b2b;
+	color: white;
 }
 ul.menu li a:visited
 {
-	color: #2d2b2b;
+	color: white;
 }
 ul.menu li a:hover
 {
-	color: #2d2b2b;
-	text-decoration: underline;
+	color: white;
+	background-color: #00aa00;
 }
 ul.menu li a:active
 {
-	color: #2d2b2b;
+	color: white;
 }
 ul.menu li.selected a
 {
-	background-image: url(./shadeactive.gif);
-	background-color: #8a8a8a;
+
+	background-color: #00aa00;
+	color: white;
 }
 ul.menu li.selected a:hover
 {

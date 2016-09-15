@@ -2,10 +2,11 @@ body
 {
 	margin-top: 0px;
 	margin-bottom: 0px;
-	background: url(./bg.jpg) no-repeat center top;
+	background: url(../../assets/img/bg.jpg) no-repeat center top;
 	background-color: #006633;
 	color: #000000;
-	font-family: tahoma, arial, helvetica, sans-serif;
+	font-family: Magneto;
+
 }
 body.inframe
 {

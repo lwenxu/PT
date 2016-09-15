@@ -2070,7 +2070,8 @@ function menu ($selected = "home") {
 	echo '
 	<style>
 	.nav{
-	background-color: #00aaaa;
+	height: 50px;
+		background-color: #00cc00;
 	}
 </style>
 	';

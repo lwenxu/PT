@@ -150,7 +150,7 @@ $AUTHORITY=array(
 );
 $BASIC=array(
 	'SITENAME' => 'NexusPHP',
-	'BASEURL' => '127.0.0.1/nuesxpt',
+	'BASEURL' => '127.0.0.1/PT',
 	'announce_url' => '127.0.0.1/announce.php',
 	'mysql_host' => '127.0.0.1',
 	'mysql_user' => 'root',
