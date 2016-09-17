@@ -249,7 +249,7 @@ if (get_user_class() >= UC_PEASANT)
 	begin_main_frame();
 
 	?>
-<div align=center>
+<div align=center style="font-family: Microsoft YaHei;font-size: 30px">
 <?php
 	if (!$size = $Cache->get_value('subtitle_sum_size')){
 		$res = sql_query("SELECT SUM(size) AS size FROM subs");
@@ -257,7 +257,7 @@ if (get_user_class() >= UC_PEASANT)
 		$size = $row5['size'];
 		$Cache->cache_value('subtitle_sum_size', $size, 3600);
 	}
-
+	
 	begin_frame($lang_subtitles['text_upload_subtitles'].mksize($size)."", true,10,"100%","center");
 	?>
 	</div>
@@ -288,6 +288,9 @@ if (get_user_class() >= UC_PEASANT)
 	}
 	echo "
 	<style>
+		.forms{
+			margin-top: 25px;
+		}
 		.forms td{
 			border: solid 2px #00a8c6;
 			height: 50%;
@@ -295,6 +298,34 @@ if (get_user_class() >= UC_PEASANT)
 			font-family: 'Microsoft YaHei';
 			font-size: 15px;
 			color: #00a8c6;
+		}
+		.btnup{
+			background-color: #00a8c6;
+			color: white;
+		}
+		.btncel{
+			background-color: #da3f3f;
+			color: white;
+		}
+		.btntwo{
+			padding-top: 7px;
+			padding-bottom: 7px;
+		}
+		.inputbar{
+			margin-top: 7px;
+			margin-left: 7px;
+		}
+		.seracher{
+			font-family: 'Microsoft YaHei';
+			font-size: 15px;
+			color: #00a8c6;
+		}
+		.serchdo{
+			margin-top: 6px;
+		}
+		.serbtn{
+			margin-left: 8px;
+			margin-bottom: 15px;
 		}
 		</style>
 	";
@@ -307,13 +338,13 @@ if (get_user_class() >= UC_PEASANT)
 		print("<br />(".$lang_subtitles['text_maximum_file_size'].mksize($maxsubsize_main).".)");
 	print("</td></tr>\n");
 	if($in_detail == "")
-	print("<tr><td class=rowhead>".$lang_subtitles['row_torrent_id']."<font color=red>*</font></td><td class=rowfollow align=left><input type=text name=torrent_id style=\"width:300px\"><br />".$lang_subtitles['text_torrent_id_note']."</td></tr>\n");
+	print("<tr><td class=rowhead>".$lang_subtitles['row_torrent_id']."<font color=red>*</font></td><td class=rowfollow align=left><input class='form-control form-control-solid placeholder-no-fix inputbar' type=text name=torrent_id style=\"width:300px\"><br />".$lang_subtitles['text_torrent_id_note']."</td></tr>\n");
 	else
 	{
-		print("<tr><td class=rowhead>".$lang_subtitles['row_torrent_id']."<font color=red>*</font></td><td class=rowfollow align=left><input type=text name=torrent_id value=$detail_torrent_id style=\"width:300px\"><br />".$lang_subtitles['text_torrent_id_note']."</td></tr>\n");
+		print("<tr><td class=rowhead>".$lang_subtitles['row_torrent_id']."<font color=red>*</font></td><td class=rowfollow align=left><input  type=text name=torrent_id value=$detail_torrent_id style=\"width:300px\"><br />".$lang_subtitles['text_torrent_id_note']."</td></tr>\n");
 		$in_detail = "";
 	}
-	print("<tr><td class=rowhead>".$lang_subtitles['row_title']."</td><td class=rowfollow colspan=3 align=left><input type=text name=title style=\"width:300px\"><br />".$lang_subtitles['text_title_note']."</td></tr>\n");
+	print("<tr><td class=rowhead>".$lang_subtitles['row_title']."</td><td class=rowfollow colspan=3 align=left><input class='form-control form-control-solid placeholder-no-fix inputbar' type=text name=title style=\"width:300px\"><br />".$lang_subtitles['text_title_note']."</td></tr>\n");
 
 	$s = "<tr><td class=rowhead>".$lang_subtitles['row_language']."<font color=red>*</font></td><td class=rowfollow align=left><select name=\"sel_lang\"><option value=\"0\">".$lang_subtitles['select_choose_one']."</option>\n";
 
@@ -332,7 +363,7 @@ if (get_user_class() >= UC_PEASANT)
 		tr($lang_subtitles['row_show_uploader'], "<input type=checkbox name=uplver value=yes>".$lang_subtitles['hide_uploader_note'], 1);
 	}
 	
-	print("<tr><td class=toolbox colspan=2 align=center><input type=submit class=btn value=".$lang_subtitles['submit_upload_file']."> <input type=reset class=btn value=\"".$lang_subtitles['submit_reset']."\"></td></tr>\n");
+	print("<tr><td class='toolbox btntwo' colspan=2 align=center ><input type=submit class='btn btnup' value=".$lang_subtitles['submit_upload_file'].">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type=reset class='btn btncel' value=\"".$lang_subtitles['submit_reset']."\"></td></tr>\n");
 	print("</table>\n");
 	print("</form>\n");
 	end_frame();
@@ -342,20 +373,20 @@ if (get_user_class() >= UC_PEASANT)
 
 if(get_user_class() >= UC_PEASANT)
 {
-		print("<form method=get action=?>\n");
+		print("<form method=get action=? class='seracher'>\n");
 		print("<br /><br />");
-		print("<input type=text style=\"width:200px\" name=search>\n");
+		print("<input class='form-control form-control-solid placeholder-no-fix inputbar ' type=text style=\"width:200px\" name=search>\n");
 
 		$s = "<select name=\"lang_id\"><option value=\"0\">".$lang_subtitles['select_all_languages']."</option>\n";
 		$langs = langlist("sub_lang");
 		foreach ($langs as $row)
 		{
-			$s .= "<option value=\"" . $row["id"] . "\">" . htmlspecialchars($row["lang_name"]) . "</option>\n";
+			$s .= "<option value=\"" . $row["id"] . "\" class='serchdo'>" . htmlspecialchars($row["lang_name"]) . "</option>\n";
 		}
 		$s .= "</select>";
 		print($s);
 
-		print("<input type=submit class=btn value=\"".$lang_subtitles['submit_search']."\">\n");
+		print("<input type=submit class='btn btnup serchdo serbtn' value=\"".$lang_subtitles['submit_search']."\">\n");
 		print("</form>\n");
 
 		for ($i = 97; $i < 123; ++$i)

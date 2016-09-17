@@ -14,7 +14,35 @@ function bark($msg) {
 function usercpmenu ($selected = "home") {
 	global $lang_usercp;
 	begin_main_frame();
-	print ("<div id=\"usercpnav\"><ul id=\"usercpmenu\" class=\"menu\">");
+	echo "
+		<style>
+			.menucontrol{
+				background-color: #00a8c6;
+				height: 40px;
+				width: 67%;
+				margin-left: 16%;
+				margin-bottom: 10px;
+			}
+			
+			.menucontrol li a{
+				float: left;
+				padding-top: 5px;
+				padding-left: 6%;
+				color: white;
+				font-family: Century Gothic, Microsoft yahei;
+				font-size: 17px;
+				font-weight: 200;
+			}
+			a:link{
+				text-decoration: none;
+				
+			}
+			a:hover{
+			text-decoration: none;
+			}
+		</style>
+	";
+	print ("<div id=\"usercpnav\"><ul id=\"usercpmenu\" class=\"menucontrol\">");
 	print ("<li" . ($selected == "home" ? " class=selected" : "") . "><a href=\"usercp.php\">".$lang_usercp['text_user_cp_home']."</a></li>");
 	print ("<li" . ($selected == "personal" ? " class=selected" : "") . "><a href=\"?action=personal\">".$lang_usercp['text_personal_settings']."</a></li>");
 	print ("<li" . ($selected == "tracker" ? " class=selected" : "") . "><a href=\"?action=tracker\">".$lang_usercp['text_tracker_settings']."</a></li>");
@@ -46,7 +74,7 @@ function form($name) {
 }
 function submit() {
 	global $lang_usercp;
-	print("<tr><td class=\"rowhead\" valign=\"top\" align=\"right\">".$lang_usercp['row_save_settings']."</td><td class=\"rowfollow\" valign=\"top\" align=left><input type=submit value=\"".$lang_usercp['submit_save_settings']."\"></td></tr>"."</form>");
+	print("<tr><td class=\"rowhead\" valign=\"top\" align=\"right\" style='padding-right: 70px;padding-left: 30%'>"."</td><td class=\"rowfollow\" valign=\"top\" align=left><input class='btn green uppercase' style='background-color: #00a8c6;color: white;margin-top: 7px;' type=submit value=\"".$lang_usercp['submit_save_settings']."\"></td></tr>"."</form>");
 }
 function format_tz($a)
 {
@@ -160,7 +188,8 @@ if ($action){
 			}
 
 			usercpmenu ("personal");
-			print ("<table border=0 cellspacing=0 cellpadding=5 width=940>");
+
+			print ("<table border=0 cellspacing=0 cellpadding=5 class='infos'>");
 			if ($type == 'saved')
 				print("<tr><td colspan=2 class=\"heading\" valign=\"top\" align=\"center\"><font color=red>".$lang_usercp['text_saved']."</font></td></tr>\n");
 
@@ -854,7 +883,23 @@ if ($forumposts)
 	$percentages = round($forumposts*100/$postcount, 3)."%";
 }
 ?>
-<table border="0" cellspacing="0" cellpadding="5" width=940>
+
+	<style>
+		.infos{
+			width: 60%;
+			height: 500px;
+			background-color: #f2ead6;
+			color: #00a8c6;
+			font-size: 17px;
+			font-weight: 300;
+			font-family: "Microsoft YaHei";
+			margin-left: 20%;
+			margin-top: 7px;
+			margin-top: 5px;
+		}
+	</style>
+
+<table border="0" cellspacing="0" cellpadding="5" class="infos">
 <?php
 tr_small($lang_usercp['row_join_date'], $joindate, 1);
 tr_small($lang_usercp['row_email_address'], $CURUSER['email'], 1);
@@ -881,54 +926,54 @@ if ($forumposts)
 	tr($lang_usercp['row_forum_posts'], $forumposts." [<a href=\"userhistory.php?action=viewposts&id=".$CURUSER[id]."\" title=\"".$lang_usercp['link_view_posts']."\">".$lang_usercp['text_view']."</a>] (".$dayposts.$lang_usercp['text_posts_per_day']."; ".$percentages.$lang_usercp['text_of_total_posts'].")", 1);
 ?>
 </table>
-<table border="0" cellspacing="0" cellpadding="5" width=940>
+<!--<table border="0" cellspacing="0" cellpadding="5" width=940>-->
 <?php
-print("<td align=center class=tabletitle><b>".$lang_usercp['text_recently_read_topics']."</b></td>");
-?>
-</table>
+//print("<td align=center class=tabletitle><b>".$lang_usercp['text_recently_read_topics']."</b></td>");
+//?>
+<!--</table>-->
 <?php
-print("<table border=0 cellspacing=0 cellpadding=3 width=940><tr>".
-"<td class=colhead align=left width=80%>".$lang_usercp['col_topic_title']."</td>".
-"<td class=colhead align=center><nobr>".$lang_usercp['col_replies']."/".$lang_usercp['col_views']."</nobr></td>".
-"<td class=colhead align=center>".$lang_usercp['col_topic_starter']."</td>".
-"<td class=colhead align=center width=20%>".$lang_usercp['col_last_post']."</td>".
-"</tr>");
-$res_topics = sql_query("SELECT * FROM readposts INNER JOIN topics ON topics.id = readposts.topicid WHERE readposts.userid = ".$CURUSER[id]." ORDER BY readposts.id DESC LIMIT 5") or sqlerr();
-while ($topicarr = mysql_fetch_assoc($res_topics))
-{
-	$topicid = $topicarr["id"];
-	$topic_title = $topicarr["subject"];
-	$topic_userid = $topicarr["userid"];
-	$topic_views = $topicarr["views"];
-	$views = number_format($topic_views);
-
-	/// GETTING TOTAL NUMBER OF POSTS ///
-	if (!$posts = $Cache->get_value('topic_'.$topicid.'_post_count')){
-		$posts = get_row_count("posts","WHERE topicid=".sqlesc($topicid));
-		$Cache->cache_value('topic_'.$topicid.'_post_count', $posts, 3600);
-	}
-	$replies = max(0, $posts - 1);
-
-	/// GETTING USERID AND DATE OF LAST POST ///
-	$arr = get_post_row($topicarr['lastpost']);
-	$postid = 0 + $arr["id"];
-	$userid = 0 + $arr["userid"];
-	$added = gettime($arr['added'],true,false);
-
-	/// GET NAME OF LAST POSTER ///
-	$username = get_username($userid);
-
-	/// GET NAME OF THE AUTHOR ///
-	$author = get_username($topic_userid);
-	$subject = "<a href=forums.php?action=viewtopic&topicid=$topicid><b>" . htmlspecialchars($topicarr["subject"]) . "</b></a>";
-
-	print("<tr class=tableb><td style='padding-left: 10px' align=left class=rowfollow>$subject</td>".
-	"<td align=center class=rowfollow>".$replies."/".$views."</td>" .
-	"<td align=center class=rowfollow>".$author."</td>" .
-	"<td align=center class=rowfollow><nobr>".$added." | ".$username."</nobr></td></tr>");
-}
-?>
-  </table>
+//print("<table border=0 cellspacing=0 cellpadding=3 width=940><tr>".
+//"<td class=colhead align=left width=80%>".$lang_usercp['col_topic_title']."</td>".
+//"<td class=colhead align=center><nobr>".$lang_usercp['col_replies']."/".$lang_usercp['col_views']."</nobr></td>".
+//"<td class=colhead align=center>".$lang_usercp['col_topic_starter']."</td>".
+//"<td class=colhead align=center width=20%>".$lang_usercp['col_last_post']."</td>".
+//"</tr>");
+//$res_topics = sql_query("SELECT * FROM readposts INNER JOIN topics ON topics.id = readposts.topicid WHERE readposts.userid = ".$CURUSER[id]." ORDER BY readposts.id DESC LIMIT 5") or sqlerr();
+//while ($topicarr = mysql_fetch_assoc($res_topics))
+//{
+//	$topicid = $topicarr["id"];
+//	$topic_title = $topicarr["subject"];
+//	$topic_userid = $topicarr["userid"];
+//	$topic_views = $topicarr["views"];
+//	$views = number_format($topic_views);
+//
+//	/// GETTING TOTAL NUMBER OF POSTS ///
+//	if (!$posts = $Cache->get_value('topic_'.$topicid.'_post_count')){
+//		$posts = get_row_count("posts","WHERE topicid=".sqlesc($topicid));
+//		$Cache->cache_value('topic_'.$topicid.'_post_count', $posts, 3600);
+//	}
+//	$replies = max(0, $posts - 1);
+//
+//	/// GETTING USERID AND DATE OF LAST POST ///
+//	$arr = get_post_row($topicarr['lastpost']);
+//	$postid = 0 + $arr["id"];
+//	$userid = 0 + $arr["userid"];
+//	$added = gettime($arr['added'],true,false);
+//
+//	/// GET NAME OF LAST POSTER ///
+//	$username = get_username($userid);
+//
+//	/// GET NAME OF THE AUTHOR ///
+//	$author = get_username($topic_userid);
+//	$subject = "<a href=forums.php?action=viewtopic&topicid=$topicid><b>" . htmlspecialchars($topicarr["subject"]) . "</b></a>";
+//
+//	print("<tr class=tableb><td style='padding-left: 10px' align=left class=rowfollow>$subject</td>".
+//	"<td align=center class=rowfollow>".$replies."/".$views."</td>" .
+//	"<td align=center class=rowfollow>".$author."</td>" .
+//	"<td align=center class=rowfollow><nobr>".$added." | ".$username."</nobr></td></tr>");
+//}
+//?>
+<!--  </table>-->
 </td>
 </tr>
 <?php

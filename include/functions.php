@@ -1981,13 +1981,21 @@ function tr($x,$y,$noesc=0,$relation='') {
 }
 
 function tr_small($x,$y,$noesc=0,$relation='') {
+	echo "<style>
+			td{
+				color: #00a8c6;
+				font-family: Century Gothic, Microsoft yahei;
+				font-size: 17px;
+				font-weight: 200;
+			}
+			</style>";
 	if ($noesc)
 	$a = $y;
 	else {
 		$a = htmlspecialchars($y);
 		//$a = str_replace("\n", "<br />\n", $a);
 	}
-	print("<tr".( $relation ? " relation = \"$relation\"" : "")."><td width=\"1%\" class=\"rowhead nowrap\" valign=\"top\" align=\"right\">".$x."</td><td width=\"99%\" class=\"rowfollow\" valign=\"top\" align=\"left\">".$a."</td></tr>\n");
+	print("<tr".( $relation ? " relation = \"$relation\"" : "")."><td style='padding-left:7%;padding-top:20px' width=\"32%\" class=\"rowhead nowrap\" valign=\"top\" align=\"right\">".$x."</td><td width=\"%\" class=\"rowfollow\" valign=\"top\" align=\"left\" style='padding-left:40px;padding-top:20px'>".$a."</td></tr>\n");
 }
 
 function twotd($x,$y,$nosec=0){
