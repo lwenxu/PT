@@ -261,24 +261,44 @@ if (get_user_class() >= UC_PEASANT)
 	begin_frame($lang_subtitles['text_upload_subtitles'].mksize($size)."", true,10,"100%","center");
 	?>
 	</div>
+	<style>
+		.rules p{
+			font-weight: 200;
+			font-family: "Microsoft YaHei";
+			font-size: 20px;
+			color: #00a8c6;
+			margin-left: 10%;
+		}
+	</style>
 <?php
 
-	print("<p align=left><b><font size=5>".$lang_subtitles['text_rules']."</font></b></p>\n");
-	print("<p align=left>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ".$lang_subtitles['text_rule_one']."</p>\n");
+	print("<p align=left><b><font size=5 style='font-family: Microsoft YaHei;font-size: 30px;font-weight: 300;color: #E80000;margin-left: 10px;padding-top: 5px'>".$lang_subtitles['text_rules']."</font></b></p>\n");
+	print("<div class='rules'><p align=left>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ".$lang_subtitles['text_rule_one']."</p>\n");
 	print("<p align=left>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ".$lang_subtitles['text_rule_two']."</p>\n");
 	print("<p align=left>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ".$lang_subtitles['text_rule_three']."</p>\n");
 	print("<p align=left>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ".$lang_subtitles['text_rule_four']."</p>\n");
 	print("<p align=left>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ".$lang_subtitles['text_rule_five']."</p>\n");
-	print("<p align=left>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ".$lang_subtitles['text_rule_six']."</p>\n");
+	print("<p align=left>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ".$lang_subtitles['text_rule_six']."</p></div>\n");
 	
-	print($lang_subtitles['text_red_star_required']);
+//	print("<p style=font-family: Microsoft YaHei;font-size: 20px;font-weight: 200;color: #e02222>".$lang_subtitles['text_red_star_required']."</p>");
 	if($in_detail != "")
 	{
-		print("<p >".$lang_subtitles['text_uploading_subtitles_for_torrent']."<b>$torrent_name</b></p>\n");
+		print("<p style='font-family: Microsoft YaHei;font-size: 20px;font-weight: 200;color: #e02222'>".$lang_subtitles['text_uploading_subtitles_for_torrent']."<b>$torrent_name</b></p>\n");
 		print("<br />");
 	}
-
-	print("<form enctype=multipart/form-data method=post action=?>\n");
+	echo "
+	<style>
+		.forms td{
+			border: solid 2px #00a8c6;
+			height: 50%;
+			width: 40%;
+			font-family: 'Microsoft YaHei';
+			font-size: 15px;
+			color: #00a8c6;
+		}
+		</style>
+	";
+	print("<form enctype=multipart/form-data method=post action=? class='forms'>\n");
 	print("<input type=hidden name=action value=upload>");
 	print("<table class=main border=1 cellspacing=0 cellpadding=5>\n");
 

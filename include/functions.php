@@ -70,9 +70,9 @@ function stdmsg($heading, $text, $htmlstrip = false)
 		$heading = htmlspecialchars(trim($heading));
 		$text = htmlspecialchars(trim($text));
 	}
-	print("<table align=\"center\" class=\"main\" width=\"500\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"embedded\">\n");
+	print("<table style=\"width: 970px;margin-left: 20%;background-color: #00a8c6;color: white;font-family: 'Microsoft YaHei';font-size: 17px;font-weight: 300;\" align=\"center\" class=\"main\" width=\"500\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"embedded\">\n");
 	if ($heading)
-	print("<h2>".$heading."</h2>\n");
+	print("<h2 style=\"font-family: 'Microsoft YaHei';font-size: 35px;font-weight: 300;color: white;text-align: center\">".$heading."</h2>\n");
 	print("<table width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"10\"><tr><td class=\"text\">");
 	print($text . "</td></tr></table></td></tr></table>\n");
 }
@@ -1547,10 +1547,12 @@ function show_image_code () {
 	if ($iv == "yes") {
 		unset($imagehash);
 		$imagehash = image_code () ;
-		print ("<tr><td class=\"rowhead\">".$lang_functions['row_security_image']."</td>");
-		print ("<td align=\"left\"><img src=\"".htmlspecialchars("image.php?action=regimage&imagehash=".$imagehash)."\" border=\"0\" alt=\"CAPTCHA\" /></td></tr>");
-		print ("<tr><td class=\"rowhead\">".$lang_functions['row_security_code']."</td><td align=\"left\">");
-		print("<input type=\"text\" autocomplete=\"off\" style=\"width: 180px; border: 1px solid gray\" name=\"imagestring\" value=\"\" />");
+//		echo "<div><img style='margin-left: 50%' src=\"".htmlspecialchars("image.php?action=regimage&imagehash=".$imagehash)."\" /></div>";
+
+		print ("<tr><td class=\"rowhead\" style=\"font-family: Century Gothic, Microsoft yahei;font-size: 17px;margin-left: 10%;>".$lang_functions['row_security_image']."</td>");
+		print ("<td  align=\"left\"><img style='margin-left: 20%' src=\"".htmlspecialchars("image.php?action=regimage&imagehash=".$imagehash)."\" border=\"0\" alt=\"CAPTCHA\" /></td></tr><br>");
+		print ("<tr><td class=\"rowhead\"><span style='font-family: \"Century Gothic\", \"Microsoft yahei\";font-size: 17px;margin-left: 10%;'>".$lang_functions['row_security_code']."</td><td align=\"left\">");
+		print("<input  class=\"form-control form-control-solid placeholder-no-fix\" type=\"text\" autocomplete=\"off\" style=\"width: 180px; border: 1px solid gray;margin-left: 20%\" name=\"imagestring\" value=\"\" />");
 		print("<input type=\"hidden\" name=\"imagehash\" value=\"$imagehash\" /></td></tr>");
 	}
 }
@@ -2066,39 +2068,182 @@ function menu ($selected = "home") {
 	$selected = "";
 
 
+	/*
+	 * <table id="info_block" cellpadding="4" cellspacing="0" border="0" width="100%"><tr>
+	<td><table width="100%" cellspacing="0" cellpadding="0" border="0"><tr>
+		<td class="bottom" align="left"><span class="medium"><?php echo $lang_functions['text_welcome_back'] ?>, <?php echo get_username($CURUSER['id'])?>
+	 [<a href="logout.php"><?php echo $lang_functions['text_logout'] ?></a>]
 
-	echo '
-	<style>
-	.nav{
-	height: 50px;
-		background-color: #00cc00;
+	<?php if (get_user_class() >= UC_MODERATOR) { ?> [<a href="staffpanel.php"><?php echo $lang_functions['text_staff_panel'] ?></a>]
+	 <?php }?> 
+	
+	<?php if (get_user_class() >= UC_SYSOP) { ?> [<a href="settings.php"><?php echo $lang_functions['text_site_settings'] ?></a>]<?php } ?>
+	收藏
+	[<a href="torrents.php?inclbookmarked=1&amp;allsec=1&amp;incldead=0"><?php echo $lang_functions['text_bookmarks'] ?></a>]
+	魔力值
+	 <font class = 'color_bonus'><?php echo $lang_functions['text_bonus'] ?></font>
+	[<a href="mybonus.php"><?php echo $lang_functions['text_use'] ?></a>]: <?php echo number_format($CURUSER['seedbonus'], 1)?>
+	邀请
+	<font class = 'color_invite'><?php echo $lang_functions['text_invite'] ?></font>
+	[<a href="invite.php?id=<?php echo $CURUSER['id']?>"><?php echo $lang_functions['text_send'] ?></a>]: <?php echo $CURUSER['invites']?><br />
+
+	<font class="color_ratio"><?php echo $lang_functions['text_ratio'] ?></font> <?php echo $ratio?>  <font class='color_uploaded'><?php echo $lang_functions['text_uploaded'] ?></font> <?php echo mksize($CURUSER['uploaded'])?><font class='color_downloaded'> <?php echo $lang_functions['text_downloaded'] ?></font> <?php echo mksize($CURUSER['downloaded'])?>  <font class='color_active'><?php echo $lang_functions['text_active_torrents'] ?></font> <img class="arrowup" alt="Torrents seeding" title="<?php echo $lang_functions['title_torrents_seeding'] ?>" src="pic/trans.gif" /><?php echo $activeseed?>  <img class="arrowdown" alt="Torrents leeching" title="<?php echo $lang_functions['title_torrents_leeching'] ?>" src="pic/trans.gif" /><?php echo $activeleech?>&nbsp;&nbsp;<font class='color_connectable'><?php echo $lang_functions['text_connectable'] ?></font><?php echo $connectable?> <?php echo maxslots();?></span></td>
+
+	<td class="bottom" align="right"><span class="medium"><?php echo $lang_functions['text_the_time_is_now'] ?><?php echo $datum[hours].":".$datum[minutes]?><br />
+
+<?php
+	if (get_user_class() >= $staffmem_class){
+	$totalreports = $Cache->get_value('staff_report_count');
+	if ($totalreports == ""){
+		$totalreports = get_row_count("reports");
+		$Cache->cache_value('staff_report_count', $totalreports, 900);
 	}
-</style>
-	';
+	$totalsm = $Cache->get_value('staff_message_count');
+	if ($totalsm == ""){
+		$totalsm = get_row_count("staffmessages");
+		$Cache->cache_value('staff_message_count', $totalsm, 900);
+	}
+	$totalcheaters = $Cache->get_value('staff_cheater_count');
+	if ($totalcheaters == ""){
+		$totalcheaters = get_row_count("cheaters");
+		$Cache->cache_value('staff_cheater_count', $totalcheaters, 900);
+	}
+	print("<a href=\"cheaterbox.php\"><img class=\"cheaterbox\" alt=\"cheaterbox\" title=\"".$lang_functions['title_cheaterbox']."\" src=\"pic/trans.gif\" />  </a>".$totalcheaters."  <a href=\"reports.php\"><img class=\"reportbox\" alt=\"reportbox\" title=\"".$lang_functions['title_reportbox']."\" src=\"pic/trans.gif\" />  </a>".$totalreports."  <a href=\"staffbox.php\"><img class=\"staffbox\" alt=\"staffbox\" title=\"".$lang_functions['title_staffbox']."\" src=\"pic/trans.gif\" />  </a>".$totalsm."  ");
+	}
 
-	echo "<div class=\"nav\">
-<ul id=\"\" class=\"menu\">";
-	print ("<li" . ($selected == "home" ? " class=\"selected\"" : "") . "><a href=\"index.php\">" . $lang_functions['text_home'] . "</a></li>");
+	print("<a href=\"messages.php\">".$inboxpic."</a> ".($messages ? $messages." (".$unread.$lang_functions['text_message_new'].")" : "0"));
+	print("  <a href=\"messages.php?action=viewmailbox&amp;box=-1\"><img class=\"sentbox\" alt=\"sentbox\" title=\"".$lang_functions['title_sentbox']."\" src=\"pic/trans.gif\" /></a> ".($outmessages ? $outmessages : "0"));
+	print(" <a href=\"friends.php\"><img class=\"buddylist\" alt=\"Buddylist\" title=\"".$lang_functions['title_buddylist']."\" src=\"pic/trans.gif\" /></a>");
+	print(" <a href=\"getrss.php\"><img class=\"rss\" alt=\"RSS\" title=\"".$lang_functions['title_get_rss']."\" src=\"pic/trans.gif\" /></a>");
+?>
+
+	</span></td>
+	</tr></table></td>
+</tr></table>
+	 */
+
+
+
+	echo "	<div class=\"header\" id=\"home\">
+			<div class=\"header-top\">
+				<div class=\"container\">
+					<div class=\"head-top\">
+						<div class=\"indicate\">
+						</div>
+						<div class=\"deatils\">
+							<ul>";
+	echo 						"<li><i class=\"glyphicon \" aria-hidden=\"true\"></i><a href=\"#\" data-toggle=\"modal\" data-target=\"#myModal\">".$lang_functions['text_welcome_back']." ".get_username($CURUSER['id'])."</a></li>
+
+	<li><i class=\"glyphicon glyphicon-log-in\" aria-hidden=\"true\"></i><a href=\"logout.php\" >".$lang_functions['text_logout']."</a></li>";
+	if (get_user_class() >= UC_MODERATOR)
+		{
+			echo "<li><em><i class=\"glyphicon \" aria-hidden=\"true\"></i></em><a href='staffpanel.php'>";
+			echo $lang_functions['text_staff_panel'];
+			echo '</a></li>';
+		}
+	if (get_user_class() >= UC_SYSOP)
+	{
+		echo "<li><em><i class=\"glyphicon \" aria-hidden=\"true\"></i></em><a href=\"settings.php\">";
+		echo $lang_functions['text_site_settings'];
+		echo '</a></li>';
+	}
+	//收藏
+	echo 						"<li><i class=\"glyphicon \" aria-hidden=\"true\"></i><a href=\"torrents.php?inclbookmarked=1&amp;allsec=1&amp;incldead=0\" >".$lang_functions['text_bookmarks']."</a></li>";
+
+//	echo "<a href=torrents.php?inclbookmarked=1&amp;allsec=1&amp;incldead=0>";
+//	echo $lang_functions['text_bookmarks'];
+//	echo "</a>";
+	echo "<br>";
+	echo "<br>";
+
+
+//<!--魔力值-->
+//	echo
+//echo "<li><i class=\"glyphicon \" aria-hidden=\"true\"></i>".$lang_functions['text_bonus']."</li>";
+//echo "<li><em><i class=\"glyphicon \" aria-hidden=\"true\"></i></em><a href=mybonus.php></li>".$lang_functions['text_use'].number_format($CURUSER['seedbonus'], 1);
+//echo "</font>";
+//echo "<a href=mybonus.php>".$lang_functions['text_use']."</a> : " .number_format($CURUSER['seedbonus'], 1);
+
+	echo "<li><i class=\"glyphicon\" aria-hidden=\"true\"></i><a>".$lang_functions['text_bonus']."</a></li>";
+	echo "<li><i class=\"glyphicon\" aria-hidden=\"true\"></i><a href=mybonus.php>[".$lang_functions['text_use']."]</a></li>"." :"."<span style='color: #99ffcc'>".number_format($CURUSER['seedbonus'], 1)."</span>";
+
+
+	echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+//<!--邀请-->
+
+	echo "<li><i class=\"glyphicon\" aria-hidden=\"true\"></i><a>".$lang_functions['text_invite']."</a></li>";
+	echo "<li><i class=\"glyphicon\" aria-hidden=\"true\"></i><a href=mybonus.php>[".$lang_functions['text_send']."]</a></li>"." :"."<span style='color: #99ffcc'>".number_format($CURUSER['invites'], 1)."</span>";
+
+echo "<br><br>";
+
+
+
+//echo "<font class = 'color_invite'>".$lang_functions['text_invite']."</font>";
+//echo "<a href=invite.php?id=".$CURUSER['id'].">".$lang_functions['text_send']."</a> : ". $CURUSER['invites'];
+
+
+
+
+	echo "
+						</ul>
+						</div>
+						<div class=\"clearfix\"></div>
+					</div>
+					<div class=\"logo\">
+						<h1><a href=\"index.php\">NWU<span>PT</span></a></h1>
+					</div>
+				</div>
+			</div>
+		<div class=\"container\">
+			<div class=\"header-bottom\">
+				<nav class=\"navbar navbar-default\">
+					<div class=\"container-fluid\">
+    <!-- Brand and toggle get grouped for better mobile display -->
+						<div class=\"navbar-header\">
+							<button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">
+								<span class=\"sr-only\">Toggle navigation</span>
+								<span class=\"icon-bar\"></span>
+								<span class=\"icon-bar\"></span>
+								<span class=\"icon-bar\"></span>
+							</button>
+						</div>
+<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">
+							<nav class=\"menu menu--francisco\">
+								<ul class=\"nav navbar-nav menu__list\">";
+
+	print ("<li" . ($selected == "home" ? " class=\"selected\"" : "") . "><a href=\"index.php\" class=\"subNavBtn\">" . $lang_functions['text_home'] . "</a></li>");
 	if ($enableextforum != 'yes')
-	print ("<li" . ($selected == "forums" ? " class=\"selected\"" : "") . "><a href=\"forums.php\">".$lang_functions['text_forums']."</a></li>");
+	print ("<li" . ($selected == "forums" ? " class=\"selected\"" : "") . "><a href=\"forums.php\" class=\"subNavBtn\">".$lang_functions['text_forums']."</a></li>");
 	else
-	print ("<li" . ($selected == "forums" ? " class=\"selected\"" : "") . "><a href=\"" . $extforumurl."\" target=\"_blank\">".$lang_functions['text_forums']."</a></li>");
-	print ("<li" . ($selected == "torrents" ? " class=\"selected\"" : "") . "><a href=\"torrents.php\">".$lang_functions['text_torrents']."</a></li>");
+	print ("<li" . ($selected == "forums" ? " class=\"selected\"" : "") . "><a href=\"" . $extforumurl."\" target=\"_blank\" class=\"subNavBtn\">".$lang_functions['text_forums']."</a></li>");
+	print ("<li" . ($selected == "torrents" ? " class=\"selected\"" : "") . "><a href=\"torrents.php\" class=\"subNavBtn\">".$lang_functions['text_torrents']."</a></li>");
 	if ($enablespecial == 'yes')
-	print ("<li" . ($selected == "music" ? " class=\"selected\"" : "") . "><a href=\"music.php\">".$lang_functions['text_music']."</a></li>");
+	print ("<li" . ($selected == "music" ? " class=\"selected\"" : "") . "><a href=\"music.php\" class=\"subNavBtn\">".$lang_functions['text_music']."</a></li>");
 	if ($enableoffer == 'yes')
-	print ("<li" . ($selected == "offers" ? " class=\"selected\"" : "") . "><a href=\"offers.php\">".$lang_functions['text_offers']."</a></li>");
+	print ("<li" . ($selected == "offers" ? " class=\"selected\"" : "") . "><a href=\"offers.php\" class=\"subNavBtn\">".$lang_functions['text_offers']."</a></li>");
 	if ($enablerequest == 'yes')
-	print ("<li" . ($selected == "requests" ? " class=\"selected\"" : "") . "><a href=\"viewrequests.php\">".$lang_functions['text_request']."</a></li>");
-	print ("<li" . ($selected == "upload" ? " class=\"selected\"" : "") . "><a href=\"upload.php\">".$lang_functions['text_upload']."</a></li>");
-	print ("<li" . ($selected == "subtitles" ? " class=\"selected\"" : "") . "><a href=\"subtitles.php\">".$lang_functions['text_subtitles']."</a></li>");
-	print ("<li" . ($selected == "usercp" ? " class=\"selected\"" : "") . "><a href=\"usercp.php\">".$lang_functions['text_user_cp']."</a></li>");
-	print ("<li" . ($selected == "topten" ? " class=\"selected\"" : "") . "><a href=\"topten.php\">".$lang_functions['text_top_ten']."</a></li>");
-	print ("<li" . ($selected == "log" ? " class=\"selected\"" : "") . "><a href=\"log.php\">".$lang_functions['text_log']."</a></li>");
-	print ("<li" . ($selected == "rules" ? " class=\"selected\"" : "") . "><a href=\"rules.php\">".$lang_functions['text_rules']."</a></li>");
-	print ("<li" . ($selected == "faq" ? " class=\"selected\"" : "") . "><a href=\"faq.php\">".$lang_functions['text_faq']."</a></li>");
-	print ("<li" . ($selected == "staff" ? " class=\"selected\"" : "") . "><a href=\"staff.php\">".$lang_functions['text_staff']."</a></li>");
-	print ("</ul></div>");
+	print ("<li" . ($selected == "requests" ? " class=\"selected\"" : "") . "><a href=\"viewrequests.php\" class=\"subNavBtn\">".$lang_functions['text_request']."</a></li>");
+	print ("<li" . ($selected == "upload" ? " class=\"selected\"" : "") . "><a href=\"upload.php\" class=\"subNavBtn\">".$lang_functions['text_upload']."</a></li>");
+	print ("<li" . ($selected == "subtitles" ? " class=\"selected\"" : "") . "><a href=\"subtitles.php\" class=\"subNavBtn\">".$lang_functions['text_subtitles']."</a></li>");
+	print ("<li" . ($selected == "usercp" ? " class=\"selected\"" : "") . "><a href=\"usercp.php\" class=\"subNavBtn\">".$lang_functions['text_user_cp']."</a></li>");
+	print ("<li" . ($selected == "topten" ? " class=\"selected\"" : "") . "><a href=\"topten.php\" class=\"subNavBtn\">".$lang_functions['text_top_ten']."</a></li>");
+	print ("<li" . ($selected == "log" ? " class=\"selected\"" : "") . "><a href=\"log.php\" class=\"subNavBtn\">".$lang_functions['text_log']."</a></li>");
+	print ("<li" . ($selected == "rules" ? " class=\"selected\"" : "") . "><a href=\"rules.php\" class=\"subNavBtn\">".$lang_functions['text_rules']."</a></li>");
+	print ("<li" . ($selected == "faq" ? " class=\"selected\"" : "") . "><a href=\"faq.php\" class=\"subNavBtn\">".$lang_functions['text_faq']."</a></li>");
+	print ("<li" . ($selected == "staff" ? " class=\"selected\"" : "") . "><a href=\"staff.php\" class=\"subNavBtn\">".$lang_functions['text_staff']."</a></li>");
+
+	echo "</ul>
+							</nav>
+							<div class=\"clearfix\"></div>
+						</div><!-- /.navbar-collapse -->
+							<!-- /.container-fluid -->
+					</div>
+				</nav>
+
+			</div>	
+		</div>
+	</div>";
 
 	if ($CURUSER){
 		if ($where_tweak == 'yes')
@@ -2242,21 +2387,76 @@ $css_uri = get_css_uri();
 $cssupdatedate=($cssupdatedate ? "?".htmlspecialchars($cssupdatedate) : "");
 ?>
 <title><?php echo $title?></title>
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="search" type="application/opensearchdescription+xml" title="<?php echo $SITENAME?> Torrents" href="opensearch.php" />
-<link rel="stylesheet" href="<?php echo get_font_css_uri().$cssupdatedate?>" type="text/css" />
-<link rel="stylesheet" href="styles/sprites.css<?php echo $cssupdatedate?>" type="text/css" />
-<link rel="stylesheet" href="<?php echo get_forum_pic_folder()."/forumsprites.css".$cssupdatedate?>" type="text/css" />
-<link rel="stylesheet" href="<?php echo $css_uri."theme.css".$cssupdatedate?>" type="text/css" />
-<link rel="stylesheet" href="<?php echo $css_uri."DomTT.css".$cssupdatedate?>" type="text/css" />
-<link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate?>" type="text/css" />
-	<link rel="stylesheet" href="../assets/index.css" type="text/css">
+	<link href="./assets/nav/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="./assets/nav/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="" />
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<link rel="stylesheet" href="./assets/nav/css/flexslider.css" type="text/css" media="screen" />
+	<script src="./assets/nav/js/jquery.min.js"></script>
+	<script src="./assets/nav/js/bootstrap.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700italic,700,600italic,600,400italic,300italic,300,100italic,100' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<script src="./assets/nav/js/responsiveslides.min.js"></script>
+
+	<link href="ht<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+	<link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+	<link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+	<link href="../assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+	<link href="../assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="../assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+	<link href="../assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+	<link href="../assets/pages/css/login-4.min.css" rel="stylesheet" type="text/css" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	<script src="../assets/global/plugins/respond.min.js"></script>
+	<script src="../assets/global/plugins/excanvas.min.js"></script>
+	<script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
+	<script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
+	<script src="../assets/pages/scripts/login-4.min.js" type="text/javascript"></script>
+
+	<script>
+		$(function () {
+			$("#slider").responsiveSlides({
+				auto: true,
+				nav: true,
+				speed: 500,
+				namespace: "callbacks",
+				pager: true,
+			});
+		});
+	</script>
+	<link href="../assets/nav/css/owl.carousel.css" rel="stylesheet">
+	<script src="../assets/nav/js/owl.carousel.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#owl-demo").owlCarousel({
+				items : 1,
+				lazyLoad : true,
+				autoPlay : true,
+				navigation : false,
+				navigationText :  false,
+				pagination : true,
+			});
+		});
+	</script>
 <?php
 if ($CURUSER){
 	$caticonrow = get_category_icon_row($CURUSER['caticon']);
 	if($caticonrow['cssfile']){
 ?>
-<link rel="stylesheet" href="<?php echo htmlspecialchars($caticonrow['cssfile']).$cssupdatedate?>" type="text/css" />
+<!--<link rel="stylesheet" href="--><?php //echo htmlspecialchars($caticonrow['cssfile']).$cssupdatedate?><!--" type="text/css" />-->
 <?php
 	}
 }
@@ -2271,16 +2471,10 @@ if ($CURUSER){
 <script type="text/javascript" src="fadomatic.js<?php echo $cssupdatedate?>"></script>
 </head>
 <body>
-<table class="head" cellspacing="0" cellpadding="0" align="center">
-	<tr>
-		<td class="clear">
 <?php
 if ($logo_main == "")
 {
 ?>
-<!--	logo here-->
-			<div class="logo"><?php echo htmlspecialchars($SITENAME)?></div>
-			<div class="slogan"><?php echo htmlspecialchars($SLOGAN)?></div>
 <?php
 }
 else
@@ -2290,32 +2484,20 @@ else
 <?php
 }
 ?>
-		</td>
-		<td class="clear nowrap" align="right" valign="middle">
 <?php if ($Advertisement->enable_ad()){
 		$headerad=$Advertisement->get_ad('header');
 		if ($headerad){
 			echo "<span id=\"ad_header\">".$headerad[0]."</span>";
 		}
 }
-if ($enabledonation == 'yes'){?>
-			<a href="donate.php"><img src="<?php echo get_forum_pic_folder()?>/donate.gif" alt="Make a donation" style="margin-left: 5px; margin-top: 50px;" /></a>
-<?php
-}
 ?>
-		</td>
-	</tr>
-</table>
-
-<table class="mainouter" width="982" cellspacing="0" cellpadding="5" align="center">
-	<tr><td  class="text" align="center">
 <?php if (!$CURUSER) { ?>
-			<a href="login.php"><font class="big"><b><?php echo $lang_functions['text_login'] ?></b></font></a> / <a href="signup.php"><font class="big"><b><?php echo $lang_functions['text_signup'] ?></b></font></a>
+			<a href="login.php"><font class="big" ><b style="margin-left: 45%"><?php echo "<span style='font-family: Century Gothic, Microsoft yahei;font-size: 40px;color: #00a8c6;text-decoration: none'>".$lang_functions['text_login']."</span>" ?></b></font></a> <span style="font-size: 40px;">/</span> <a href="signup.php"><font class="big"><b><?php echo "<span style='font-family: Century Gothic, Microsoft yahei;font-size: 40px;color: #00a8c6;text-decoration: none'>".$lang_functions['text_signup']."</span>" ?></b></font></a>
 <?php } 
 else {
-	begin_main_frame();
+//	begin_main_frame();
 	menu ();
-	end_main_frame();
+//	end_main_frame();
 
 	$datum = getdate();
 	$datum["hours"] = sprintf("%02.0f", $datum["hours"]);
@@ -2369,49 +2551,57 @@ else {
 ?>
 
 
+
+
+
+
+
+
 <!--			登录信息板块的HTML-->
 
-<table id="info_block" cellpadding="4" cellspacing="0" border="0" width="100%"><tr>
-	<td><table width="100%" cellspacing="0" cellpadding="0" border="0"><tr>
-		<td class="bottom" align="left"><span class="medium"><?php echo $lang_functions['text_welcome_back'] ?>, <?php echo get_username($CURUSER['id'])?>  [<a href="logout.php"><?php echo $lang_functions['text_logout'] ?></a>]<?php if (get_user_class() >= UC_MODERATOR) { ?> [<a href="staffpanel.php"><?php echo $lang_functions['text_staff_panel'] ?></a>] <?php }?> <?php if (get_user_class() >= UC_SYSOP) { ?> [<a href="settings.php"><?php echo $lang_functions['text_site_settings'] ?></a>]<?php } ?> [<a href="torrents.php?inclbookmarked=1&amp;allsec=1&amp;incldead=0"><?php echo $lang_functions['text_bookmarks'] ?></a>] <font class = 'color_bonus'><?php echo $lang_functions['text_bonus'] ?></font>[<a href="mybonus.php"><?php echo $lang_functions['text_use'] ?></a>]: <?php echo number_format($CURUSER['seedbonus'], 1)?> <font class = 'color_invite'><?php echo $lang_functions['text_invite'] ?></font>[<a href="invite.php?id=<?php echo $CURUSER['id']?>"><?php echo $lang_functions['text_send'] ?></a>]: <?php echo $CURUSER['invites']?><br />
-
-	<font class="color_ratio"><?php echo $lang_functions['text_ratio'] ?></font> <?php echo $ratio?>  <font class='color_uploaded'><?php echo $lang_functions['text_uploaded'] ?></font> <?php echo mksize($CURUSER['uploaded'])?><font class='color_downloaded'> <?php echo $lang_functions['text_downloaded'] ?></font> <?php echo mksize($CURUSER['downloaded'])?>  <font class='color_active'><?php echo $lang_functions['text_active_torrents'] ?></font> <img class="arrowup" alt="Torrents seeding" title="<?php echo $lang_functions['title_torrents_seeding'] ?>" src="pic/trans.gif" /><?php echo $activeseed?>  <img class="arrowdown" alt="Torrents leeching" title="<?php echo $lang_functions['title_torrents_leeching'] ?>" src="pic/trans.gif" /><?php echo $activeleech?>&nbsp;&nbsp;<font class='color_connectable'><?php echo $lang_functions['text_connectable'] ?></font><?php echo $connectable?> <?php echo maxslots();?></span></td>
-
-	<td class="bottom" align="right"><span class="medium"><?php echo $lang_functions['text_the_time_is_now'] ?><?php echo $datum[hours].":".$datum[minutes]?><br />
-
+<!--<table id="info_block" cellpadding="4" cellspacing="0" border="0" width="100%"><tr>-->
+<!--	<td><table width="100%" cellspacing="0" cellpadding="0" border="0"><tr>-->
+<!--		<td class="bottom" align="left"><span class="medium">--><?php //echo $lang_functions['text_welcome_back'] ?><!--, --><?php //echo get_username($CURUSER['id'])?><!--  [<a href="logout.php">--><?php //echo $lang_functions['text_logout'] ?><!--</a>]--><?php //if (get_user_class() >= UC_MODERATOR) { ?><!-- [<a href="staffpanel.php">--><?php //echo $lang_functions['text_staff_panel'] ?><!--</a>] --><?php //}?><!-- --><?php //if (get_user_class() >= UC_SYSOP) { ?><!-- [<a href="settings.php">--><?php //echo $lang_functions['text_site_settings'] ?><!--</a>]--><?php //} ?><!-- [<a href="torrents.php?inclbookmarked=1&amp;allsec=1&amp;incldead=0">--><?php //echo $lang_functions['text_bookmarks'] ?><!--</a>] <font class = 'color_bonus'>--><?php //echo $lang_functions['text_bonus'] ?><!--</font>[<a href="mybonus.php">--><?php //echo $lang_functions['text_use'] ?><!--</a>]: --><?php //echo number_format($CURUSER['seedbonus'], 1)?><!-- <font class = 'color_invite'>--><?php //echo $lang_functions['text_invite'] ?><!--</font>[<a href="invite.php?id=--><?php //echo $CURUSER['id']?><!--">--><?php //echo $lang_functions['text_send'] ?><!--</a>]: --><?php //echo $CURUSER['invites']?><!--<br />-->
+<!---->
+<!--	<font class="color_ratio">--><?php //echo $lang_functions['text_ratio'] ?><!--</font> --><?php //echo $ratio?><!--  <font class='color_uploaded'>--><?php //echo $lang_functions['text_uploaded'] ?><!--</font> --><?php //echo mksize($CURUSER['uploaded'])?><!--<font class='color_downloaded'> --><?php //echo $lang_functions['text_downloaded'] ?><!--</font> --><?php //echo mksize($CURUSER['downloaded'])?><!--  <font class='color_active'>--><?php //echo $lang_functions['text_active_torrents'] ?><!--</font> <img class="arrowup" alt="Torrents seeding" title="--><?php //echo $lang_functions['title_torrents_seeding'] ?><!--" src="pic/trans.gif" />--><?php //echo $activeseed?><!--  <img class="arrowdown" alt="Torrents leeching" title="--><?php //echo $lang_functions['title_torrents_leeching'] ?><!--" src="pic/trans.gif" />--><?php //echo $activeleech?><!--&nbsp;&nbsp;<font class='color_connectable'>--><?php //echo $lang_functions['text_connectable'] ?><!--</font>--><?php //echo $connectable?><!-- --><?php //echo maxslots();?><!--</span></td>-->
+<!---->
+<!--	<td class="bottom" align="right"><span class="medium">--><?php //echo $lang_functions['text_the_time_is_now'] ?><!----><?php //echo $datum[hours].":".$datum[minutes]?><!--<br />-->
+<!---->
 <?php
-	if (get_user_class() >= $staffmem_class){
-	$totalreports = $Cache->get_value('staff_report_count');
-	if ($totalreports == ""){
-		$totalreports = get_row_count("reports");
-		$Cache->cache_value('staff_report_count', $totalreports, 900);
-	}
-	$totalsm = $Cache->get_value('staff_message_count');
-	if ($totalsm == ""){
-		$totalsm = get_row_count("staffmessages");
-		$Cache->cache_value('staff_message_count', $totalsm, 900);
-	}
-	$totalcheaters = $Cache->get_value('staff_cheater_count');
-	if ($totalcheaters == ""){
-		$totalcheaters = get_row_count("cheaters");
-		$Cache->cache_value('staff_cheater_count', $totalcheaters, 900);
-	}
-	print("<a href=\"cheaterbox.php\"><img class=\"cheaterbox\" alt=\"cheaterbox\" title=\"".$lang_functions['title_cheaterbox']."\" src=\"pic/trans.gif\" />  </a>".$totalcheaters."  <a href=\"reports.php\"><img class=\"reportbox\" alt=\"reportbox\" title=\"".$lang_functions['title_reportbox']."\" src=\"pic/trans.gif\" />  </a>".$totalreports."  <a href=\"staffbox.php\"><img class=\"staffbox\" alt=\"staffbox\" title=\"".$lang_functions['title_staffbox']."\" src=\"pic/trans.gif\" />  </a>".$totalsm."  ");
-	}
+//	if (get_user_class() >= $staffmem_class){
+//	$totalreports = $Cache->get_value('staff_report_count');
+//	if ($totalreports == ""){
+//		$totalreports = get_row_count("reports");
+//		$Cache->cache_value('staff_report_count', $totalreports, 900);
+//	}
+//	$totalsm = $Cache->get_value('staff_message_count');
+//	if ($totalsm == ""){
+//		$totalsm = get_row_count("staffmessages");
+//		$Cache->cache_value('staff_message_count', $totalsm, 900);
+//	}
+//	$totalcheaters = $Cache->get_value('staff_cheater_count');
+//	if ($totalcheaters == ""){
+//		$totalcheaters = get_row_count("cheaters");
+//		$Cache->cache_value('staff_cheater_count', $totalcheaters, 900);
+//	}
+//	print("<a href=\"cheaterbox.php\"><img class=\"cheaterbox\" alt=\"cheaterbox\" title=\"".$lang_functions['title_cheaterbox']."\" src=\"pic/trans.gif\" />  </a>".$totalcheaters."  <a href=\"reports.php\"><img class=\"reportbox\" alt=\"reportbox\" title=\"".$lang_functions['title_reportbox']."\" src=\"pic/trans.gif\" />  </a>".$totalreports."  <a href=\"staffbox.php\"><img class=\"staffbox\" alt=\"staffbox\" title=\"".$lang_functions['title_staffbox']."\" src=\"pic/trans.gif\" />  </a>".$totalsm."  ");
+//	}
+//
+//	print("<a href=\"messages.php\">".$inboxpic."</a> ".($messages ? $messages." (".$unread.$lang_functions['text_message_new'].")" : "0"));
+//	print("  <a href=\"messages.php?action=viewmailbox&amp;box=-1\"><img class=\"sentbox\" alt=\"sentbox\" title=\"".$lang_functions['title_sentbox']."\" src=\"pic/trans.gif\" /></a> ".($outmessages ? $outmessages : "0"));
+//	print(" <a href=\"friends.php\"><img class=\"buddylist\" alt=\"Buddylist\" title=\"".$lang_functions['title_buddylist']."\" src=\"pic/trans.gif\" /></a>");
+//	print(" <a href=\"getrss.php\"><img class=\"rss\" alt=\"RSS\" title=\"".$lang_functions['title_get_rss']."\" src=\"pic/trans.gif\" /></a>");
+//?>
+<!---->
+<!--	</span></td>-->
+<!--	</tr></table></td>-->
+<!--</tr></table>-->
 
-	print("<a href=\"messages.php\">".$inboxpic."</a> ".($messages ? $messages." (".$unread.$lang_functions['text_message_new'].")" : "0"));
-	print("  <a href=\"messages.php?action=viewmailbox&amp;box=-1\"><img class=\"sentbox\" alt=\"sentbox\" title=\"".$lang_functions['title_sentbox']."\" src=\"pic/trans.gif\" /></a> ".($outmessages ? $outmessages : "0"));
-	print(" <a href=\"friends.php\"><img class=\"buddylist\" alt=\"Buddylist\" title=\"".$lang_functions['title_buddylist']."\" src=\"pic/trans.gif\" /></a>");
-	print(" <a href=\"getrss.php\"><img class=\"rss\" alt=\"RSS\" title=\"".$lang_functions['title_get_rss']."\" src=\"pic/trans.gif\" /></a>");
-?>
 
-	</span></td>
-	</tr></table></td>
-</tr></table>
 
-</td></tr>
+<!--消息及错误提醒-->
 
-<tr><td id="outer" align="center" class="outer" style="padding-top: 20px; padding-bottom: 20px">
+
 <?php
 	if ($Advertisement->enable_ad()){
 			$belownavad=$Advertisement->get_ad('belownav');
@@ -2420,10 +2610,10 @@ else {
 	}
 if ($msgalert)
 {
-	function msgalert($url, $text, $bgcolor = "red")
+	function msgalert($url, $text, $bgcolor = "")
 	{
-		print("<p><table border=\"0\" cellspacing=\"0\" cellpadding=\"10\"><tr><td style='border: none; padding: 10px; background: ".$bgcolor."'>\n");
-		print("<b><a href=\"".$url."\"><font color=\"white\">".$text."</font></a></b>");
+		print("<p><table border=\"0\" cellspacing=\"0\" cellpadding=\"10\"><tr><td style='border: none; padding: 10px; background: #3399cc'>\n");
+		print("<b><a href=\"".$url."\" style='font-family: \"微软雅黑 Light\";text-decoration: none;'><font color=\"white\">".$text."</font></a></b>");
 		print("</td></tr></table></p><br />");
 	}
 	if($CURUSER['leechwarn'] == 'yes')
@@ -2432,6 +2622,7 @@ if ($msgalert)
 		$text = $lang_functions['text_please_improve_ratio_within'].$kicktimeout.$lang_functions['text_or_you_will_be_banned'];
 		msgalert("faq.php#id17", $text, "orange");
 	}
+
 	if($deletenotransfertwo_account) //inactive account deletion notice
 	{
 		if ($CURUSER['downloaded'] == 0 && ($CURUSER['uploaded'] == 0 || $CURUSER['uploaded'] == $iniupload_main))
@@ -2460,6 +2651,10 @@ if ($msgalert)
 		$text = $lang_functions['text_you_have'].$unread.$lang_functions['text_new_message'] . add_s($unread) . $lang_functions['text_click_here_to_read'];
 		msgalert("messages.php",$text, "red");
 	}
+
+
+
+
 /*
 	$pending_invitee = $Cache->get_value('user_'.$CURUSER["id"].'_pending_invitee_count');
 	if ($pending_invitee == ""){
@@ -2471,6 +2666,7 @@ if ($msgalert)
 		$text = $lang_functions['text_your_friends'].add_s($pending_invitee).is_or_are($pending_invitee).$lang_functions['text_awaiting_confirmation'];
 		msgalert("invite.php?id=".$CURUSER[id],$text, "red");
 	}*/
+
 	$settings_script_name = $_SERVER["SCRIPT_FILENAME"];
 	if (!preg_match("/index/i", $settings_script_name))
 	{
@@ -2497,6 +2693,7 @@ if ($msgalert)
 			$text = $lang_functions['text_there_is'].is_or_are($numreports).$numreports.$lang_functions['text_new_report'] .add_s($numreports);
 			msgalert("reports.php",$text, "blue");
 		}
+
 		$nummessages = $Cache->get_value('staff_new_message_count');
 		if ($nummessages == ""){
 			$nummessages = get_row_count("staffmessages","WHERE answered='no'");
@@ -2521,7 +2718,7 @@ if ($msgalert)
 		{
 			print("<p><table width=\"737\" border=\"1\" cellspacing=\"0\" cellpadding=\"10\"><tr><td style='padding: 10px; background: red' class=\"text\" align=\"center\">\n");
 			print("<font color=\"white\">".$lang_functions['text_website_offline_warning']."</font>");
-			print("</td></tr></table></p><br />\n");
+			
 		}
 }
 }
@@ -2574,6 +2771,13 @@ function stdfoot() {
 	if ($analyticscode_tweak)
 		print("\n".$analyticscode_tweak."\n");
 	print("</body></html>");
+
+
+
+
+//	END OF　ＨＴＭＬ
+
+
 
 	//echo replacePngTags(ob_get_clean());
 

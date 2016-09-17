@@ -26,8 +26,11 @@ function forum_stats ()
 	else
 		$forumusers = $lang_forums['text_no_active_users'];
 ?>
-<h2 align="left"><?php echo $lang_forums['text_stats'] ?></h2>
-<table width="100%"><tr><td class="text">
+
+
+<!--	数据-->
+<h2 align="left" style="font-family: Century Gothic,Microsoft yahei;font-size: 35px;font-weight: 300"><?php echo $lang_forums['text_stats'] ?></h2>
+<table width="100%" style="font-size: 20px;font-family: 'Microsoft YaHei';margin-left: 65px;margin-top: 5px"><tr><td class="text">
 <?php
 	if (!$postcount = $Cache->get_value('total_posts_count')){
 		$postcount = get_row_count("posts");
@@ -1423,10 +1426,50 @@ if ($CURUSER)
 	$USERUPDATESET[] = "forum_access = ".sqlesc(date("Y-m-d H:i:s"));
 
 stdhead($lang_forums['head_forums']);
+echo "
+<style>
+	.tools{
+		font-family: \"Century Gothic\", \"Microsoft yahei\";
+		font-size: 23px;
+		background-color:;
+		margin-top: 20px;
+		margin-bottom: 2px;
+		font-weight: 400;
+		padding-top: 20px;
+	}
+	a:hover{
+		text-decoration: none;
+	}
+	.tbbg{
+		background-color: #abe7ed;
+		color: #27a4b0;
+		font-family: Century Gothic, Microsoft yahei;
+		font-size: 18px;
+		font-weight: 200;
+		margin-top: 20px;
+		margin-left: 5%;
+		border: solid 1px ;
+	}
+	.tbbg td{
+		border: solid 1px;
+	}
+	.forblock{
+		color: ;
+		font-family: Century Gothic, Microsoft yahei;
+		font-size: 50px;
+		font-weight: 400;
+		color: #da555b;
+	}
+</style>
+
+";
+
 begin_main_frame();
-print("<h1 align=\"center\">".$SITENAME."&nbsp;".$lang_forums['text_forums']."</h1>");
-print("<p align=\"center\"><a href=\"?action=search\"><b>".$lang_forums['text_search']."</b></a> | <a href=\"?action=viewunread\"><b>".$lang_forums['text_view_unread']."</b></a> | <a href=\"?catchup=1\"><b>".$lang_forums['text_catch_up']."</b></a> ".(get_user_class() >= $forummanage_class ? "| <a href=\"forummanage.php\"><b>".$lang_forums['text_forum_manager']."</b></a>":"")."</p>");
-print("<table border=\"1\" cellspacing=\"0\" cellpadding=\"5\" width=\"100%\">\n");
+print("<h1 align=\"center\" style='font-family: Microsoft YaHei;font-size: 35px;font-weight: 700'>"."&nbsp;".$lang_forums['text_forums']."</h1>");
+print("<p align=\"center\"><a href=\"?action=search\"><b class='tools'>".$lang_forums['text_search']."</b></a><b class='tools'>|</b> <a href=\"?action=viewunread\"><b class='tools'>".$lang_forums['text_view_unread']."</b></a> <b class='tools'>|</b> <a href=\"?catchup=1\"><b class='tools'>".$lang_forums['text_catch_up']."</b></a> ".(get_user_class() >= $forummanage_class ? "<b class='tools'>|</b> <a href=\"forummanage.php\"><b class='tools'>".$lang_forums['text_forum_manager']."</b></a>":"")."</p>");
+
+
+print("<table  cellspacing=\"0\" cellpadding=\"5\" width=\"90%\" class='tbbg '>\n");
 
 if (!$overforums = $Cache->get_value('overforums_list')){
 	$overforums = array();
@@ -1451,9 +1494,9 @@ foreach ($overforums as $a)
 	$forid = $a["id"];
 	$overforumname = $a["name"];
 
-	print("<tr><td align=\"left\" class=\"colhead\" width=\"99%\">".htmlspecialchars($overforumname)."</td><td align=\"center\" class=\"colhead\">".$lang_forums['col_topics']."</td>" .
-	"<td align=\"center\" class=\"colhead\">".$lang_forums['col_posts']."</td>" .
-	"<td align=\"left\" class=\"colhead\">".$lang_forums['col_last_post']."</td><td class=\"colhead\" align=\"left\">".$lang_forums['col_moderator']."</td></tr>\n");
+	print("<tr ><td align=\"left\" class=\"colhead forblock\" width=\"80%\" style='border: 0px'>".htmlspecialchars($overforumname)."</td><td align=\"center\" class=\"colhead\" style='width=7%'>".$lang_forums['col_topics']."</td>" .
+	"<td align=\"center\" class=\"colhead\"  width=\"7%\">".$lang_forums['col_posts']."</td>" .
+	"<td align=\"left\" class=\"colhead\" width=\"7%\">".$lang_forums['col_last_post']."</td><td class=\"colhead\" align=\"left\" width=\"8%\">".$lang_forums['col_moderator']."</td></tr>\n");
 
 	$forums = get_forum_row();
 	foreach ($forums as $forums_arr)
@@ -1522,8 +1565,8 @@ foreach ($overforums as $a)
 		if ($posttodaycount > 0)
 			$posttoday = "&nbsp;&nbsp;(".$lang_forums['text_today']."<b><font class=\"new\">".$posttodaycount."</font></b>)";
 		else $posttoday = "";
-		print("<tr><td class=\"rowfollow\" align=\"left\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"embedded\" style='padding-right: 10px'>".$img."</td><td class=\"embedded\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid)."\"><font class=\"big\"><b>".$forumname."</b></font></a>" .$posttoday.
-		"<br />".$forumdescription."</td></tr></table></td><td class=\"rowfollow\" align=\"center\" width=\"1%\">".$topiccount."</td><td class=\"rowfollow\" align=\"center\" width=\"1%\">".$postcount."</td>" .
+		print("<tr><td class=\"rowfollow\" align=\"left\"><table border=\"\" cellspacing=\"0\" cellpadding=\"0\" style='border: 0px'><tr style='border: 0'><td class=\"embedded\" style='border: 0'><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid)."\"><font class=\"big\"><b>".$forumname."</b></font></a>" .$posttoday.
+		"<br />".$forumdescription."</td></tr></table></td><td class=\"rowfollow\" align=\"center\" width=\"5%\">".$topiccount."</td><td class=\"rowfollow\" align=\"center\" width=\"33%\">".$postcount."</td>" .
 		"<td class=\"rowfollow nowrap\" align=\"left\">".$lastpost."</td><td class=\"rowfollow\" align=\"left\">".$forummoderators."</td></tr>\n");
 	}
 	$count++;

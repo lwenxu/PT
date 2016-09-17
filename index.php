@@ -38,8 +38,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 stdhead($lang_index['head_home']);
 begin_main_frame();
 
+
+
+
+
+
 // ------------- start: recent news ------------------//
-print("<h2>".$lang_index['text_recent_news'].(get_user_class() >= $newsmanage_class ? " - <font class=\"small\">[<a class=\"altlink\" href=\"news.php\"><b>".$lang_index['text_news_page']."</b></a>]</font>" : "")."</h2>");
+
+print("<h2 style='font-family: Century Gothic, Microsoft yahei;font-size: 30px;font-weight: 200'>".$lang_index['text_recent_news'].(get_user_class() >= $newsmanage_class ? " - <font class=\"small\">[<a class=\"altlink\" href=\"news.php\"><b style='font-family: 微软雅黑 ;font-weight: 300'>".$lang_index['text_news_page']."</b></a>]</font>" : "")."</h2>");
 
 $Cache->new_page('recent_news', 86400, true);
 if (!$Cache->get_page()){
@@ -47,7 +53,7 @@ $res = sql_query("SELECT * FROM news ORDER BY added DESC LIMIT ".(int)$maxnewsnu
 if (mysql_num_rows($res) > 0)
 {
 	$Cache->add_whole_row();
-	print("<table width=\"100%\"><tr><td class=\"text\"><div style=\"margin-left: 16pt;\">\n");
+	print("<table width=\"100%\"><tr><td class=\"text\"><div style=\"margin-left: 17px;\">\n");
 	$Cache->end_whole_row();
 	$news_flag = 0;
 	while($array = mysql_fetch_array($res))
@@ -55,19 +61,20 @@ if (mysql_num_rows($res) > 0)
 		$Cache->add_row();
 		$Cache->add_part();
 		if ($news_flag < 1) {
-			print("<a href=\"javascript: klappe_news('a".$array['id']."')\"><img class=\"minus\" src=\"pic/trans.gif\" id=\"pica".$array['id']."\" alt=\"Show/Hide\" title=\"".$lang_index['title_show_or_hide']."\" />&nbsp;" . date("Y.m.d",strtotime($array['added'])) . " - " ."<b>". $array['title'] . "</b></a>");
-			print("<div id=\"ka".$array['id']."\" style=\"display: block;\"> ".format_comment($array["body"],0)." </div> ");
+			print("<a href=\"javascript: klappe_news('a".$array['id']."')\"><img class=\"minus\" src=\"pic/trans.gif\" id=\"pica".$array['id']."\" alt=\"Show/Hide\" title=\"".$lang_index['title_show_or_hide']."\" />&nbsp;" );
+			echo  "<br>"."<b style='font-family: 微软雅黑;font-weight: 450;font-size: 30px;color:black'>". $array['title'] ."</b></a>";
+			print("<div id=\"ka".$array['id']."\" style=\"display: block;\"> <b style='font-family: 微软雅黑;font-weight: 300;font-size: 20px;'>".format_comment($array["body"],0)."</b> </div> ");
 			$news_flag = $news_flag + 1;
 		}
 		else
 		{
-			print("<a href=\"javascript: klappe_news('a".$array['id']."')\"><br /><img class=\"plus\" src=\"pic/trans.gif\" id=\"pica".$array['id']."\" alt=\"Show/Hide\" title=\"".$lang_index['title_show_or_hide']."\" />&nbsp;" . date("Y.m.d",strtotime($array['added'])) . " - " ."<b>". $array['title'] . "</b></a>");
+			print("<a href=\"javascript: klappe_news('a".$array['id']."')\"><br /><img class=\"plus\"  id=\"pica".$array['id']."\" alt=\"Show/Hide\" title=\"".$lang_index['title_show_or_hide']."\" />&nbsp;" . date("Y.m.d",strtotime($array['added'])) . " - " ."<b>". $array['title'] . "</b></a>");
 			print("<div id=\"ka".$array['id']."\" style=\"display: none;\"> ".format_comment($array["body"],0)." </div> ");
 		}
 		$Cache->end_part();
 		$Cache->add_part();
-		print("  &nbsp; [<a class=\"faqlink\" href=\"news.php?action=edit&amp;newsid=" . $array['id'] . "\"><b>".$lang_index['text_e']."</b></a>]");
-		print(" [<a class=\"faqlink\" href=\"news.php?action=delete&amp;newsid=" . $array['id'] . "\"><b>".$lang_index['text_d']."</b></a>]");
+		echo "&nbsp; [<a href=news.php?action=edit&amp;newsid=" . $array['id'] . ">"."<b style='font-family: 微软雅黑;font-weight: 450;font-size: 20px;>".$lang_index['text_e']."</b></a>]";
+		print(" [<a class=\"faqlink\" href=\"news.php?action=delete&amp;newsid=" . $array['id'] . "\"><b style='font-family: 微软雅黑;font-weight: 450;font-size: 20px;color:red;>".$lang_index['text_d']."</b></a>]");
 		$Cache->end_part();
 		$Cache->end_row();
 	}
@@ -86,6 +93,10 @@ while($Cache->next_row()){
 }
 echo $Cache->next_row();
 // ------------- end: recent news ------------------//
+
+
+
+
 // ------------- start: hot and classic movies ------------------//
 if ($showextinfo['imdb'] == 'yes' && ($showmovies['hot'] == "yes" || $showmovies['classic'] == "yes"))
 {
@@ -142,6 +153,11 @@ if ($showextinfo['imdb'] == 'yes' && ($showmovies['hot'] == "yes" || $showmovies
 	}
 }
 // ------------- end: hot and classic movies ------------------//
+
+
+
+
+
 // ------------- start: funbox ------------------//
 if ($showfunbox_main == "yes" && (!isset($CURUSER) || $CURUSER['showfb'] == "yes")){
 	// Get the newest fun stuff
@@ -152,7 +168,7 @@ if ($showfunbox_main == "yes" && (!isset($CURUSER) || $CURUSER['showfb'] == "yes
 	}
 	if (!$row) //There is no funbox item
 	{
-		print("<h2>".$lang_index['text_funbox'].(get_user_class() >= $newfunitem_class ? "<font class=\"small\"> - [<a class=\"altlink\" href=\"fun.php?action=new\"><b>".$lang_index['text_new_fun']."</b></a>]</font>" : "")."</h2>");
+		print("<h2 style='font-family:Microsoft JhengHei;font-size: 30px;font-weight: 200'>".$lang_index['text_funbox'].(get_user_class() >= $newfunitem_class ? "<font class=\"small\"> - [<a class=\"altlink\" href=\"fun.php?action=new\"><b style='font-family:Microsoft JhengHei;font-size: 30px;font-weight: 200'>".$lang_index['text_new_fun']."</b></a>]</font>" : "")."</h2>");
 	}
 	else
 	{
@@ -169,7 +185,7 @@ if ($showfunbox_main == "yes" && (!isset($CURUSER) || $CURUSER['showfb'] == "yes
 //check whether current user has voted
 	$funvoted = get_row_count("funvotes", "WHERE funid = ".sqlesc($row['id'])." AND userid=".sqlesc($CURUSER[id]));
 
-	print ("<h1>".$lang_index['text_funbox']);
+	print ("<h1 style='font-family:Microsoft JhengHei;font-size: 30px;font-weight: 200'>".$lang_index['text_funbox']);
 	if ($CURUSER)
 	{
 		print("<font class=\"small\">".(get_user_class() >= $log_class ? " - [<a class=\"altlink\" href=\"log.php?action=funbox\"><b>".$lang_index['text_more_fun']."</b></a>]": "").($row['neednew'] && get_user_class() >= $newfunitem_class ? " - [<a class=altlink href=\"fun.php?action=new\"><b>".$lang_index['text_new_fun']."</b></a>]" : "" ).( ($CURUSER['id'] == $row['userid'] || get_user_class() >= $funmanage_class) ? " - [<a class=\"altlink\" href=\"fun.php?action=edit&amp;id=".$row['id']."&amp;returnto=index.php\"><b>".$lang_index['text_edit']."</b></a>]" : "").(get_user_class() >= $funmanage_class ? " - [<a class=\"altlink\" href=\"fun.php?action=delete&amp;id=".$row['id']."&amp;returnto=index.php\"><b>".$lang_index['text_delete']."</b></a>] - [<a class=\"altlink\" href=\"fun.php?action=ban&amp;id=".$row['id']."&amp;returnto=index.php\"><b>".$lang_index['text_ban']."</b></a>]" : "")."</font>");
@@ -189,22 +205,32 @@ if ($showfunbox_main == "yes" && (!isset($CURUSER) || $CURUSER['showfb'] == "yes
 	}
 }
 // ------------- end: funbox ------------------//
+
+
+
+
+
+
 // ------------- start: shoutbox ------------------//
 if ($showshoutbox_main == "yes") {
 ?>
-<h2><?php echo $lang_index['text_shoutbox'] ?> - <font class="small"><?php echo $lang_index['text_auto_refresh_after']?></font><font class='striking' id="countdown"></font><font class="small"><?php echo $lang_index['text_seconds']?></font></h2>
+<h2 style='font-size: 30px;font-weight: 200'><?php echo $lang_index['text_shoutbox'] ?> - <font class="small"><?php echo $lang_index['text_auto_refresh_after']?></font><font class='striking' id="countdown"></font><font class="small"><?php echo $lang_index['text_seconds']?></font></h2>
 <?php
 	print("<table width=\"100%\"><tr><td class=\"text\">\n");
-	print("<iframe src='shoutbox.php?type=shoutbox' width='900' height='180' frameborder='0' name='sbox' marginwidth='0' marginheight='0'></iframe><br /><br />\n");
+	print("<iframe src='shoutbox.php?type=shoutbox' width='100%' height='150px' frameborder='0' name='sbox' marginwidth='0' marginheight='0'></iframe><br /><br />\n");
 	print("<form action='shoutbox.php' method='get' target='sbox' name='shbox'>\n");
-	print("<label for='shbox_text'>".$lang_index['text_message']."</label><input type='text' name='shbox_text' id='shbox_text' size='100' style='width: 650px; border: 1px solid gray;' />  <input type='submit' id='hbsubmit' class='btn' name='shout' value=\"".$lang_index['sumbit_shout']."\" />");
+	print("<label for='shbox_text' > <b style='font-family:Matura MT Script Capitals;font-size: 20px;font-weight: 400;margin-left: 10px'>".$lang_index['text_message']."</b></label><input type='text' name='shbox_text' id='shbox_text' size='100' style='width: 650px; border: 1px solid gray;' />  <input type='submit' id='hbsubmit' class='btn' name='shout' value=\"".$lang_index['sumbit_shout']."\" />");
 	if ($CURUSER['hidehb'] != 'yes' && $showhelpbox_main =='yes')
-		print("<input type='submit' class='btn' name='toguest' value=\"".$lang_index['sumbit_to_guest']."\" />");
-	print("<input type='reset' class='btn' value=\"".$lang_index['submit_clear']."\" /> <input type='hidden' name='sent' value='yes' /><input type='hidden' name='type' value='shoutbox' /><br />\n");
+	print("<input style=' background-color: crimson;color: white;' type='submit' name='toguest' value=\"".$lang_index['sumbit_to_guest']."\" />");
+	print("<input style=' background-color: crimson;color: white;margin-left: 10px;' type='reset' class='btn' value=\"".$lang_index['submit_clear']."\" /> <input type='hidden' name='sent' value='yes' /><input type='hidden' name='type' value='shoutbox' /><br />\n");
 	print(smile_row("shbox","shbox_text"));
 	print("</form></td></tr></table>");
 }
 // ------------- end: shoutbox ------------------//
+
+
+
+
 // ------------- start: latest forum posts ------------------//
 /*
 if ($showlastxforumposts_main == "yes" && $CURUSER)
@@ -224,6 +250,11 @@ if ($showlastxforumposts_main == "yes" && $CURUSER)
 }
 */
 // ------------- end: latest forum posts ------------------//
+
+
+
+
+
 // ------------- start: latest torrents ------------------//
 
 if ($showlastxtorrents_main == "yes") {
@@ -242,6 +273,10 @@ if ($showlastxtorrents_main == "yes") {
 }
 // ------------- end: latest torrents ------------------//
 
+
+
+
+
 // ------------- start: polls ------------------//
 if ($CURUSER && $showpolls_main == "yes")
 {
@@ -255,11 +290,11 @@ if ($CURUSER && $showpolls_main == "yes")
 			$pollexists = false;
 		else $pollexists = true;
 
-		print("<h2>".$lang_index['text_polls']);
+		print("<h2 style='font-family: Century Gothic, Microsoft yahei;font-size: 30px;font-weight: 200'>".$lang_index['text_polls']);
 
 			if (get_user_class() >= $pollmanage_class)
 			{
-				print("<font class=\"small\"> - [<a class=\"altlink\" href=\"makepoll.php?returnto=main\"><b>".$lang_index['text_new']."</b></a>]\n");
+				print("<font class=\"small\"> - [<a class=\"altlink\" href=\"makepoll.php?returnto=main\" style='font-family: Century Gothic, Microsoft yahei;font-size: 20px;font-weight: 200'><b>".$lang_index['text_new']."</b></a>]\n");
 				if ($pollexists)
 				{
 					print(" - [<a class=\"altlink\" href=\"makepoll.php?action=edit&amp;pollid=".$arr[id]."&amp;returnto=main\"><b>".$lang_index['text_edit']."</b></a>]\n");
@@ -333,7 +368,7 @@ if ($CURUSER && $showpolls_main == "yes")
 					print("<tr><td width=\"1%\" class=\"embedded nowrap\">" . $a[1] . "&nbsp;&nbsp;</td><td width=\"99%\" class=\"embedded nowrap\"><img class=\"bar_end\" src=\"pic/trans.gif\" alt=\"\" /><img ");
 					$Cache->end_part();
 					$Cache->add_part();
-					print(" src=\"pic/trans.gif\" style=\"width: " . ($p * 3) ."px;\" alt=\"\" /><img class=\"bar_end\" src=\"pic/trans.gif\" alt=\"\" /> $p%</td></tr>\n");
+					print(" src=\"pic/trans.gif\" style=\"width: " . ($p * 3) ."px;\" alt=\"\" /><img class=\"bar_end\"  alt=\"\" /> $p%</td></tr>\n");
 					$Cache->end_part();
 					$Cache->end_row();
 					++$i;
@@ -342,7 +377,7 @@ if ($CURUSER && $showpolls_main == "yes")
 				$Cache->add_whole_row();
 				print("</table>\n");
 				$tvotes = number_format($tvotes);
-				print("<p align=\"center\">".$lang_index['text_votes']." ".$tvotes."</p>\n");
+				print("<p align=\"center\" style='background-color: #00a8c6;color: white;'>".$lang_index['text_votes']." ".$tvotes."</p>\n");
 				$Cache->end_whole_row();
 				$Cache->cache_page();
 				}
@@ -361,16 +396,16 @@ if ($CURUSER && $showpolls_main == "yes")
 			}
 			else //user has not voted yet
 			{
-				print("<form method=\"post\" action=\"index.php\">\n");
+				print("<form method=\"post\" action=\"index.php\" style='background-color: lemonchiffon'>\n");
 				$i = 0;
 				while ($a = $o[$i])
 				{
-					print("<input type=\"radio\" name=\"choice\" value=\"".$i."\">".$a."<br />\n");
+					echo "<input "."style='color: #00a8c6;' type=radio name=choice value=".$i.">".$a."<br />\n";
 					++$i;
 				}
 				print("<br />");
 				print("<input type=\"radio\" name=\"choice\" value=\"255\">".$lang_index['radio_blank_vote']."<br />\n");
-				print("<p align=\"center\"><input type=\"submit\" class=\"btn\" value=\"".$lang_index['submit_vote']."\" /></p>");
+				print("<p align=\"center\"><input style='background-color: #00a8c6;color: white;' type=\"submit\" class=\"btn\" value=\"".$lang_index['submit_vote']."\" /></p>");
 			}
 			print("</td></tr></table>");
 
@@ -384,9 +419,21 @@ if ($CURUSER && $showpolls_main == "yes")
 if ($showstats_main == "yes")
 {
 ?>
-<h2><?php echo $lang_index['text_tracker_statistics'] ?></h2>
+<h2 style='font-family: Century Gothic, Microsoft yahei;font-size: 30px;font-weight: 200'><?php echo $lang_index['text_tracker_statistics'] ?></h2>
+	<style>
+		table td tr{
+			color: white;
+			font-family: "Century Gothic", "Microsoft yahei";
+			font-size: 16px;
+		}
+		.status{
+			background-color:#1f3c52;
+			margin-top: 10px;
+			margin-bottom: 5px;
+		}
+	</style>
 <table width="100%"><tr><td class="text" align="center">
-<table width="60%" class="main" border="1" cellspacing="0" cellpadding="10">
+<table width="80%" class="main status" border="1" cellspacing="0" cellpadding="10" >
 <?php
 	$Cache->new_page('stats_users', 3000, true);
 	if (!$Cache->get_page()){
@@ -402,6 +449,8 @@ if ($showstats_main == "yes")
 	$registered_male = number_format(get_row_count("users", "WHERE gender='Male'"));
 	$registered_female = number_format(get_row_count("users", "WHERE gender='Female'"));
 ?>
+
+
 <tr>
 <?php
 	twotd($lang_index['row_users_active_today'],$totalonlinetoday);
@@ -581,9 +630,9 @@ if ($showtrackerload == "yes") {
 <?php
 // ------------- end: disclaimer ------------------//
 // ------------- start: links ------------------//
-	print("<h2>".$lang_index['text_links']);
+	print("<h2 style='font-family: Century Gothic, Microsoft yahei;font-size: 30px;font-weight: 200'>".$lang_index['text_links']);
 	if (get_user_class() >= $applylink_class)
-		print("<font class=\"small\"> - [<a class=\"altlink\" href=\"linksmanage.php?action=apply\"><b>".$lang_index['text_apply_for_link']."</b></a>]</font>");
+		print("<font class=\"small\"> - [<a class=\"altlink\" href=\"linksmanage.php?action=apply\" style='font-family: ;font-size: 17px;color: white'><b>".$lang_index['text_apply_for_link']."</b></a>]</font>");
 	if (get_user_class() >= $linkmanage_class)
 	{
 		print("<font class=\"small\">");
@@ -600,7 +649,7 @@ if ($showtrackerload == "yes") {
 		$links = "";
 		while($array = mysql_fetch_array($res))
 		{
-			$links .= "<a href=\"" . $array['url'] . "\" title=\"" . $array['title'] . "\" target=\"_blank\">" . $array['name'] . "</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			$links .= "<a href=\"" . $array['url'] . "\" title=\"" . $array['title'] . "\" target=\"_blank\" style=\"font-family: Century Gothic, Microsoft yahei;font-size: 17px;font-weight: 200;text-decoration: none;  margin-left: 10px; margin-top: 10px;\">" . $array['name'] . "</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 		}
 		print("<table width=\"100%\"><tr><td class=\"text\">".trim($links)."</td></tr></table>");
 	}
@@ -611,15 +660,21 @@ if ($showtrackerload == "yes") {
 // ------------- end: links ------------------//
 // ------------- start: browser, client and code note ------------------//
 ?>
-<table width="100%" class="main" border="0" cellspacing="0" cellpadding="0"><tr><td class="embedded">
-<div align="center"><br /><font class="medium"></font></div>
-<div align="center"><a href="http://www.nexusphp.com" title="<?php echo PROJECTNAME?>" target="_blank"><img src="pic/nexus.png" alt="<?php echo PROJECTNAME?>" /></a></div>
-</td></tr></table>
+<!--<table width="100%" class="main" border="0" cellspacing="0" cellpadding="0"><tr><td class="embedded">-->
+<!--<div align="center"><br /><font class="medium"></font></div>-->
+<!--<div align="center"><a href="http://www.nexusphp.com" title="--><?php //echo PROJECTNAME?><!--" target="_blank"><img src="pic/nexus.png" alt="--><?php //echo PROJECTNAME?><!--" /></a></div>-->
+<!--</td></tr></table>-->
 <?php
 // ------------- end: browser, client and code note ------------------//
-if ($CURUSER)
-	$USERUPDATESET[] = "last_home = ".sqlesc(date("Y-m-d H:i:s"));
-$Cache->delete_value('user_'.$CURUSER["id"].'_unread_news_count');
-end_main_frame();
-stdfoot();
+//if ($CURUSER)
+//	$USERUPDATESET[] = "last_home = ".sqlesc(date("Y-m-d H:i:s"));
+//$Cache->delete_value('user_'.$CURUSER["id"].'_unread_news_count');
+//end_main_frame();
+////stdfoot();
 ?>
+
+			<div class="copy-section">
+				<div class="container">
+					<p>西北大学PT站</p>
+				</div>
+			</div>

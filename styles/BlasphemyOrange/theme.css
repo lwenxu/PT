@@ -1,7 +1,8 @@
 body
 {
-	margin-top: 0px;
-	margin-bottom: 0px;
+	/*margin-top: 0px;*/
+	/*margin-bottom: 0px;*/
+	/*margin: 0px;*/
 	color: #000000;
 	background-color: white;
 	font-family: Magneto
@@ -438,6 +439,7 @@ a.altlink_green:hover
 }
 .big
 {
+
 }
 li
 {
@@ -454,6 +456,9 @@ img
 {
 	border: 0;
 }
+
+
+
 img.border
 {
 	border-right: #000000 1px solid;
@@ -513,67 +518,53 @@ img.border
 	margin-right: 3px;
 	text-align: center;
 }
-ul.menu
-{
-	list-style-image: none;
-	list-style-type: none;
-	white-space: nowrap;
-	text-align: center;
-
-}
-ul.menu li
-{
-	display: inline;
-	margin-left: 0px;
-	text-align: center;
-}
 
 
-ul.menu li a
-{
-	color: white;
-	background-color: #00cc00;
-	margin-right: 1px;
-	padding: 3px 7px;
-	text-decoration: none;
-	font-style: normal;
-	font-weight: bold;
-	font-family: verdana;
-	font-variant: normal;
-	text-align: center;
-	display: inline-block;
-	font-family: "Microsoft JhengHei UI";
-	margin-top: 20px;
-	margin-left: 5px;
-	height: 43px;
-}
-ul.menu li a:link
-{
-	color: white;
-}
-ul.menu li a:visited
-{
-	color: white;
-}
-ul.menu li a:hover
-{
-	color: white;
-	background-color: #00aa00;
-}
-ul.menu li a:active
-{
-	color: white;
-}
-ul.menu li.selected a
-{
 
-	background-color: #00aa00;
-	color: white;
-}
-ul.menu li.selected a:hover
+
+
+/*ul.menu*/
+/*{*/
+
+
+/*}*/
+/*ul.menu li*/
+/*{*/
+	/*float: left;*/
+/*}*/
+
+
+/*ul.menu li a*/
+/*{*/
+	/*float: left;*/
+/*}*/
+/*ul.menu li a:link*/
+/*{*/
+	/*color: white;*/
+/*}*/
+/*ul.menu li a:visited*/
+/*{*/
+	/*color: white;*/
+/*}*/
+/*ul.menu li a:hover*/
+/*{*/
+	/*color: white;*/
+	/*background-color: #00aa00;*/
+/*}*/
+/*ul.menu li a:active*/
+/*{*/
+	/*color: white;*/
+/*}*/
+nav li.selected a
 {
-	text-decoration: none;
+	color: #00a8c6;
 }
+/*ul.menu li.selected a:hover*/
+/*{*/
+	/*text-decoration: none;*/
+/*}*/
+
+
 .listitem
 {
 	margin-left: 10px;

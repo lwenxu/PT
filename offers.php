@@ -697,7 +697,7 @@ stdhead($lang_offers['head_offers']);
 begin_main_frame();
 begin_frame($lang_offers['text_offers_section'], true,10,"100%","center");
 
-print("<p align=\"left\"><b><font size=\"5\">".$lang_offers['text_rules']."</font></b></p>\n");
+print("<div style='margin-left: 20%;color: #00a8c6'><p align=\"left\"><b><font size=\"5\" style='margin-left: -20%;color: #da3f3f;font-size: 37px'>".$lang_offers['text_rules']."</font></b></p>\n");
 print("<div align=\"left\"><ul>");
 print("<li>".$lang_offers['text_rule_one_one'].get_user_class_name($upload_class, false, true, true).$lang_offers['text_rule_one_two'].get_user_class_name($addoffer_class, false, true, true).$lang_offers['text_rule_one_three']."</li>\n");
 print("<li>".$lang_offers['text_rule_two_one']."<b>".$minoffervotes."</b>".$lang_offers['text_rule_two_two']."</li>\n");
@@ -705,18 +705,18 @@ if ($offervotetimeout_main)
 	print("<li>".$lang_offers['text_rule_three_one']."<b>".($offervotetimeout_main / 3600)."</b>".$lang_offers['text_rule_three_two']."</li>\n");
 if ($offeruptimeout_main)
 	print("<li>".$lang_offers['text_rule_four_one']."<b>".($offeruptimeout_main / 3600)."</b>".$lang_offers['text_rule_four_two']."</li>\n");
-print("</ul></div>");
+print("</ul></div></div>");
 if (get_user_class() >= $addoffer_class)
 print("<div align=\"center\" style=\"margin-bottom: 8px;\"><a href=\"?add_offer=1\">".
-"<b>".$lang_offers['text_add_offer']."</b></a></div>");
-print("<div align=\"center\"><form method=\"get\" action=\"?\">".$lang_offers['text_search_offers']."&nbsp;&nbsp;<input type=\"text\" id=\"specialboxg\" name=\"search\" />&nbsp;&nbsp;");
+"<b style=\"font-family: 'Microsoft YaHei';font-size: 28px;font-weight: 400;color: #d93d5e\">".$lang_offers['text_add_offer']."</b></a></div>");
+print("<div align=\"center\"><form method=\"get\" action=\"?\" style='font-family: Microsoft YaHei;font-size: 17px'>".$lang_offers['text_search_offers']."&nbsp;&nbsp;<input type=\"text\" id=\"specialboxg\" name=\"search\" />&nbsp;&nbsp;");
 $cats = genrelist($browsecatmode);
 $catdropdown = "";
 foreach ($cats as $cat) {
 	$catdropdown .= "<option value=\"" . $cat["id"] . "\"";
 	$catdropdown .= ">" . htmlspecialchars($cat["name"]) . "</option>\n";
 }
-print("<select name=\"category\"><option value=\"0\">".$lang_offers['select_show_all']."</option>".$catdropdown."</select>&nbsp;&nbsp;<input type=\"submit\" class=\"btn\" value=\"".$lang_offers['submit_search']."\" /></form></div>");
+print("<select name=\"category\"><option value=\"0\">".$lang_offers['select_show_all']."</option>".$catdropdown."</select>&nbsp;&nbsp;<input style=\"background-color: #00a8c6;color: white\" type=\"submit\" class=\"btn\" value=\"".$lang_offers['submit_search']."\" /></form></div>");
 end_frame();
 print("<br /><br />");
 
@@ -726,9 +726,26 @@ if (!$num)
 else
 {
 	$catid = $_GET[category];
-	print("<table class=\"torrents\" cellspacing=\"0\" cellpadding=\"5\" width=\"100%\">");
+	echo "
+		<style>
+			.torrs{
+			border: solid 2px #00a8c6;
+			font-family: 'Microsoft YaHei';
+			font-size: 20px;
+			font-weight: 200;
+			}
+			.torrs tr,td{
+			border: solid 2px #00a8c6;
+			font-family: 'Microsoft YaHei';
+			font-size: 20px;
+			font-weight: 200;
+			}
+			
+		</style>
+	";
+	print("<table class=\"torrents torrs\" cellspacing=\"0\" cellpadding=\"5\" width=\"100%\">");
 	print("<tr><td class=\"colhead\" style=\"padding: 0px\"><a href=\"?category=" . $catid . "&amp;sort=cat&amp;type=".$cat_order_type."\">".$lang_offers['col_type']."</a></td>".
-"<td class=\"colhead\" width=\"100%\"><a href=\"?category=" . $catid . "&amp;sort=name&amp;type=".$name_order_type."\">".$lang_offers['col_title']."</a></td>".
+"<td class=\"colhead\" width=\"60%\"><a href=\"?category=" . $catid . "&amp;sort=name&amp;type=".$name_order_type."\">".$lang_offers['col_title']."</a></td>".
 "<td colspan=\"3\" class=\"colhead\"><a href=\"?category=" . $catid . "&amp;sort=v_res&amp;type=".$v_res_order_type."\">".$lang_offers['col_vote_results']."</a></td>".
 "<td class=\"colhead\"><a href=\"?category=" . $catid . "&amp;sort=comments&amp;type=".$comments_order_type."\"><img class=\"comments\" src=\"pic/trans.gif\" alt=\"comments\" title=\"".$lang_offers['title_comment']."\" />".$lang_offers['col_comment']."</a></td>".
 "<td class=\"colhead\"><a href=\"?category=" . $catid . "&amp;sort=added&amp;type=".$added_order_type."\"><img class=\"time\" src=\"pic/trans.gif\" alt=\"time\" title=\"".$lang_offers['title_time_added']."\" /></a></td>");

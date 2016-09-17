@@ -31,10 +31,36 @@ $showaudiocodec = (($allowtorrents && get_searchbox_value($brsectiontype, 'showa
 
 stdhead($lang_upload['head_upload']);
 ?>
-	<form id="compose" enctype="multipart/form-data" action="takeupload.php" method="post" name="upload">
-			<?php
-			print("<p align=\"center\">".$lang_upload['text_red_star_required']."</p>");
-			?>
+<style>
+	.forms{
+		/*border: solid 2px #00a8c6;*/
+
+		font-family: "Microsoft YaHei";
+		font-size: 17px;
+		font-weight: 100;
+		margin-left: 16%;
+		/*background-color: #7FB0DA;*/
+		color: #00a8c6;
+	}
+	.forms tr{
+		border: solid 2px #00a8c6;
+	}
+	.forms tr td{
+		margin: 2px;
+		padding: 4px;
+	}
+	.require{
+		font-family: "Microsoft YaHei";
+		color: #ff2e19;
+		font-weight: 500;
+		font-size: 25px;
+	}
+</style>
+<?php
+print("<p align=\"center\" class='require'>".$lang_upload['text_red_star_required']."</p>");
+?>
+	<form id="compose" enctype="multipart/form-data" action="takeupload.php" method="post" name="upload" class="forms">
+
 			<table border="1" cellspacing="0" cellpadding="5" width="940">
 				<tr>
 					<td class='colhead' colspan='2' align='center'>
@@ -61,7 +87,7 @@ stdhead($lang_upload['head_upload']);
 				get_external_tr();
 				if ($enablenfo_main=='yes')
 					tr($lang_upload['row_nfo_file'], "<input type=\"file\" class=\"file\" name=\"nfo\" /><br /><font class=\"medium\">".$lang_upload['text_only_viewed_by'].get_user_class_name($viewnfo_class,false,true,true).$lang_upload['text_or_above']."</font>", 1);
-				print("<tr><td class=\"rowhead\" style='padding: 3px' valign=\"top\">".$lang_upload['row_description']."<font color=\"red\">*</font></td><td class=\"rowfollow\">");
+				print("<tr><td style=border: 0px class=\"rowhead\" style='padding: 3px' valign=\"top\">".$lang_upload['row_description']."<font color=\"red\">*</font></td><td class=\"rowfollow\" style=border: 0px>");
 				textbbcode("upload","descr","",false);
 				print("</td></tr>\n");
 

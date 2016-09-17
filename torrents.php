@@ -867,11 +867,34 @@ else stdhead($lang_torrents['head_music']);
 print("<table width=\"940\" class=\"main\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"embedded\">");
 if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showing bookmarked torrents from all sections;
 ?>
+	<style>
+		a:hover{
+			text-decoration: none;
+			color: #00a8c6;
+		}
+		a:visited{
+			text-decoration: none;
+		}
+		a:active{
+			text-decoration: none;
+		}
+		a:link{
+			text-decoration: none;
+		}
+		.tablept{
+			border: solid 2px #ff5d6a;
+			margin-left: 20%;
+			font-family: "Century Gothic", "Microsoft yahei";
+			font-size: 17px;
+			font-weight: 300;
+			color: #00a8c6;
+		}
+	</style>
 <form method="get" name="searchbox" action="?">
-	<table border="1" class="searchbox" cellspacing="0" cellpadding="5" width="100%">
-		<tbody>
+	<table  class="searchbox tablept" cellspacing="0" cellpadding="5" width="100%" >
+		<tbody style="background-color: #ff5d6a">
 		<tr>
-		<td class="colhead" align="center" colspan="2"><a href="javascript: klappe_news('searchboxmain')"><img class="minus" src="pic/trans.gif" id="picsearchboxmain" alt="Show/Hide" /><?php echo $lang_torrents['text_search_box'] ?></a></td>
+		<td class="colhead" align="center" colspan="2"><a href="javascript: klappe_news('searchboxmain')"><?php echo  "<span style='font-size: 35px;font-family: \"Microsoft yahei\";color: white;'>".$lang_torrents['text_search_box']."</span>" ?></a></td>
 		</tr></tbody>
 		<tbody id="ksearchboxmain">
 		<tr>
