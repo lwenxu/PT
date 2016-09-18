@@ -27,9 +27,13 @@ function usershare_table($res, $frame_caption)
 			font-size: 18px;
 			font-weight: 300;
 			color: #00aaaa;
+			/*border: solid 2px #d93d5e;*/
+			margin-top: 10px;
+			margin-bottom: 10px;
 		}
 		td{
-			padding: 2px;
+			padding: 4px;
+			border: solid 2px #d93d5e;
 		}
 	</style>
 <tr class="tabletop">
