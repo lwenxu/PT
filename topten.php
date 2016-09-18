@@ -21,7 +21,18 @@ function usershare_table($res, $frame_caption)
 	begin_frame($frame_caption, true);
 	begin_table();
 ?>
-<tr>
+	<style>
+		.tabletop{
+			font-family: "Century Gothic", "Microsoft yahei";
+			font-size: 18px;
+			font-weight: 300;
+			color: #00aaaa;
+		}
+		td{
+			padding: 2px;
+		}
+	</style>
+<tr class="tabletop">
 <td class="colhead"><?php echo $lang_topten['col_rank'] ?></td>
 <td class="colhead" align="left"> <?php echo $lang_topten['col_user'] ?> </td>
 <td class="colhead"> <?php echo $lang_topten['col_uploaded'] ?> </td>
