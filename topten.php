@@ -28,12 +28,20 @@ function usershare_table($res, $frame_caption)
 			font-weight: 300;
 			color: #00aaaa;
 			/*border: solid 2px #d93d5e;*/
+			padding-top: 10px;
+			padding-bottom: 10px;
+
+		}
+		td{
+			padding: 7px;
+			border: solid 2px #d93d5e;
 			margin-top: 10px;
 			margin-bottom: 10px;
 		}
-		td{
-			padding: 4px;
-			border: solid 2px #d93d5e;
+		.datas td{
+			font-family: "Century Gothic", "Microsoft yahei";
+			font-size: 16px;
+			color: #00aaaa;
 		}
 	</style>
 <tr class="tabletop">
@@ -61,13 +69,13 @@ while ($a = mysql_fetch_assoc($res))
 	}
 	else
 		$ratio = $lang_topten['text_inf'];
-	print("<tr><td class=\"rowfollow\" align=\"center\">$num</td><td class=\"rowfollow\" align=\"left\">" . get_username($a["userid"]) .
-	"</td><td class=\"rowfollow\" align=\"right\">" . mksize($a["uploaded"]) .
-	"</td><td class=\"rowfollow\" align=\"right\">" . mksize($a["upspeed"]) . "/s" .
-	"</td><td class=\"rowfollow\" align=\"right\">" . mksize($a["downloaded"]) .
-	"</td><td class=\"rowfollow\" align=\"right\">" . mksize($a["downspeed"]) . "/s" .
-	"</td><td class=\"rowfollow\" align=\"right\">" . $ratio .
-	"</td><td class=\"rowfollow\" align=\"left\">" . gettime($a["added"],true,false). "</td></tr>");
+//	print("<tr><td class=\"rowfollow tabletop\" align=\"center\">$num</td><td class=\"rowfollow\" align=\"left\">" . get_username($a["userid"]) .
+//	"</td><td class=\"rowfollow\" align=\"right\">" . mksize($a["uploaded"]) .
+//	"</td><td class=\"rowfollow\" align=\"right\">" . mksize($a["upspeed"]) . "/s" .
+//	"</td><td class=\"rowfollow\" align=\"right\">" . mksize($a["downloaded"]) .
+//	"</td><td class=\"rowfollow\" align=\"right\">" . mksize($a["downspeed"]) . "/s" .
+//	"</td><td class=\"rowfollow\" align=\"right\">" . $ratio .
+//	"</td><td class=\"rowfollow\" align=\"left\">" . gettime($a["added"],true,false). "</td></tr>");
 }
 end_table();
 end_frame();
@@ -79,7 +87,7 @@ function _torrenttable($res, $frame_caption)
 	begin_frame($frame_caption, true);
 	begin_table();
 ?>
-<tr>
+<tr class="datas">
 <td class="colhead" align="center"><?php echo $lang_topten['col_rank'] ?></td>
 <td class="colhead" align="left"><?php echo $lang_topten['col_name'] ?></td>
 <td class="colhead" align="right"><?php echo "<img class=\"snatched\" src=\"pic/trans.gif\" alt=\"snatched\" title=\"".$lang_topten['title_sna']."\" />" ?></td>
@@ -471,15 +479,46 @@ if (!in_array($type,array(1,2,3,4,5,6,7)))
 $type = 1;
 $limit = isset($_GET["lim"]) ? 0 + $_GET["lim"] : false;
 $subtype = isset($_GET["subtype"]) ? $_GET["subtype"] : false;
-
-print("<p align=\"center\">"  .
-($type == 1 && !$limit ? "<b>".$lang_topten['text_users']."</b>" : "<a href=\"topten.php?type=1\">".$lang_topten['text_users']."</a>") .	" | " .
-($type == 2 && !$limit ? "<b>".$lang_topten['text_torrents']."</b>" : "<a href=\"topten.php?type=2\">".$lang_topten['text_torrents']."</a>") . " | " .
-($type == 3 && !$limit ? "<b>".$lang_topten['text_countries']."</b>" : "<a href=\"topten.php?type=3\">".$lang_topten['text_countries']."</a>") . " | " .
-//($type == 4 && !$limit ? "<b>".$lang_topten['text_peers']."</b>" : "<a href=\"topten.php?type=4\">".$lang_topten['text_peers']."</a>")  . " | " .
-($type == 5 && !$limit ? "<b>".$lang_topten['text_community']."</b>" : "<a href=\"topten.php?type=5\">".$lang_topten['text_community']."</a>")  . " | " .
+echo "
+		<style>
+			.menucontrol{
+				background-color: #00a8c6;
+				height: 40px;
+				width: 67%;
+				margin-left: 16%;
+				margin-bottom: 10px;
+			}
+			
+			.menucontrol a{
+//				float: left;
+//				padding-top: 5px;
+				padding-left: 6%;
+				padding-top: 10px;
+				color: white;
+				font-family: Century Gothic, Microsoft yahei;
+				font-size: 25px;
+				font-weight: 200;
+			}
+			a:link{
+				text-decoration: none;
+				
+			}
+			a:hover{
+			text-decoration: none;
+			}
+			.xain{
+				padding-left: 4px;
+			}
+		</style>
+	";
+print("<p align=\"center\" class='menucontrol'>"  .
+"<a href=\"topten.php?type=1\">".$lang_topten['text_users']."</a>" .
+"<a href=\"topten.php?type=2\">".$lang_topten['text_torrents']."</a>" .
+"<a href=\"topten.php?type=3\">".$lang_topten['text_countries']."</a>".
+//"<a href=\"topten.php?type=4\">".$lang_topten['text_peers']."</a>" .
+"<a href=\"topten.php?type=5\">".$lang_topten['text_community']."</a>"  .
 //($type == 7 && !$limit ? "<b>".$lang_topten['text_search']."</b>" : "<a href=\"topten.php?type=7\">".$lang_topten['text_search']."</a>")  . " | " .
-($type == 6 && !$limit ? "<b>".$lang_topten['text_other']."</b>" : "<a href=\"topten.php?type=6\">".$lang_topten['text_other']."</a>")  . "</p>\n");
+"<a href=\"topten.php?type=6\">".$lang_topten['text_other']."</a>"  . "</p>\n");
 
 if (!$limit || $limit > 250)
 $limit = 10;
