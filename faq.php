@@ -12,9 +12,18 @@ $Cache->add_whole_row();
 //make_folder("cache/" , get_langfolder_cookie());
 //cache_check ('faq');
 begin_main_frame();
-
+echo "
+	<style>
+		.infos{
+			font-family: Century Gothic, Microsoft yahei;
+			font-size: 17px;
+			color: #00a8c6;
+			margin-left: 20px;
+		}
+	</style>
+";
 begin_frame($lang_faq['text_welcome_to'].$SITENAME." - ".$SLOGAN);
-print($lang_faq['text_welcome_content_one'].$lang_faq['text_welcome_content_two']);
+print("<span class='infos'>".$lang_faq['text_welcome_content_one'].$lang_faq['text_welcome_content_two']."</span>");
 end_frame();
 
 $lang_id = get_guest_lang_id();
@@ -60,9 +69,19 @@ if (isset($faq_categ)) {
 	{
 		if ($faq_categ[$id][flag] == "1")
 		{
-			print("<ul><li><a href=\"#id". $faq_categ[$id][link_id] ."\"><b>". $faq_categ[$id][title] ."</b></a><ul>\n");
+			print("<ul class='catelink'><li><a  href=\"#id". $faq_categ[$id][link_id] ."\"><b >". $faq_categ[$id][title] ."</b></a><ul>\n");
    			if (array_key_exists("items", $faq_categ[$id])) 
 			{
+				echo "
+		<style>
+			.catelink{
+				font-family: Century Gothic, Microsoft yahei;
+				font-size: 20px;
+				margin-left: 60px;
+				color: #00a8c6;
+			}
+		</style>
+	";
     				foreach ($faq_categ[$id][items] as $id2 => $temp)
 				{
 	 				if ($faq_categ[$id][items][$id2][flag] == "1") print("<li><a href=\"#id". $faq_categ[$id][items][$id2][link_id] ."\" class=\"faqlink\">". $faq_categ[$id][items][$id2][question] ."</a></li>\n");
@@ -87,8 +106,8 @@ if (isset($faq_categ)) {
 				{
 					if ($faq_categ[$id][items][$id2][flag] != "0")
 					{
-						print("<br /><span id=\"id".$faq_categ[$id][items][$id2][link_id]."\"><b>". $faq_categ[$id][items][$id2][question] ."</b></span><br />\n");
-						print("<br />". $faq_categ[$id][items][$id2][answer] ."\n<br /><br />\n");
+						print("<br /><span class='infos' id=\"id".$faq_categ[$id][items][$id2][link_id]."\"><b>". $faq_categ[$id][items][$id2][question] ."</b></span><br />\n");
+						print("<br /> <span class='infos'>". $faq_categ[$id][items][$id2][answer] ."\n<br /><br />\n");
 					}
 				}
 			}

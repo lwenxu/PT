@@ -17,7 +17,28 @@ function logmenu($selected = "dailylog"){
 		global $lang_log;
 		global $showfunbox_main;
 		begin_main_frame();
-		print ("<div id=\"lognav\"><ul id=\"logmenu\" class=\"menu\">");
+		echo "
+			<style>
+				#lognav {
+					width: 100%;
+					margin-left: 30%;
+					background-color: #00a8c6;
+					
+				}
+				#lognav ul li{
+					float: left;
+					font-family: 'Microsoft Yahei';
+					font-size: 20px;
+					color: white;
+					height: auto;
+					margin: 20px;
+				}
+				.navs{
+					background-color: #00a8c6;
+				}
+			</style>
+		";
+		print ("<div id=\"lognav\" class='navs'><ul id=\"logmenu\" class=\"menu\">");
 		print ("<li" . ($selected == "dailylog" ? " class=selected" : "") . "><a href=\"?action=dailylog\">".$lang_log['text_daily_log']."</a></li>");
 		print ("<li" . ($selected == "chronicle" ? " class=selected" : "") . "><a href=\"?action=chronicle\">".$lang_log['text_chronicle']."</a></li>");
 		if ($showfunbox_main == 'yes')
@@ -30,7 +51,19 @@ function logmenu($selected = "dailylog"){
 
 function searchtable($title, $action, $opts = array()){
 		global $lang_log;
-		print("<table border=1 cellspacing=0 width=940 cellpadding=5>\n");
+	echo "<style>
+				.logtable{
+					margin: auto;
+				}
+				.logtable tr td{
+					font-family: 'Microsoft Yahei';
+					color: #00a8c6;
+					font-size: 22px;
+					border:solid 2px;
+					padding: 5px;
+				}
+			</style>";
+		print("<table class='logtable' border=1 cellspacing=0 width=940 cellpadding=5>\n");
 		print("<tr><td class=colhead align=left>".$title."</td></tr>\n");
 		print("<tr><td class=toolbox align=left><form method=\"get\" action='" . $_SERVER['PHP_SELF'] . "'>\n");
 		print("<input type=\"text\" name=\"query\" style=\"width:500px\" value=\"".$_GET['query']."\">\n");
@@ -47,7 +80,19 @@ function searchtable($title, $action, $opts = array()){
 
 function additem($title, $action){
 		global $lang_log;
-		print("<table border=1 cellspacing=0 width=940 cellpadding=5>\n");
+	echo "<style>
+				.logtable{
+					margin: auto;
+				}
+				.logtable tr td{
+					font-family: 'Microsoft Yahei';
+					color: #00a8c6;
+					font-size: 22px;
+					border:solid 2px;
+					padding: 5px;
+				}
+			</style>";
+		print("<table class='logtable' border=1 cellspacing=0 width=940 cellpadding=5>\n");
 		print("<tr><td class=colhead align=left>".$title."</td></tr>\n");
 		print("<tr><td class=toolbox align=left><form method=\"post\" action='" . $_SERVER['PHP_SELF'] . "'>\n");
 		print("<textarea name=\"txt\" style=\"width:500px\" rows=\"3\" >".$row["txt"]."</textarea>\n");
@@ -59,9 +104,21 @@ function additem($title, $action){
 
 function edititem($title, $action, $id){
 		global $lang_log;
+		echo "<style>
+				.logtable{
+					margin: auto;
+				}
+				.logtable tr td{
+					font-family: 'Microsoft Yahei';
+					color: #00a8c6;
+					font-size: 22px;
+					border:solid 2px;
+					padding: 5px;
+				}
+			</style>";
 		$result = sql_query ("SELECT * FROM ".$action." where id = ".sqlesc($id)) or sqlerr(__FILE__, __LINE__);
 		if ($row = mysql_fetch_array($result)) {
-		print("<table border=1 cellspacing=0 width=940 cellpadding=5>\n");
+		print("<table class='logtable' border=1 cellspacing=0 width=940 cellpadding=5>\n");
 		print("<tr><td class=colhead align=left>".$title."</td></tr>\n");
 		print("<tr><td class=toolbox align=left><form method=\"post\" action='" . $_SERVER['PHP_SELF'] . "'>\n");
 		print("<textarea name=\"txt\" style=\"width:500px\" rows=\"3\" >".$row["txt"]."</textarea>\n");
@@ -126,8 +183,19 @@ else {
 		{
 
 		//echo $pagertop;
-
-			print("<table width=940 border=1 cellspacing=0 cellpadding=5>\n");
+			echo "<style>
+				.logtable{
+					margin: auto;
+				}
+				.logtable tr td{
+					font-family: 'Microsoft Yahei';
+					color: #00a8c6;
+					font-size: 22px;
+					border:solid 2px;
+					padding: 5px;
+				}
+			</style>";
+			print("<table width=940 border=1 cellspacing=0 cellpadding=5 class='logtable'>\n");
 			print("<tr><td class=colhead align=center><img class=\"time\" src=\"pic/trans.gif\" alt=\"time\" title=\"".$lang_log['title_time_added']."\" /></td><td class=colhead align=left>".$lang_log['col_event']."</td></tr>\n");
 			while ($arr = mysql_fetch_assoc($res))
 			{
@@ -197,8 +265,19 @@ else {
 		{
 
 		//echo $pagertop;
-
-			print("<table width=940 border=1 cellspacing=0 cellpadding=5>\n");
+			echo "<style>
+				.logtable{
+					margin: auto;
+				}
+				.logtable tr td{
+					font-family: 'Microsoft Yahei';
+					color: #00a8c6;
+					font-size: 22px;
+					border:solid 2px;
+					padding: 5px;
+				}
+			</style>";
+			print("<table class='logtable' width=940 border=1 cellspacing=0 cellpadding=5>\n");
 			print("<tr><td class=colhead align=center>".$lang_log['col_date']."</td><td class=colhead align=left>".$lang_log['col_event']."</td>".(get_user_class() >= $chrmanage_class ? "<td class=colhead align=center>".$lang_log['col_modify']."</td>" : "")."</tr>\n");
 			while ($arr = mysql_fetch_assoc($res))
 			{
@@ -248,7 +327,19 @@ else {
 		//echo $pagertop;
 			while ($arr = mysql_fetch_assoc($res)){
 				$date = gettime($arr['added'],true,false);
-			print("<table width=940 border=1 cellspacing=0 cellpadding=5>\n");
+				echo "<style>
+				.logtable{
+					margin: auto;
+				}
+				.logtable tr td{
+					font-family: 'Microsoft Yahei';
+					color: #00a8c6;
+					font-size: 22px;
+					border:solid 2px;
+					padding: 5px;
+				}
+			</style>";
+			print("<table class='logtable' width=940 border=1 cellspacing=0 cellpadding=5>\n");
 			print("<tr><td class=rowhead width='10%'>".$lang_log['col_title']."</td><td class=rowfollow align=left>".$arr["title"]." - <b>".$arr["status"]."</b></td></tr><tr><td class=rowhead width='10%'>".$lang_log['col_date']."</td><td class=rowfollow align=left>".$date."</td></tr><tr><td class=rowhead width='10%'>".$lang_log['col_body']."</td><td class=rowfollow align=left>".format_comment($arr["body"],false,false,true)."</td></tr>\n");
 			print("</table><br />");
 			}
@@ -293,9 +384,21 @@ else {
 		{
 
 		//echo $pagertop;
+			echo "<style>
+				.logtable{
+					margin: auto;
+				}
+				.logtable tr td{
+					font-family: 'Microsoft Yahei';
+					color: #00a8c6;
+					font-size: 22px;
+					border:solid 2px;
+					padding: 5px;
+				}
+			</style>";
 			while ($arr = mysql_fetch_assoc($res)){
 				$date = gettime($arr['added'],true,false);
-			print("<table width=940 border=1 cellspacing=0 cellpadding=5>\n");
+			print("<table class='logtable' width=940 border=1 cellspacing=0 cellpadding=5>\n");
 			print("<tr><td class=rowhead width='10%'>".$lang_log['col_title']."</td><td class=rowfollow align=left>".$arr["title"]."</td></tr><tr><td class=rowhead width='10%'>".$lang_log['col_date']."</td><td class=rowfollow align=left>".$date."</td></tr><tr><td class=rowhead width='10%'>".$lang_log['col_body']."</td><td class=rowfollow align=left>".format_comment($arr["body"],false,false,true)."</td></tr>\n");
 			print("</table><br />");
 			}

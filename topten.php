@@ -38,10 +38,21 @@ function usershare_table($res, $frame_caption)
 			margin-top: 10px;
 			margin-bottom: 10px;
 		}
-		.datas td{
+		.datas{
 			font-family: "Century Gothic", "Microsoft yahei";
-			font-size: 16px;
+			font-size: 20px;
 			color: #00aaaa;
+		}
+		.tablehead{
+			margin-top: 17px;
+			margin-bottom: 13px;
+			border: 2px;
+		}
+		tr{
+			font-family: "Microsoft Yahei", serif;
+			font-size: 20px;
+			padding: 17px;
+			color: #00a8c6;
 		}
 	</style>
 <tr class="tabletop">
@@ -87,16 +98,18 @@ function _torrenttable($res, $frame_caption)
 	begin_frame($frame_caption, true);
 	begin_table();
 ?>
-<tr class="datas">
-<td class="colhead" align="center"><?php echo $lang_topten['col_rank'] ?></td>
-<td class="colhead" align="left"><?php echo $lang_topten['col_name'] ?></td>
-<td class="colhead" align="right"><?php echo "<img class=\"snatched\" src=\"pic/trans.gif\" alt=\"snatched\" title=\"".$lang_topten['title_sna']."\" />" ?></td>
-<td class="colhead" align="right"><?php echo $lang_topten['col_data'] ?></td>
-<td class="colhead" align="right"><?php echo "<img class=\"seeders\" src=\"pic/trans.gif\" alt=\"seeders\" title=\"".$lang_topten['title_se']."\" />" ?></td>
-<td class="colhead" align="right"><?php echo "<img class=\"leechers\" src=\"pic/trans.gif\" alt=\"leechers\" title=\"".$lang_topten['title_le']."\" />" ?></td>
-<td class="colhead" align="right"><?php echo $lang_topten['col_to'] ?></td>
-<td class="colhead" align="right"><?php echo $lang_topten['col_ratio'] ?></td>
+<div class="tablehead">
+<tr >
+<td class="colhead" align="center"><?php echo "<span style='font-size: 20px;font-family: Microsoft YaHei;color: #00a8c6;margin: 17px'>".$lang_topten['col_rank']."</span>" ?></td>
+<td class="colhead" align="left"><?php echo "<span style='font-size: 20px;font-family: Microsoft YaHei;color: #00a8c6;margin: 17px'>".$lang_topten['col_name'] ?></td>
+<!--<td class="colhead" align="right">--><?php //echo "<img class=\"snatched\" src=\"pic/trans.gif\" alt=\"snatched\" title=\"".$lang_topten['title_sna']."\" />" ?><!--</td>-->
+<td class="colhead" align="right"><?php echo "<span style='font-size: 20px;font-family: Microsoft YaHei;color: #00a8c6;margin: 17px'>".$lang_topten['col_data'] ?></td>
+<!--<td class="colhead" align="right">--><?php //echo "<img class=\"seeders\" src=\"pic/trans.gif\" alt=\"seeders\" title=\"".$lang_topten['title_se']."\" />" ?><!--</td>-->
+<!--<td class="colhead" align="right">--><?php //echo "<img class=\"leechers\" src=\"pic/trans.gif\" alt=\"leechers\" title=\"".$lang_topten['title_le']."\" />" ?><!--</td>-->
+<td class="colhead" align="right"><?php echo "<span style='font-size: 20px;font-family: Microsoft YaHei;color: #00a8c6;margin: 17px'>".$lang_topten['col_to'] ?></td>
+<td class="colhead" align="right"><?php echo "<span style='font-size: 20px;font-family: Microsoft YaHei;color: #00a8c6;margin: 17px'>".$lang_topten['col_ratio'] ?></td>
 </tr>
+</div>
 <?php
 $num = 0;
 while ($a = mysql_fetch_assoc($res))
@@ -144,9 +157,9 @@ while ($a = mysql_fetch_assoc($res))
 	$value = mksize($a["ul_avg"]);
 	elseif ($what == $lang_topten['col_ratio'])
 	$value = number_format($a["r"],2);
-	print("<tr><td class=\"rowfollow\" align=\"center\">$num</td><td class=\"rowfollow\" align=\"left\"><table border=\"0\" class=\"main\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"embedded\">".
-	"<img align=\"center\" src=\"pic/flag/$a[flagpic]\" alt=\"\" /></td><td class=\"embedded\" style='padding-left: 5px'><b>$a[name]</b></td>".
-	"</tr></table></td><td class=\"rowfollow\" align=\"right\">$value</td></tr>\n");
+//	print("<tr><td class=\"rowfollow\" align=\"center\">$num</td><td class=\"rowfollow\" align=\"left\"><table border=\"0\" class=\"main\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"embedded\">".
+//	"<b>$a[name]</b></td>".
+//	"</tr></table></td><td class=\"rowfollow datas\" align=\"right\" >$value</td></tr>\n");
 }
 end_table();
 end_frame();
@@ -513,12 +526,12 @@ echo "
 	";
 print("<p align=\"center\" class='menucontrol'>"  .
 "<a href=\"topten.php?type=1\">".$lang_topten['text_users']."</a>" .
-"<a href=\"topten.php?type=2\">".$lang_topten['text_torrents']."</a>" .
-"<a href=\"topten.php?type=3\">".$lang_topten['text_countries']."</a>".
+"<a href=\"topten.php?type=2\">".$lang_topten['text_torrents']."</a>" ."</p>\n");
+//"<a href=\"topten.php?type=3\">".$lang_topten['text_countries']."</a>".
 //"<a href=\"topten.php?type=4\">".$lang_topten['text_peers']."</a>" .
-"<a href=\"topten.php?type=5\">".$lang_topten['text_community']."</a>"  .
+//"<a href=\"topten.php?type=5\">".$lang_topten['text_community']."</a>"  .
 //($type == 7 && !$limit ? "<b>".$lang_topten['text_search']."</b>" : "<a href=\"topten.php?type=7\">".$lang_topten['text_search']."</a>")  . " | " .
-"<a href=\"topten.php?type=6\">".$lang_topten['text_other']."</a>"  . "</p>\n");
+//"<a href=\"topten.php?type=6\">".$lang_topten['text_other']."</a>"  .
 
 if (!$limit || $limit > 250)
 $limit = 10;

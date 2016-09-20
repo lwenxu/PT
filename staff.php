@@ -29,9 +29,23 @@ while ($arr = mysql_fetch_assoc($res))
 
 begin_frame($lang_staff['text_firstline_support']."<font class=small> - [<a class=altlink href=contactstaff.php><b>".$lang_staff['text_apply_for_it']."</b></a>]</font>");
 ?>
-<?php echo $lang_staff['text_firstline_support_note'] ?>
+<?php echo "<span style='color: #e02222;font-family: Microsoft Yahei, serif;font-size: 17px;margin: 8px'>".$lang_staff['text_firstline_support_note'] ?>
 <br /><br />
-<table width=100% cellspacing=0 align=center>
+	<style>
+		.tables{
+			font-size: 19px;
+			font-family: "Microsoft Yahei";
+			color: #00a8c6;
+			/*border:solid 2px;*/
+		}
+		td{
+			font-size: 19px;
+			font-family: "Microsoft Yahei";
+			color: #00a8c6;
+			border:solid 2px;
+		}
+	</style>
+<table class="tables" width=100% cellspacing=0 align=center>
 	<tr>
 		<td class=embedded><b><?php echo $lang_staff['text_username'] ?></b></td>
 		<td class=embedded align=center><b><?php echo $lang_staff['text_country'] ?></b></td>
@@ -66,7 +80,7 @@ while ($arr = mysql_fetch_assoc($res))
 
 begin_frame($lang_staff['text_movie_critics']."<font class=small> - [<a class=altlink href=contactstaff.php><b>".$lang_staff['text_apply_for_it']."</b></a>]</font>");
 ?>
-<?php echo $lang_staff['text_movie_critics_note'] ?>
+<?php echo "<span style='color: #e02222;font-family: Microsoft Yahei, serif;font-size: 17px;margin: 8px'>".$lang_staff['text_movie_critics_note'] ?>
 <br /><br />
 <table width=100% cellspacing=0 align=center>
 	<tr>
@@ -108,7 +122,7 @@ while ($arr = mysql_fetch_assoc($res))
 
 begin_frame($lang_staff['text_forum_moderators']."<font class=small> - [<a class=altlink href=contactstaff.php><b>".$lang_staff['text_apply_for_it']."</b></a>]</font>");
 ?>
-<?php echo $lang_staff['text_forum_moderators_note'] ?>
+<?php echo "<span style='color: #e02222;font-family: Microsoft Yahei, serif;font-size: 17px;margin: 8px'>".$lang_staff['text_forum_moderators_note'] ?>
 <br /><br />
 <table width=100% cellspacing=0 align=center>
 	<tr>
@@ -159,7 +173,7 @@ while ($arr = mysql_fetch_assoc($res))
 
 begin_frame($lang_staff['text_general_staff']."<font class=small> - [<a class=altlink href=contactstaff.php><b>".$lang_staff['text_apply_for_it']."</b></a>]</font>");
 ?>
-<?php echo $lang_staff['text_general_staff_note'] ?>
+<?php echo "<span style='color: #e02222;font-family: Microsoft Yahei, serif;font-size: 17px;margin: 8px'>".$lang_staff['text_general_staff_note'] ?>
 <br /><br />
 <table width=100% cellspacing=0 align=center>
 	<?php echo $ppl?>
@@ -185,7 +199,7 @@ while ($arr = mysql_fetch_assoc($res))
 
 begin_frame($lang_staff['text_vip']);
 ?>
-<?php echo $lang_staff['text_vip_note'] ?>
+<?php echo "<span style='color: #e02222;font-family: Microsoft Yahei, serif;font-size: 17px;margin: 8px'>".$lang_staff['text_vip_note'] ?>
 <br /><br />
 <table width=100% cellspacing=0 align=center>
 	<tr>

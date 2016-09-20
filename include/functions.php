@@ -986,7 +986,21 @@ function begin_compose($title = "",$type="new", $body="", $hassubject=true, $sub
 		}
 	}
 	begin_frame($framename, true);
-	print("<table class=\"main\" width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"5\">\n");
+	echo "	<style>
+		.tables{
+			font-size: 19px;
+			font-family: \"Microsoft Yahei\";
+//			color: #00a8c6;
+			/*border:solid 2px;*/
+		}
+		 td{
+			font-size: 19px;
+			font-family: \"Microsoft Yahei\";
+			color: #00a8c6;
+			border:solid 1px;
+		}
+	</style>";
+	print("<table  class=\"main tables\" width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"5\">\n");
 	if ($hassubject)
 		print("<tr><td class=\"rowhead\">".$lang_functions['row_subject']."</td>" .
 "<td class=\"rowfollow\" align=\"left\"><input type=\"text\" style=\"width: 650px;\" name=\"subject\" maxlength=\"".$maxsubjectlength."\" value=\"".$subject."\" /></td></tr>\n");
