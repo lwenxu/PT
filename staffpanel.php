@@ -13,6 +13,25 @@ if (get_user_class() < UC_MODERATOR)
 }
 begin_main_frame();
 
+echo "
+	<style>
+		h1{
+			font-family: Consolas, Menlo, Courier, monospace;
+			font-size: 32px;
+			color: #de3d3b;
+		}
+		td{
+			font-family: 'Microsoft Yahei';
+			font-size: 20px;
+			border: solid 1px;
+			color: #00a8c6;
+		}
+		a{
+			color: #d93d5e;
+		}
+	</style>
+";
+
 ///////////////////// SysOp Only \\\\\\\\\\\\\\\\\\\\\\\\\\\\
 if (get_user_class() >= UC_SYSOP) {
 	echo("<h1 align=center>..:: For SysOp Only  ::..</h1>");

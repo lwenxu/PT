@@ -426,14 +426,20 @@ if ($showstats_main == "yes")
 			font-family: "Century Gothic", "Microsoft yahei";
 			font-size: 16px;
 		}
+		.status td{
+			color: #00a8c6;
+			font-family: Microsoft Yahei;
+			font-size: 19px;
+			font-weight: 200;
+			border: solid 2px;
+			padding: 3px;
+		}
 		.status{
-			background-color:#1f3c52;
-			margin-top: 10px;
-			margin-bottom: 5px;
+			margin: 10px;
 		}
 	</style>
 <table width="100%"><tr><td class="text" align="center">
-<table width="80%" class="main status" border="1" cellspacing="0" cellpadding="10" >
+<table width="80%" class=" status" border="1" cellspacing="0" cellpadding="10" >
 <?php
 	$Cache->new_page('stats_users', 3000, true);
 	if (!$Cache->get_page()){

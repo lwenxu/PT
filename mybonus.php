@@ -122,6 +122,35 @@ if (isset($do)) {
 	stdhead($CURUSER['username'] . $lang_mybonus['head_karma_page']);
 
 	$bonus = number_format($CURUSER['seedbonus'], 1);
+
+
+
+
+echo "
+<style>
+td{
+	font-family: 'Microsoft Yahei';
+	font-size: 17px;
+	padding: 8px;
+	color: #00a8c6;
+	border: solid 1px;
+	margin: 10px;
+}
+h1{
+	font-family: 'Microsoft Yahei';
+//	font-size: 30px;
+	font-weight: 300;
+}
+b{
+	padding: 20px;
+}
+input{
+//	padding-left: 5px;
+	margin-left: 10px;
+}
+</style>
+";
+
 if (!$action) {
 	print("<table align=\"center\" width=\"940\" border=\"1\" cellspacing=\"0\" cellpadding=\"3\">\n");
 	print("<tr><td class=\"colhead\" colspan=\"4\" align=\"center\"><font class=\"big\">".$SITENAME.$lang_mybonus['text_karma_system']."</font></td></tr>\n");
@@ -219,7 +248,11 @@ for ($i=1; $i <=9; $i++)
 }
 print("</table><br />");
 ?>
-
+<style>
+	table{
+		margin-left: 10%;
+	}
+</style>
 <table width="940" cellpadding="3">
 <tr><td class="colhead" align="center"><font class="big"><?php echo $lang_mybonus['text_what_is_karma'] ?></font></td></tr>
 <tr><td class="text" align="left">

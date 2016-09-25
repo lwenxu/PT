@@ -24,13 +24,13 @@ begin_main_frame();
 if ($shownotice)
 {
 ?>
-<div style="text-align: center;"><?php echo $deletecount.$lang_deletedisabled['text_users_are_disabled']?></div>
+<div style="text-align: center;color: #d93d5e;font-family: 'Microsoft Yahei';font-size: 17px"><?php echo $deletecount.$lang_deletedisabled['text_users_are_disabled']?></div>
 <?php
 }
 else
 {
 ?>
-<div style="text-align: center;"><?php echo $lang_deletedisabled['text_delete_disabled_note']?></div>
+<div style="text-align: center;color: #d93d5e;font-family: 'Microsoft Yahei';font-size: 17px"><?php echo $lang_deletedisabled['text_delete_disabled_note']?></div>
 <div style="text-align: center; margin-top: 10px;">
 <form method="post" action="?">
 <input type="hidden" name="sure" value="1" />

@@ -4,7 +4,41 @@ dbconn();
 require_once(get_langfile_path());
 loggedinorreturn();
 parked();
+echo "
+	<style>
+		.tabletop{
+			font-family: \"Century Gothic\", \"Microsoft yahei\";
+			font-size: 18px;
+			font-weight: 300;
+			color: #00aaaa;
+			padding-bottom: 10px;
 
+		}
+		td{
+			padding: 5px 37px;
+			border: solid 2px ;
+//			margin-bottom: 10px;
+//			margin-left: 10px;
+		}
+		.datas{
+			font-family: \"Century Gothic\", \"Microsoft yahei\";
+			font-size: 20px;
+			color: #00aaaa;
+		}
+		.tablehead{
+			margin-top: 17px;
+			margin-bottom: 13px;
+			border: 2px;
+		}
+		
+		table{
+			margin-top: 10px;
+			margin-bottom: 15px;
+			width: 80%;
+			margin-left: 10%;
+		}
+	</style>
+";
 function bark($msg) {
 	global $lang_topten;
 	genbark($msg, $lang_topten['std_error']);
@@ -19,42 +53,9 @@ function usershare_table($res, $frame_caption)
 	global $CURUSER;
 	global $lang_topten;
 	begin_frame($frame_caption, true);
-	begin_table();
+//	begin_table();
 ?>
-	<style>
-		.tabletop{
-			font-family: "Century Gothic", "Microsoft yahei";
-			font-size: 18px;
-			font-weight: 300;
-			color: #00aaaa;
-			/*border: solid 2px #d93d5e;*/
-			padding-top: 10px;
-			padding-bottom: 10px;
 
-		}
-		td{
-			padding: 7px;
-			border: solid 2px #d93d5e;
-			margin-top: 10px;
-			margin-bottom: 10px;
-		}
-		.datas{
-			font-family: "Century Gothic", "Microsoft yahei";
-			font-size: 20px;
-			color: #00aaaa;
-		}
-		.tablehead{
-			margin-top: 17px;
-			margin-bottom: 13px;
-			border: 2px;
-		}
-		tr{
-			font-family: "Microsoft Yahei", serif;
-			font-size: 20px;
-			padding: 17px;
-			color: #00a8c6;
-		}
-	</style>
 <tr class="tabletop">
 <td class="colhead"><?php echo $lang_topten['col_rank'] ?></td>
 <td class="colhead" align="left"> <?php echo $lang_topten['col_user'] ?> </td>
@@ -88,7 +89,7 @@ while ($a = mysql_fetch_assoc($res))
 //	"</td><td class=\"rowfollow\" align=\"right\">" . $ratio .
 //	"</td><td class=\"rowfollow\" align=\"left\">" . gettime($a["added"],true,false). "</td></tr>");
 }
-end_table();
+//end_table();
 end_frame();
 }
 
@@ -96,10 +97,18 @@ function _torrenttable($res, $frame_caption)
 {
 	global $lang_topten;
 	begin_frame($frame_caption, true);
-	begin_table();
+//	begin_table();
 ?>
+
+	<style>
+		td{
+			color: #00a8c6;
+			border: solid 2px;
+		}
+	</style>
+
 <div class="tablehead">
-<tr >
+
 <td class="colhead" align="center"><?php echo "<span style='font-size: 20px;font-family: Microsoft YaHei;color: #00a8c6;margin: 17px'>".$lang_topten['col_rank']."</span>" ?></td>
 <td class="colhead" align="left"><?php echo "<span style='font-size: 20px;font-family: Microsoft YaHei;color: #00a8c6;margin: 17px'>".$lang_topten['col_name'] ?></td>
 <!--<td class="colhead" align="right">--><?php //echo "<img class=\"snatched\" src=\"pic/trans.gif\" alt=\"snatched\" title=\"".$lang_topten['title_sna']."\" />" ?><!--</td>-->
@@ -108,7 +117,7 @@ function _torrenttable($res, $frame_caption)
 <!--<td class="colhead" align="right">--><?php //echo "<img class=\"leechers\" src=\"pic/trans.gif\" alt=\"leechers\" title=\"".$lang_topten['title_le']."\" />" ?><!--</td>-->
 <td class="colhead" align="right"><?php echo "<span style='font-size: 20px;font-family: Microsoft YaHei;color: #00a8c6;margin: 17px'>".$lang_topten['col_to'] ?></td>
 <td class="colhead" align="right"><?php echo "<span style='font-size: 20px;font-family: Microsoft YaHei;color: #00a8c6;margin: 17px'>".$lang_topten['col_ratio'] ?></td>
-</tr>
+
 </div>
 <?php
 $num = 0;
@@ -128,7 +137,7 @@ while ($a = mysql_fetch_assoc($res))
 	"</td><td class=\"rowfollow\" align=\"right\">" . number_format($a["leechers"]) . "</td><td class=\"rowfollow\" align=\"right\">" . ($a["leechers"] + $a["seeders"]) .
 	"</td><td class=\"rowfollow\" align=\"right\">$ratio</td>\n");
 }
-end_table();
+//end_table();
 end_frame();
 }
 
@@ -161,7 +170,7 @@ while ($a = mysql_fetch_assoc($res))
 //	"<b>$a[name]</b></td>".
 //	"</tr></table></td><td class=\"rowfollow datas\" align=\"right\" >$value</td></tr>\n");
 }
-end_table();
+//end_table();
 end_frame();
 }
 

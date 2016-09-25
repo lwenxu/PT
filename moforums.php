@@ -3,8 +3,47 @@ require "include/bittorrent.php";
 dbconn();
 require_once(get_langfile_path());
 loggedinorreturn();
+
+echo "
+<style>
+table{
+//margin-left: 17%;
+//align-self: center;
+}
+td{
+border: solid 2px;
+font-family: 'Microsoft Yahei';
+font-size: 16px;
+color: #00a8c6;
+padding: 5px;
+}
+tr td{
+text-align: center;
+}
+form{
+float: left;
+margin-left: 10px;
+margin-top: 7px;
+}
+form input{
+font-family: 'Microsoft Yahei';
+margin-bottom: 7px;
+}
+td input{
+margin: 7px;
+}
+td select{
+margin: 7px;
+}
+.newfor{
+margin-left: 40%;
+}
+</style>
+";
 if (get_user_class() < $forummanage_class) 
 	permissiondenied();
+
+
 
 //Presets
 $act = $_GET['action'];
@@ -95,7 +134,7 @@ echo "</table>";
 ?>
 <br /><br />
 <form method=post action="<?php echo $PHP_SELF;?>">
-<table width="100%"  border="0" cellspacing="0" cellpadding="3" align="center">
+<table width="100%"  border="0" cellspacing="0" cellpadding="3" align="center" class="newfor">
 <tr align="center">
     <td colspan="2" class=colhead><?php echo $lang_moforums['text_new_overforum']?></td>
   </tr>

@@ -23,21 +23,45 @@ function yesorno($title, $name, $value, $note="")
 	global $lang_settings;
 	tr($title, "<input type='radio' id='".$name."yes' name='".$name."'".($value == "yes" ? " checked=\"checked\"" : "")." value='yes' /> <label for='".$name."yes'>".$lang_settings['text_yes']."</label> <input type='radio' id='".$name."no' name='".$name."'".($value == "no" ? " checked=\"checked\"" : "")." value='no' /> <label for='".$name."no'>".$lang_settings['text_no']."</label><br />".$note, 1);
 }
+echo "
+<style>
+table{
+margin-left: 17%;
+}
+td{
+border: solid 2px;
+font-family: 'Microsoft Yahei';
+font-size: 16px;
+color: #00a8c6;
+//margin: 4px 6px;
+
+}
+form{
+margin: 5px;
+}
+tr input{
+margin: 5px;
+//padding: 5px;
+}
+</style>
+";
 
 $action = isset($_POST['action']) ? $_POST['action'] : 'showmenu';
 $allowed_actions = array('basicsettings','mainsettings','smtpsettings','securitysettings','authoritysettings','tweaksettings', 'botsettings','codesettings','bonussettings','accountsettings','torrentsettings', 'attachmentsettings', 'advertisementsettings', 'savesettings_basic', 'savesettings_main','savesettings_smtp','savesettings_security','savesettings_authority','savesettings_tweak','savesettings_bot','savesettings_code','savesettings_bonus', 'savesettings_account','savesettings_torrent', 'savesettings_attachment', 'savesettings_advertisement', 'showmenu');
 if (!in_array($action, $allowed_actions))
 $action = 'showmenu';
-$notice = "<h1 align=\"center\"><a class=\"faqlink\" href=\"settings.php\">".$lang_settings['text_website_settings']."</a></h1><table cellspacing=\"0\" cellpadding=\"10\" width=\"940\"><tr><td colspan=\"2\" style='padding: 10px; background: black' align=\"center\">
-<font color=\"white\">".$lang_settings['text_configuration_file_saving_note']."
+$notice = "<h1 align=\"center\"><a class=\"faqlink\" href=\"settings.php\">".$lang_settings['text_website_settings']."</a></h1><table cellspacing=\"0\" cellpadding=\"10\" width=\"70%\"><tr><td colspan=\"2\" style='padding: 10px; background: #00a8c6' align=\"center\">
+<font color=\"#da3f3f\">".$lang_settings['text_configuration_file_saving_note']."
 </font></td></tr>";
 
 if ($action == 'savesettings_main')	// save main
 {
+
 	stdhead($lang_settings['head_save_main_settings']);
 	$validConfig = array('site_online','max_torrent_size','announce_interval', 'annintertwoage', 'annintertwo', 'anninterthreeage', 'anninterthree', 'signup_timeout','minoffervotes','offervotetimeout','offeruptimeout','maxsubsize','postsperpage', 'topicsperpage', 'torrentsperpage', 'maxnewsnum','max_dead_torrent_time','maxusers','torrent_dir', 'iniupload','SITEEMAIL', 'ACCOUNTANTID', 'ALIPAYACCOUNT', 'PAYPALACCOUNT', 'SLOGAN', 'icplicense', 'autoclean_interval_one', 'autoclean_interval_two', 'autoclean_interval_three','autoclean_interval_four', 'autoclean_interval_five','reportemail','invitesystem','registration','showhotmovies','showclassicmovies','showimdbinfo', 'enablenfo', 'enableschool','restrictemail','showpolls','showstats','showlastxtorrents', 'showtrackerload','showshoutbox','showfunbox','showoffer','sptime','showhelpbox','enablebitbucket', 'smalldescription','altname','extforum','extforumurl','defaultlang','defstylesheet', 'donation','spsct','browsecat','specialcat','waitsystem','maxdlsystem','bitbucket','torrentnameprefix', 'showforumstats','verification','invite_count','invite_timeout', 'seeding_leeching_time_calc_start','startsubid', 'logo');
 	GetVar($validConfig);
 	unset($MAIN);
+
 	foreach($validConfig as $config) {
 		$MAIN[$config] = $$config;
 	}

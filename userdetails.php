@@ -309,7 +309,14 @@ print("<a href=\"report.php?user=".htmlspecialchars($user[id])."\"><img class=\"
 print("</td></tr>");
 }
 print("</table>\n");
+echo "<style>
+table td{
+//	margin-left: 20px;
+border: solid 2px;
+padding-right: 40px;
+}
 
+</style>";
 if (get_user_class() >= $prfmanage_class && $user["class"] < get_user_class())
 {
 	begin_frame($lang_userdetails['text_edit_user'], true);

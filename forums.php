@@ -1441,17 +1441,19 @@ echo "
 		text-decoration: none;
 	}
 	.tbbg{
-		background-color: #abe7ed;
+//		background-color: #abe7ed;
 		color: #27a4b0;
 		font-family: Century Gothic, Microsoft yahei;
 		font-size: 18px;
 		font-weight: 200;
 		margin-top: 20px;
 		margin-left: 5%;
-		border: solid 1px ;
+		border: solid 2px ;
+		margin-bottom: 23px;
 	}
 	.tbbg td{
-		border: solid 1px;
+		border: solid 2px;
+		padding: 5px;
 	}
 	.forblock{
 		color: ;
