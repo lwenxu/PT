@@ -3,6 +3,40 @@ require_once("include/bittorrent.php");
 dbconn();
 require_once(get_langfile_path());
 loggedinorreturn();
+echo "<style>
+    td{
+        color: #00a8c6;
+        font-family: 'Microsoft Yahei';
+        font-size: 14px;
+        font-weight: 200;
+    }
+//    td input{
+//        margin: 4px;
+//    }
+//    td select{
+//        margin: 4px;
+//    }
+//    table{
+//        margin-left: 25%;
+//        margin-top: 10px;
+//        width: 50%;
+//    }
+//    .selectdate{
+//    	font-family: 'Microsoft Yahei';
+//    	color: #00a8c6;
+//    	font-size: 20px;
+//    }
+//    b{
+//    font-family: 'Microsoft Yahei';
+//    	color: #00a8c6;
+//    	font-size: 20px;
+//    }
+//    #orderlist{
+//    font-family: 'Microsoft Yahei';
+//    	color: #00a8c6;
+//    	font-size: 16px;
+//    }
+</style>";
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$torrentid = 0+$_POST['id'];

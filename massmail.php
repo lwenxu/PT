@@ -44,10 +44,33 @@ stderr("Error", "Try again.");
 stdhead("Mass E-mail Gateway");
 ?>
 
+	<style>
+		table{
+			margin-left: 23%;
+		}
+		td{
+			border: solid 2px;
+			color: #00a8c6;
+		}
+		tr td input{
+			margin: 5px;
+		}
+		tr td select{
+			margin: 5px;
+		}
+		.warning{
+			color: #d93d5e;
+			font-family: "Microsoft Yahei";
+			font-size: 20px;
+			margin-left: 22%;
+			margin-bottom: 10px;
+		}
+	</style>
+
 <p><table border=0 class=main cellspacing=0 cellpadding=0><tr>
-<td class=embedded style='padding-left: 10px'><font size=3><b>Send mass e-mail to all members</b></font></td>
+<span class=embedded style='padding-left: 10px'><font size=3><b class="warning">Send mass e-mail to all members</b></font></span>
 </tr></table></p>
-<table border=1 cellspacing=0 cellpadding=5>
+<table border=1 cellspacing=0 cellpadding=5 >
 <form method=post action=massmail.php>
 
 <?php

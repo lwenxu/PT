@@ -45,6 +45,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 stdhead("Add user");
 
 ?>
+<style>
+	h1{
+		text-align: center;
+		color: #00aaaa;
+	}
+	table{
+		margin-left: 30%;
+
+	}
+	td{
+		border: solid 2px;
+		color: #00a8c6;
+	}
+	td input{
+		margin: 5px;
+	}
+</style>
 <h1>Add user</h1>
 <form method=post action=adduser.php>
 <table border=1 cellspacing=0 cellpadding=5>

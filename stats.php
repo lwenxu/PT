@@ -7,7 +7,41 @@ if (get_user_class() < UC_MODERATOR)
 
 stdhead("Stats");
 ?>
-
+<style>
+	td{
+		border: solid 2px;
+		color: #00a8c6;
+		font-family: 'Microsoft Yahei';
+		font-size: 17px;
+		font-weight: 200;
+	}
+	td input{
+		margin: 4px;
+	}
+	td select{
+		margin: 4px;
+	}
+	table{
+		margin-left: 33%;
+		margin-top: 10px;
+		width: 40%;
+	}
+	/*.selectdate{*/
+		/*font-family: 'Microsoft Yahei';*/
+		/*color: #00a8c6;*/
+		/*font-size: 20px;*/
+	/*}*/
+	/*b{*/
+		/*font-family: 'Microsoft Yahei';*/
+		/*color: #00a8c6;*/
+		/*font-size: 20px;*/
+	/*}*/
+	/*#orderlist{*/
+		/*font-family: 'Microsoft Yahei';*/
+		/*color: #00a8c6;*/
+		/*font-size: 16px;*/
+	/*}*/
+</style>
 <STYLE TYPE="text/css" MEDIA=screen>
   a.colheadlink:link, a.colheadlink:visited{
 	font-weight: bold;

@@ -9,6 +9,25 @@ loggedinorreturn();
 /**
  * Checks if the user is allowed to do what he tries to...
  */
+echo "
+<style>
+td{
+border: solid 1px;
+color: #00a8c6;
+}
+.sqlrun{
+margin-left:15%;
+margin-bottom: 20px;
+}
+.lista{
+margin-left: 28%;
+}
+.listb{
+margin-left: 22%;
+}
+</style>
+";
+
 if (get_user_class() < UC_SYSOP)
 	stderr("Error", "Permission denied.");
 
@@ -149,7 +168,7 @@ $row = mysql_fetch_row($res);
 //echo sprintf("Server Status Uptime", timespanFormat($serverStatus['Uptime']), localisedDate($row[0])) . "\n";
 ?>
 
-	<table id="torrenttable" border="1"><tr><td>
+	<table id="torrenttable" border="1" class="sqlrun"><tr><td>
 
 <?php
 print("This MySQL server has been running for ". timespanFormat($serverStatus['Uptime']) .". It started up on ". localisedDate($row[0])) . "\n";
@@ -174,13 +193,14 @@ unset($tmp_array);
 ?>
 
 <ul>
-    <li>
+
+    <li class="lista">
         <b>Server traffic:</b> These tables show the network traffic statistics of this MySQL server since its startup
         <br />
         <table border="0">
             <tr>
                 <td valign="top">
-                    <table id="torrenttable" border="0">
+                    <table id="torrenttable" border="0" class="sqlrun">
                         <tr>
                             <th colspan="2" bgcolor="lightgrey">&nbsp;Traffic&nbsp;</th>
                             <th bgcolor="lightgrey">&nbsp;&nbsp;Per Hour&nbsp;</th>
@@ -233,7 +253,7 @@ unset($tmp_array);
         </table>
     </li>
     <br />
-    <li>
+    <li class="listb">
         <?php print("<b>Query Statistics:</b> Since it's start up, ". number_format($serverStatus['Questions'], 0, '.', ',')." queries have been sent to the server.\n"); ?>
         <table border="0">
             <tr>
@@ -317,7 +337,7 @@ unset($serverStatus['Uptime']);
 if (!empty($serverStatus)) {
 ?>
     <br />
-    <li>
+    <li class="listc">
         <b>More status variables</b><br />
         <table border="0">
             <tr>

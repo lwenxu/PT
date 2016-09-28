@@ -8,7 +8,20 @@ if (get_user_class() < UC_SYSOP)
 	stderr("Error", "Access denied.");
 
 $action = isset($_POST['action']) ? htmlspecialchars($_POST['action']) : (isset($_GET['action']) ?  htmlspecialchars($_GET['action']) : 'showlist');
-
+echo "
+<style>
+table{
+margin-left: 20%;
+}
+td{
+border: solid 2px;
+color: #00a8c6;
+}
+td input{
+margin: 5px;
+}
+</style>
+";
 if ($action == 'showlist') {
 	stdhead ("Show List");
 	print("<table border=1 cellspacing=0 cellpadding=5 width=737>\n");

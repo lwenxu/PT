@@ -150,12 +150,12 @@ $AUTHORITY=array(
 );
 $BASIC=array(
 	'SITENAME' => 'NexusPHP',
-	'BASEURL' => '127.0.0.1/PT',
-	'announce_url' => '127.0.0.1/announce.php',
+	'BASEURL' => '111.114.113.178/PT',
+	'announce_url' => '111.114.113.178/announce.php',
 	'mysql_host' => '127.0.0.1',
 	'mysql_user' => 'root',
 	'mysql_pass' => '',
-	'mysql_db' => 'nexusphp',
+	'mysql_db' => 'nexus',
 );
 $BONUS=array(
 	'donortimes' => '2',

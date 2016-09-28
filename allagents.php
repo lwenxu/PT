@@ -2,6 +2,26 @@
 require "include/bittorrent.php";
 dbconn();
 loggedinorreturn();
+echo "<style>
+    td{
+        border: solid 2px;
+        color: #00a8c6;
+        font-family: 'Microsoft Yahei';
+        font-size: 17px;
+        font-weight: 200;
+    }
+    td input{
+        margin: 4px;
+    }
+    td select{
+        margin: 4px;
+    }
+    table{
+        margin-left: 35%;
+        margin-top: 10px;
+        width: 30%;
+    }
+</style>";
 if (get_user_class() < UC_MODERATOR)
 	stderr("Error", "Permission denied.");
 $res2 = sql_query("SELECT agent,peer_id FROM peers  GROUP BY agent ") or sqlerr();

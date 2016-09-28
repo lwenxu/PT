@@ -9,7 +9,27 @@ if (get_user_class() < UC_ADMINISTRATOR) {
 
 stdhead("FAQ Management");
 begin_main_frame();
-
+echo "
+<style>
+    td{
+        border: solid 1px;
+        color: #00a8c6;
+        font-family: 'Microsoft Yahei';
+        font-size: 13px;
+        font-weight: 200;
+    }
+    td input{
+        margin: 4px;
+    }
+    td select{
+        margin: 4px;
+    }
+    .outer{
+        margin-left: 20%;
+        margin-top: 20px;
+    }
+</style>
+";
 print("<h1 align=\"center\">FAQ Management</h1>");
 
 // make the array that has all the faq in a nice structured

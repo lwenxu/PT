@@ -29,14 +29,33 @@ if (get_user_class() < UC_ADMINISTRATOR) {
 }
 
 //stdhead("FAQ Management");
-
+echo "
+<style>
+    td{
+        border: solid 2px;
+        color: #00a8c6;
+        font-family: 'Microsoft Yahei';
+        font-size: 17px;
+        font-weight: 200;
+    }
+    td input{
+        margin: 4px;
+    }
+    td select{
+        margin: 4px;
+    }
+    .outer{
+        margin-left: 20%;
+        margin-top: 20px;
+    }
+</style>
+";
 // ACTION: reorder - reorder sections and items
 if ($_GET[action] == "reorder") {
 	foreach($_POST[order] as $id => $position) sql_query("UPDATE `faq` SET `order`=".sqlesc($position)." WHERE id=".sqlesc($id)) or sqlerr();
 	header("Location: " . get_protocol_prefix() . "$BASEURL/faqmanage.php");
 	die;
 }
-
 // ACTION: edit - edit a section or item
 elseif ($_GET[action] == "edit" && isset($_GET[id])) {
 	stdhead("FAQ Management");

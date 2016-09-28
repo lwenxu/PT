@@ -8,7 +8,28 @@ stderr("Sorry", "Access denied.");
 stdhead("Duplicate IP users");
 begin_frame("Duplicate IP users:", true);
 begin_table();
-
+echo "
+<style>
+    td{
+        border: solid 2px;
+        color: #00a8c6;
+        font-family: 'Microsoft Yahei';
+        font-size: 17px;
+        font-weight: 200;
+    }
+    td input{
+        margin: 4px;
+    }
+    td select{
+        margin: 4px;
+    }
+    table{
+        margin-left: 10%;
+        margin-top: 10px;
+        width: 80%;
+    }
+</style>
+";
 if (get_user_class() >= UC_MODERATOR || $CURUSER["guard"] == "yes")
 {
  $res = sql_query("SELECT count(*) AS dupl, ip FROM users WHERE enabled = 'yes' AND ip <> '' AND ip <> '127.0.0.0' GROUP BY ip ORDER BY dupl DESC, ip") or sqlerr();

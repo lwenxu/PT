@@ -3,7 +3,41 @@ require "include/bittorrent.php";
 dbconn();
 require_once(get_langfile_path());
 loggedinorreturn();
-
+echo "
+<style>
+    td{
+        border: solid 2px;
+        color: #00a8c6;
+        font-family: 'Microsoft Yahei';
+        font-size: 17px;
+        font-weight: 200;
+    }
+    td input{
+        margin: 4px;
+    }
+    td select{
+        margin: 4px;
+    }
+    table{
+        margin-left: 2%;
+        margin-top: 20px;
+        width: 95%;
+    }
+    #itemlist{
+    	font-family: 'Microsoft Yahei';
+    	font-size: 25px;
+//    	color: #e62711;
+    	margin-left: 20px;
+    }
+    #itemlist ul{
+    	margin-left: 6%;
+    }
+    #itemlist li{
+    	float: left;
+    	margin: 10px;
+    }
+</style>
+";
 if (get_user_class() < UC_ADMINISTRATOR)
     permissiondenied();
 
@@ -110,8 +144,8 @@ function print_type_list($type){
 ?>
 <h1 align="center"><?php echo $lang_catmanage['text_category_management']?> - <?php echo $typename?></h1>
 <div>
-<span id="item" onclick="dropmenu(this);"><span style="cursor: pointer;" class="big"><b><?php echo $lang_catmanage['text_manage']?></b></span>
-<div id="itemlist" class="dropmenu" style="display: none"><ul>
+<!--<span id="item" onclick="dropmenu(this);"><span style="cursor: pointer;" class="big"><b>--><?php //echo $lang_catmanage['text_manage']?><!--</b></span>-->
+<div id="itemlist" class="dropmenu" ><ul>
 <li><a href="?action=view&amp;type=searchbox"><?php echo $lang_catmanage['text_searchbox']?></a></li>
 <li><a href="?action=view&amp;type=caticon"><?php echo $lang_catmanage['text_category_icons']?></a></li>
 <li><a href="?action=view&amp;type=secondicon"><?php echo $lang_catmanage['text_second_icons']?></a></li>
@@ -123,13 +157,14 @@ function print_type_list($type){
 <li><a href="?action=view&amp;type=processing"><?php echo $lang_catmanage['text_processings']?></a></li>
 <li><a href="?action=view&amp;type=team"><?php echo $lang_catmanage['text_teams']?></a></li>
 <li><a href="?action=view&amp;type=audiocodec"><?php echo $lang_catmanage['text_audio_codecs']?></a></li>
+<li><a href="?action=add&amp;type=<?php echo $type?>" ><?php echo $lang_catmanage['text_add']?></a></li>
 </ul>
 </div>
 </span>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<span id="add">
-<a href="?action=add&amp;type=<?php echo $type?>" class="big"><b><?php echo $lang_catmanage['text_add']?></b></a>
-</span>
+<!--&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--<span id="add">-->
+<!--<a id="itemlist" href="?action=add&amp;type=--><?php //echo $type?><!--" class="big"><b>--><?php //echo $lang_catmanage['text_add']?><!--</b></a>-->
+<!--</span>-->
 </div>
 <?php
 }

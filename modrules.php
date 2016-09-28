@@ -2,6 +2,33 @@
 require_once("include/bittorrent.php");
 dbconn();
 loggedinorreturn();
+echo "
+<style>
+    td{
+        border: solid 1px;
+        color: #00a8c6;
+        font-family: 'Microsoft Yahei';
+        font-size: 15px;
+        font-weight: 200;
+    }
+    td input{
+        margin: 4px;
+    }
+    td select{
+        margin: 4px;
+    }
+    table{
+        margin-left: 16%;
+        margin-top: 20px;
+    }
+    td a{
+    color: #e62711;
+    margin: 7px;
+    width: 10px;
+    }
+</style>
+";
+
 if (get_user_class() < UC_ADMINISTRATOR) {
 	stderr("Error","Only Administrators and above can modify the Rules, sorry.");
 }

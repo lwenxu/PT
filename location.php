@@ -11,7 +11,20 @@ mysql_select_db($mysql_db);
 stdhead("Manage Locations");
 begin_main_frame("",false,100);
 begin_frame("Manage Locations",true,10,"100%","center");
-
+echo "
+<style>
+table{
+margin-top: 10px;
+}
+td{
+border: solid 2px;
+color: #00a8c6;
+}
+td input{
+margin: 4px;
+}
+</style>
+";
 $sure = $_GET['sure'];
 if($sure == "yes") {
 	$delid = $_GET['delid'];

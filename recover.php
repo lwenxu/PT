@@ -2,7 +2,126 @@
 require "include/bittorrent.php";
 dbconn();
 failedloginscheck ("Recover",true);
-
+echo "
+	<style>
+		input[type=text]{
+		display: block;
+//		width: 100%;
+//		height: 34px;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #555;
+		background-color: #fff;
+		background-image: none;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+		-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+		-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		}
+		input[type=password]{
+		display: block;
+//		width: 100%;
+//		height: 34px;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #555;
+		background-color: #fff;
+		background-image: none;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+		-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+		-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		}
+		input[type=submit]{
+		display: inline-block;
+		margin-bottom: 0;
+		font-weight: 400;
+		text-align: center;
+		vertical-align: middle;
+		touch-action: manipulation;
+		cursor: pointer;
+		border: 1px solid transparent;
+		white-space: nowrap;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 1.42857;
+		border-radius: 4px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		color: #FFF;
+		background-color: #32c5d2;
+		border-color: #32c5d2;
+		}
+		form p{
+		font-family: 'Microsoft Yahei';
+		font-size: 17px;
+		color: #E83737;
+		}
+		tr{
+		font-family: 'Microsoft JhengHei UI';
+		font-size: 18px;
+		color: #00a8c6;
+		font-weight: 400;
+		}
+		td input{
+		margin-top: 10px;
+		margin-bottom: 10px;
+		}
+		p{
+		font-family: 'Microsoft Yahei';
+		font-size: 15px;
+//		color: #00a8c6;
+		font-weight: 300;
+		text-align: center;
+		}
+		table{
+		margin-left: 9%;
+		}
+		.langselect{
+		font-family: 'Microsoft Yahei';
+		font-size: 17px;
+		color: #00a8c6;
+		font-weight: 300;
+		}
+		body{
+//		background-image: url('./bg.jpg');
+		    background-color: #364150!important;
+		}
+		.loginbox{
+			height: 70%;
+			width: 45%;
+			background-color: #fff;
+			margin-left: 28%;
+			border-radius: 9px;
+		}
+		.footer{
+			color: white;
+		}
+		h1{
+		text-align: center;
+		}
+		td{
+			border: 0px;
+		}
+		table{
+		border: 0px;
+		margin-left: 20%;
+		}
+		input[type=submit]{
+			margin-left: 10%;
+		}
+	</style>
+";
 $take_recover = !isset($_GET['sitelanguage']);
 $langid = 0 + $_GET['sitelanguage'];
 if ($langid)
@@ -122,11 +241,12 @@ else
 	}
 	$s .= "\n</select>";
 	?>
-	<form method="get" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+	<form  method="get" action="<?php echo $_SERVER['PHP_SELF'] ?>">
 	<?php
-	print("<div align=\"right\">".$lang_recover['text_select_lang']. $s . "</div>");
+	print("<div class='langselect' align=\"right\">".$lang_recover['text_select_lang']. $s . "</div>");
 	?>
 	</form>
+	<div class="loginbox">
 	<h1><?php echo $lang_recover['text_recover_user'] ?></h1>
 	<p><?php echo $lang_recover['text_use_form_below'] ?></p>
  	<p><?php echo $lang_recover['text_reply_to_confirmation_email'] ?></p>
@@ -141,6 +261,9 @@ else
 	?>
 	<tr><td class="toolbox" colspan="2" align="center"><input type="submit" value="<?php echo $lang_recover['submit_recover_it'] ?>" class="btn" /></td></tr>
 	</table></form>
+	</div>
 	<?php
+	echo "<div class='footer' >";
 	stdfoot();
+	echo "</div>";
 }

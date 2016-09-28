@@ -3,7 +3,41 @@ require "include/bittorrent.php";
 dbconn();
 require_once(get_langfile_path());
 loggedinorreturn();
-
+echo "<style>
+    td{
+        border: solid 2px;
+        color: #00a8c6;
+        font-family: 'Microsoft Yahei';
+        font-size: 17px;
+        font-weight: 200;
+    }
+    td input{
+        margin: 4px;
+    }
+    td select{
+        margin: 4px;
+    }
+    table{
+        margin-left: 35%;
+        margin-top: 10px;
+        width: 80%;
+    }
+    .selectdate{
+    	font-family: 'Microsoft Yahei';
+    	color: #00a8c6;
+    	font-size: 20px;
+    }
+    b{
+    font-family: 'Microsoft Yahei';
+    	color: #00a8c6;
+    	font-size: 20px;
+    }
+    #orderlist{
+    font-family: 'Microsoft Yahei';
+    	color: #00a8c6;
+    	font-size: 16px;
+    }
+</style>";
 if (get_user_class() < UC_UPLOADER)
     permissiondenied();
 
@@ -48,7 +82,7 @@ $monthselection.="</select>";
 ?>
 <div>
 <form method="get" action="?">
-<span>
+<span class="selectdate">
 <?php echo $lang_uploaders['text_select_month']?><?php echo $yearselection?>&nbsp;&nbsp;<?php echo $monthselection?>&nbsp;&nbsp;<input type="submit" value="<?php echo $lang_uploaders['submit_go']?>" />
 </span>
 </form>

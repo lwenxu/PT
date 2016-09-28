@@ -35,6 +35,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && get_user_class() >= UC_ADMINISTRATOR
 $res = sql_query("SELECT * FROM bans ORDER BY added DESC") or sqlerr();
 
 stdhead("Bans");
+echo "
+<style>
+table{
+margin-left: 33%;
+}
+td input{
+margin: 5px;
+}
+td{
+font-family: Microsoft Yahei, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+</style>
+";
 
 print("<h1>Current Bans</h1>\n");
 

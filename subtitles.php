@@ -296,7 +296,7 @@ if (get_user_class() >= UC_PEASANT)
 			height: 50%;
 			width: 40%;
 			font-family: 'Microsoft YaHei';
-			font-size: 15px;
+			font-size: 10px;
 			color: #00a8c6;
 		}
 		.btnup{
@@ -327,11 +327,19 @@ if (get_user_class() >= UC_PEASANT)
 			margin-left: 8px;
 			margin-bottom: 15px;
 		}
+		.uploadform td{
+		font-size: 18px;
+		font-family: 'Microsoft YaHei';
+			color: #00a8c6;
+		}
+		#footer{
+			font-size: 13px;
+		}
 		</style>
 	";
 	print("<form enctype=multipart/form-data method=post action=? class='forms'>\n");
 	print("<input type=hidden name=action value=upload>");
-	print("<table class=main border=1 cellspacing=0 cellpadding=5>\n");
+	print("<table class=uploadform border=1 cellspacing=0 cellpadding=5 >\n");
 
 	print("<tr><td class=rowhead>".$lang_subtitles['row_file']."<font color=red>*</font></td><td class=rowfollow align=left><input type=file name=file>");
 	if ($maxsubsize_main > 0)

@@ -1564,9 +1564,9 @@ function show_image_code () {
 //		echo "<div><img style='margin-left: 50%' src=\"".htmlspecialchars("image.php?action=regimage&imagehash=".$imagehash)."\" /></div>";
 
 		print ("<tr><td class=\"rowhead\" style=\"font-family: Century Gothic, Microsoft yahei;font-size: 17px;margin-left: 10%;>".$lang_functions['row_security_image']."</td>");
-		print ("<td  align=\"left\"><img style='margin-left: 20%' src=\"".htmlspecialchars("image.php?action=regimage&imagehash=".$imagehash)."\" border=\"0\" alt=\"CAPTCHA\" /></td></tr><br>");
-		print ("<tr><td class=\"rowhead\"><span style='font-family: \"Century Gothic\", \"Microsoft yahei\";font-size: 17px;margin-left: 10%;'>".$lang_functions['row_security_code']."</td><td align=\"left\">");
-		print("<input  class=\"form-control form-control-solid placeholder-no-fix\" type=\"text\" autocomplete=\"off\" style=\"width: 180px; border: 1px solid gray;margin-left: 20%\" name=\"imagestring\" value=\"\" />");
+		print ("<td  align=\"left\" ><a href=><img  style='margin-left: 100%' src=\"".htmlspecialchars("image.php?action=regimage&imagehash=".$imagehash)."\" border=\"0\" alt=\"CAPTCHA\" /></a></td></tr><br>");
+		print ("<tr><td class=\"rowhead\"><span >".$lang_functions['row_security_code']."</td><td align=\"left\">");
+		print("<input  class=\"form-control form-control-solid placeholder-no-fix\" type=\"text\" autocomplete=\"off\" style=\"width: 180px; border: 1px solid gray;\" name=\"imagestring\" value=\"\" />");
 		print("<input type=\"hidden\" name=\"imagehash\" value=\"$imagehash\" /></td></tr>");
 	}
 }
@@ -1991,7 +1991,7 @@ function tr($x,$y,$noesc=0,$relation='') {
 		$a = htmlspecialchars($y);
 		$a = str_replace("\n", "<br />\n", $a);
 	}
-	print("<tr".( $relation ? " relation = \"$relation\"" : "")."><td class=\"rowhead nowrap\" valign=\"top\" align=\"right\">$x</td><td class=\"rowfollow\" valign=\"top\" align=\"left\">".$a."</td></tr>\n");
+	print("<tr".( $relation ? " relation = \"$relation\"" : "")."><td >$x</td><td class=\"rowfollow\" valign=\"top\" align=\"left\">".$a."</td></tr>\n");
 }
 
 function tr_small($x,$y,$noesc=0,$relation='') {
@@ -2809,6 +2809,7 @@ if ($msgalert)
 
 function stdfoot() {
 	global $SITENAME,$BASEURL,$Cache,$datefounded,$tstart,$icplicense_main,$add_key_shortcut,$query_name, $USERUPDATESET, $CURUSER, $enablesqldebug_tweak, $sqldebug_tweak, $Advertisement, $analyticscode_tweak;
+
 	print("</td></tr></table>");
 	print("<div id=\"footer\">");
 	if ($Advertisement->enable_ad()){
@@ -2821,6 +2822,7 @@ function stdfoot() {
 		sql_query("UPDATE users SET " . join(",", $USERUPDATESET) . " WHERE id = ".$CURUSER['id']);
 	}
 	// Variables for End Time
+
 	$tend = getmicrotime();
 	$totaltime = ($tend - $tstart);
 	$year = substr($datefounded, 0, 4);

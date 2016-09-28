@@ -3,7 +3,38 @@ require "include/bittorrent.php";
 dbconn();
 require_once(get_langfile_path());
 loggedinorreturn();
-
+echo "<style>
+    td{
+        border: solid 2px;
+        color: #00a8c6;
+        font-family: 'Microsoft Yahei';
+        font-size: 17px;
+        font-weight: 200;
+    }
+    td input{
+        margin: 4px;
+    }
+    td select{
+        margin: 4px;
+    }
+    table{
+        margin-left: 19%;
+        margin-top: 10px;
+    }
+        #addadlist{
+    	font-family: 'Microsoft Yahei';
+    	font-size: 25px;
+//    	color: #e62711;
+    	margin-left: 20px;
+    }
+    #addadlist ul{
+    	margin-left: 10%;
+    }
+    #addadlist li{
+    	float: left;
+    	margin: 10px;
+    }
+</style>";
 if (get_user_class() < UC_MODERATOR)
     permissiondenied();
 $allowxhtmlclass = UC_ADMINISTRATOR;
@@ -358,8 +389,8 @@ begin_main_frame();
 ?>
 <h1 align="center"><?php echo $lang_admanage['text_ad_management']?></h1>
 <div>
-<span id="addad" onclick="dropmenu(this);"><span style="cursor: pointer;" class="big"><b><?php echo $lang_admanage['text_add_ad']?></b></span>
-<div id="addadlist" class="dropmenu" style="display: none"><ul>
+<!--<span id="addad" onclick="dropmenu(this);"><span style="cursor: pointer;" class="big"><b>--><?php //echo $lang_admanage['text_add_ad']?><!--</b></span>-->
+<div id="addadlist" class="dropmenu" ><ul>
 <li><a href="?action=add&amp;position=header"><?php echo $lang_admanage['text_header']?></a></li>
 <li><a href="?action=add&amp;position=footer"><?php echo $lang_admanage['text_footer']?></a></li>
 <li><a href="?action=add&amp;position=belownav"><?php echo $lang_admanage['text_below_navigation']?></a></li>

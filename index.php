@@ -676,11 +676,11 @@ if ($showtrackerload == "yes") {
 //	$USERUPDATESET[] = "last_home = ".sqlesc(date("Y-m-d H:i:s"));
 //$Cache->delete_value('user_'.$CURUSER["id"].'_unread_news_count');
 //end_main_frame();
-////stdfoot();
+stdfoot();
 ?>
-
-			<div class="copy-section">
-				<div class="container">
-					<p>西北大学PT站</p>
-				</div>
-			</div>
+<!--			stdfoot();-->
+<!--			<div class="copy-section">-->
+<!--				<div class="container">-->
+<!--					<p>西北大学PT站</p>-->
+<!--				</div>-->
+<!--			</div>-->

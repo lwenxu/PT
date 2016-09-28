@@ -14,7 +14,27 @@ if (get_user_class() < UC_MODERATOR) stderr("Error", "Permission denied.");
 
 stdhead("Cheaters");
 begin_frame('Cheaters');
-
+echo "
+<style>
+    td{
+        border: solid 1px;
+        color: #00a8c6;
+        font-family: 'Microsoft Yahei';
+        font-size: 17px;
+        font-weight: 200;
+    }
+    td input{
+        margin: 4px;
+    }
+    td select{
+        margin: 4px;
+    }
+    table{
+        margin-left: 24%;
+        margin-top: 20px;
+    }
+</style>
+";
 $page = @$_GET['page'];
 //$perpage = 100; // currently ignored
 

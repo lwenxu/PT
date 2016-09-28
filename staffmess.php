@@ -6,7 +6,22 @@ if (get_user_class() < UC_ADMINISTRATOR)
 stderr("Sorry", "Access denied.");
 stdhead("Mass PM", false);
 ?>
-<table class=main width=737 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
+<style>
+    td{
+        border: solid 1px;
+        color: #00a8c6;
+    }
+    td input{
+        margin: 4px;
+    }
+    td select{
+        margin: 4px;
+    }
+    .outer{
+        margin-left: 20%;
+    }
+</style>
+<table class=outer width=737 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
 <div align=center>
 <h1>Mass PM to all Staff members and users:</a></h1>
 <form method=post action=takestaffmess.php>

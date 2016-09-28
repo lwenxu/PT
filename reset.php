@@ -37,10 +37,27 @@ write_log("Password Reset For $username by $CURUSER[username]");
 }
 stdhead("Reset User's Lost Password");
 ?>
+<style>
+    h1{
+        text-align: center;
+        color: #00aaaa;
+    }
+    table{
+        margin-left: 30%;
+
+    }
+    td{
+        border: solid 2px;
+        color: #00a8c6;
+    }
+    td input{
+        margin: 5px;
+    }
+</style>
 <table border=1 cellspacing=0 cellpadding=5>
 <form method=post>
 <tr><td class=colhead align="center" colspan=2>Reset User's Lost Password</td></tr>
-<tr><td class=rowhead align="right">User Name:</td><td class=rowfollow><input size=40 name=username></td></tr>
+<tr><td class=rowhead align="right">User Name:</td><td class=rowfollow><input type="text" size=40 name=username></td></tr>
 <tr><td class=rowhead align="right">New Password:</td><td class=rowfollow><input type="password" size=40 name=newpassword><br /><font class=small>Minimum is 6 characters</font></td></tr>
 <tr><td class=rowhead align="right">Confirm New Password:</td><td class=rowfollow><input type="password" size=40 name=newpasswordagain></td></tr>
 <tr><td class=toolbox colspan=2 align="center"><input type=submit class=btn value='Reset'></td></tr>

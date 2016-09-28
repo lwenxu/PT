@@ -7,13 +7,31 @@ if (get_user_class() < UC_MODERATOR)
 stderr("Sorry", "Access denied.");
 
 stdhead("Warned Users");
+echo "
+<style>
+    td{
+        border: solid 1px;
+        color: #00a8c6;
+    }
+    td input{
+        margin: 4px;
+    }
+    td select{
+        margin: 4px;
+    }
+    .outer{
+        margin-left: 20%;
+        margin-top: 20px;
+    }
+</style>
+";
 $warned = number_format(get_row_count("users", "WHERE warned='yes'"));
 begin_frame("Warned Users: ($warned)", true);
 begin_table();
 
 $res = sql_query("SELECT * FROM users WHERE warned=1 AND enabled='yes' ORDER BY (users.uploaded/users.downloaded)") or sqlerr();
 $num = mysql_num_rows($res);
-print("<table border=1 width=675 cellspacing=0 cellpadding=2><form action=\"nowarn.php\" method=post>\n");
+print("<table border=1 width=675 cellspacing=0 cellpadding=2 class='outer'><form action=\"nowarn.php\" method=post>\n");
 print("<tr align=center><td class=colhead width=90>User Name</td>
  <td class=colhead width=70>Registered</td>
  <td class=colhead width=75>Last access</td>  
