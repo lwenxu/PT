@@ -70,10 +70,15 @@ function stdmsg($heading, $text, $htmlstrip = false)
 		$heading = htmlspecialchars(trim($heading));
 		$text = htmlspecialchars(trim($text));
 	}
-	print("<table style=\"width: 970px;margin-left: 20%;background-color: #00a8c6;color: white;font-family: 'Microsoft YaHei';font-size: 17px;font-weight: 300;\" align=\"center\" class=\"main\" width=\"500\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"embedded\">\n");
+	echo "<style>
+	tr td{
+		border: 0px;
+	}
+</style>";
+	print("<table style=\"align-self: center; width: 970px;margin: 0 17%;text-align:center;background-color:white;color: ;font-family: 'Microsoft YaHei';font-size: 17px;font-weight: 300;\" align=\"center\" class=\"main\" width=\"500\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"embedded\">\n");
 	if ($heading)
 	print("<h2 style=\"font-family: 'Microsoft YaHei';font-size: 35px;font-weight: 300;color: white;text-align: center\">".$heading."</h2>\n");
-	print("<table width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"10\"><tr><td class=\"text\">");
+	print("<table width=\"100%\"  border=\"1\" cellspacing=\"0\" cellpadding=\"10\"><tr><td class=\"text\" style='text-align: center'>");
 	print($text . "</td></tr></table></td></tr></table>\n");
 }
 
@@ -823,7 +828,12 @@ function simpletag(thetag)
 }
 //]]>
 </script>
-<table width="100%" cellspacing="0" cellpadding="5" border="0">
+	<style>
+		.textcode tr{
+			border: 0px;
+		}
+	</style>
+<table width="100%" cellspacing="0" cellpadding="5" border="0" class="textcode">
 <tr><td align="left" colspan="2">
 <table cellspacing="1" cellpadding="2" border="0">
 <tr>
@@ -1134,8 +1144,15 @@ function cur_user_check () {
 	global $CURUSER;
 	if ($CURUSER)
 	{
+//		echo "<style>
+//			span{
+//					color: crimson;
+//				}
+//			</style>";
 		sql_query("UPDATE users SET lang=" . get_langid_from_langcookie() . " WHERE id = ". $CURUSER['id']);
+		echo "<span>";
 		stderr ($lang_functions['std_permission_denied'], $lang_functions['std_already_logged_in']);
+		echo "</span>";
 	}
 }
 
@@ -2482,32 +2499,15 @@ $cssupdatedate=($cssupdatedate ? "?".htmlspecialchars($cssupdatedate) : "");
 	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700italic,700,600italic,600,400italic,300italic,300,100italic,100' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	<script src="./assets/nav/js/responsiveslides.min.js"></script>
-
 	<link href="ht<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
 	<link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
 	<link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
 	<link href="../assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 	<link href="../assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="../assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-	<link href="../assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
-	<link href="../assets/pages/css/login-4.min.css" rel="stylesheet" type="text/css" />
-	<link rel="shortcut icon" href="favicon.ico" />
-	<script src="../assets/global/plugins/respond.min.js"></script>
-	<script src="../assets/global/plugins/excanvas.min.js"></script>
-	<script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-	<script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="../assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
-	<script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-	<script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-	<script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-	<script src="../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-	<script src="../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
-	<script src="../assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
-	<script src="../assets/global/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
-	<script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
-	<script src="../assets/pages/scripts/login-4.min.js" type="text/javascript"></script>
+
+
 
 	<script>
 		$(function () {
@@ -3262,7 +3262,26 @@ function torrenttable($res, $variant = "torrent") {
 		else $wait = 0;
 	}
 ?>
-<table class="torrents" cellspacing="0" cellpadding="5" width="100%">
+
+<style>
+	#torrentslist{
+		color: #00a8c6;
+		font-family: \"Arial Black\", arial-black;
+		font-size: 15px;
+		margin-left: 20%;
+		/*border: 1px;*/
+	}
+	/*td{*/
+	/*border: 1px solid;*/
+	/*}*/
+	#torrentslist td{
+		/*width: 3px;*/
+		border: 2px solid;
+	}
+</style>
+
+
+<table class="torrents" id="torrentslist" cellspacing="10" cellpadding="5" width="100%">
 <tr>
 <?php
 $count_get = 0;
@@ -3292,7 +3311,7 @@ for ($i=1; $i<=9; $i++){
 	else $link[$i] = ($i == 1 ? "asc" : "desc");
 }
 ?>
-<td class="colhead" style="padding: 0px"><?php echo $lang_functions['col_type'] ?></td>
+<!--<td class="colhead" style="padding: 0px">--><?php //echo $lang_functions['col_type'] ?><!--</td>-->
 <td class="colhead"><a href="?<?php echo $oldlink?>sort=1&amp;type=<?php echo $link[1]?>"><?php echo $lang_functions['col_name'] ?></a></td>
 <?php
 
@@ -3301,15 +3320,15 @@ if ($wait)
 	print("<td class=\"colhead\">".$lang_functions['col_wait']."</td>\n");
 }
 if ($CURUSER['showcomnum'] != 'no') { ?>
-<td class="colhead"><a href="?<?php echo $oldlink?>sort=3&amp;type=<?php echo $link[3]?>"><img class="comments" src="pic/trans.gif" alt="comments" title="<?php echo $lang_functions['title_number_of_comments'] ?>" /></a></td>
+<td ><a href="?<?php echo $oldlink?>sort=3&amp;type=<?php echo $link[3]?>"><?php echo $lang_functions['title_number_of_comments'] ?></a></td>
 <?php } ?>
 
-<td class="colhead"><a href="?<?php echo $oldlink?>sort=4&amp;type=<?php echo $link[4]?>"><img class="time" src="pic/trans.gif" alt="time" title="<?php echo ($CURUSER['timetype'] != 'timealive' ? $lang_functions['title_time_added'] : $lang_functions['title_time_alive'])?>" /></a></td>
-<td class="colhead"><a href="?<?php echo $oldlink?>sort=5&amp;type=<?php echo $link[5]?>"><img class="size" src="pic/trans.gif" alt="size" title="<?php echo $lang_functions['title_size'] ?>" /></a></td>
-<td class="colhead"><a href="?<?php echo $oldlink?>sort=7&amp;type=<?php echo $link[7]?>"><img class="seeders" src="pic/trans.gif" alt="seeders" title="<?php echo $lang_functions['title_number_of_seeders'] ?>" /></a></td>
-<td class="colhead"><a href="?<?php echo $oldlink?>sort=8&amp;type=<?php echo $link[8]?>"><img class="leechers" src="pic/trans.gif" alt="leechers" title="<?php echo $lang_functions['title_number_of_leechers'] ?>" /></a></td>
-<td class="colhead"><a href="?<?php echo $oldlink?>sort=6&amp;type=<?php echo $link[6]?>"><img class="snatched" src="pic/trans.gif" alt="snatched" title="<?php echo $lang_functions['title_number_of_snatched']?>" /></a></td>
-<td class="colhead"><a href="?<?php echo $oldlink?>sort=9&amp;type=<?php echo $link[9]?>"><?php echo $lang_functions['col_uploader']?></a></td>
+<td><?php echo $lang_functions['title_time_added']?></td>
+<td><?php echo $lang_functions['title_size'] ?></td>
+<td><?php echo $lang_functions['title_number_of_seeders'] ?></td>
+<td> <?php echo $lang_functions['title_number_of_leechers'] ?></td>
+<td> <?php echo $lang_functions['title_number_of_snatched']?></td>
+<td>　<?php echo $lang_functions['col_uploader']?></td>
 <?php
 if (get_user_class() >= $torrentmanage_class) { ?>
 	<td class="colhead"><?php echo $lang_functions['col_action'] ?></td>
@@ -3330,16 +3349,16 @@ while ($row = mysql_fetch_assoc($res))
 	$sphighlight = get_torrent_bg_color($row['sp_state']);
 	print("<tr" . $sphighlight . ">\n");
 
-	print("<td class=\"rowfollow nowrap\" valign=\"middle\" style='padding: 0px'>");
-	if (isset($row["category"])) {
-		print(return_category_image($row["category"], "?"));
-		if ($has_secondicon){
-			print(get_second_icon($row, "pic/".$catimgurl."additional/"));
-		}
-	}
-	else
-		print("-");
-	print("</td>\n");
+//	print("<td class=\"rowfollow nowrap\" valign=\"middle\" style='padding: 0px'>");
+//	if (isset($row["category"])) {
+//		print(return_category_image($row["category"], "?"));
+//		if ($has_secondicon){
+////			print(get_second_icon($row, "pic/".$catimgurl."additional/"));
+//		}
+//	}
+//	else
+//		print("-");
+//	print("</td>\n");
 
 	//torrent name
 	$dispname = trim($row["name"]);
@@ -3398,7 +3417,13 @@ while ($row = mysql_fetch_assoc($res))
 		$stickyicon = "<img class=\"sticky\" src=\"pic/trans.gif\" alt=\"Sticky\" title=\"".$lang_functions['title_sticky']."\" />&nbsp;";
 	else $stickyicon = "";
 	
-	print("<td class=\"rowfollow\" width=\"100%\" align=\"left\"><table class=\"torrentname\" width=\"100%\"><tr" . $sphighlight . "><td class=\"embedded\">".$stickyicon."<a $short_torrent_name_alt $mouseovertorrent href=\"details.php?id=".$id."&amp;hit=1\"><b>".htmlspecialchars($dispname)."</b></a>");
+	print("<td class=\"rowfollow\" align=\"left\">
+<table class=\"torrentname\" width=\"100%\">
+<tr" . $sphighlight . ">
+<td style='border:0' class=\"embedded\">".$stickyicon." 
+<a $short_torrent_name_alt $mouseovertorrent href=\"details.php?id=".$id."&amp;hit=1\">
+<b>".htmlspecialchars($dispname)."</b>
+</a>");
 	$sp_torrent = get_torrent_promotion_append($row['sp_state'],"",true,$row["added"], $row['promotion_time_type'], $row['promotion_until']);
 	$picked_torrent = "";
 	if ($CURUSER['appendpicked'] != 'no'){
@@ -3435,7 +3460,7 @@ while ($row = mysql_fetch_assoc($res))
 			$act .= ($act ? "<br />" : "")."<a id=\"bookmark".$counter."\" ".$bookmark." >".get_torrent_bookmark_state($CURUSER['id'], $id)."</a>";
 		}
 
-	print("<td width=\"20\" class=\"embedded\" style=\"text-align: right; \" valign=\"middle\">".$act."</td>\n");
+//	print("<td width=\"20\" class=\"embedded\" style=\"text-align: right; \" valign=\"middle\">".$act."</td>\n");
 
 	print("</tr></table></td>");
 	if ($wait)
@@ -3916,7 +3941,7 @@ $smallth
 }
 
 function quickreply($formname, $taname,$submit){
-	print("<textarea name='".$taname."' cols=\"100\" rows=\"8\" style=\"width: 450px\" onkeydown=\"ctrlenter(event,'compose','qr')\"></textarea>");
+	print("<textarea name='".$taname."' cols=\"200\" rows=\"8\" style=\"width: 450px\" onkeydown=\"ctrlenter(event,'compose','qr')\"></textarea>");
 	print(smile_row($formname, $taname));
 	print("<br />");
  	print("<input type=\"submit\" id=\"qr\" class=\"btn\" value=\"".$submit."\" />");

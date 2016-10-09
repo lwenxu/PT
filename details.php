@@ -6,7 +6,34 @@ require_once(get_langfile_path());
 if ($showextinfo['imdb'] == 'yes')
 	require_once("imdb/imdb.class.php");
 loggedinorreturn();
+echo "<style>
+table{
+	color: #00a8c6;
+	font-size: 17px;
+	font-family: 'Microsoft YaHei UI Light';
+	font-weight: 300;
+}
 
+
+td{
+	border: solid 1px;
+	padding: 5px;
+	margin: 5px;
+}
+.rowfollow td{
+	border: 0;
+}
+.infos{
+	margin-left: 10%;
+}
+b{
+	margin: 5px;
+}
+.pinlun{
+	margin-left: 10%;
+	width: 80%;
+}
+</style>";
 $id = 0 + $_GET["id"];
 
 int_check($id);
@@ -49,7 +76,7 @@ else {
 
 		$s=htmlspecialchars($row["name"]).($sp_torrent ? "&nbsp;&nbsp;&nbsp;".$sp_torrent : "");
 		print("<h1 align=\"center\" id=\"top\">".$s."</h1>\n");
-		print("<table width=\"940\" cellspacing=\"0\" cellpadding=\"5\">\n");
+		print("<table width=\"80%\" cellspacing=\"0\" cellpadding=\"5\" class='infos'>\n");
 
 		$url = "edit.php?id=" . $row["id"];
 		if (isset($_GET["returnto"])) {
@@ -147,7 +174,11 @@ else {
 				}
 			}
 		}
-		print("<td class=\"embedded\"><form method=\"get\" action=\"http://shooter.cn/sub/\" target=\"_blank\"><input type=\"text\" name=\"searchword\" id=\"keyword\" style=\"width: 250px\" value=\"".$moviename."\" /><input type=\"submit\" value=\"".$lang_details['submit_search_at_shooter']."\" /></form></td><td class=\"embedded\"><form method=\"get\" action=\"http://www.opensubtitles.org/en/search2/\" target=\"_blank\"><input type=\"hidden\" id=\"moviename\" name=\"MovieName\" /><input type=\"hidden\" name=\"action\" value=\"search\" /><input type=\"hidden\" name=\"SubLanguageID\" value=\"all\" /><input onclick=\"document.getElementById('moviename').value=document.getElementById('keyword').value;\" type=\"submit\" value=\"".$lang_details['submit_search_at_opensubtitles']."\" /></form></td>\n");
+		print("<td class=\"embedded\">
+<form method=\"get\" action=\"http://shooter.cn/sub/\" target=\"_blank\">
+<input  type=\"text\" name=\"searchword\" id=\"keyword\" style=\"width: 250px;margin: 5px\" value=\"".$moviename."\" />
+</form>
+\n");
 		print("</tr></table>");
 		print("</td></tr>\n");
 		// ---------------- end subtitle block -------------------//
@@ -439,7 +470,7 @@ else {
 		if ($row["type"] == "multi")
 		{
 			$files_info = "<b>".$lang_details['text_num_files']."</b>". $row["numfiles"] . $lang_details['text_files'] . "<br />";
-			$files_info .= "<span id=\"showfl\"><a href=\"javascript: viewfilelist(".$id.")\" >".$lang_details['text_see_full_list']."</a></span><span id=\"hidefl\" style=\"display: none;\"><a href=\"javascript: hidefilelist()\">".$lang_details['text_hide_list']."</a></span>";
+			$files_info .= "<span id=\"showfl\" ><a style='float: left' href=\"javascript: viewfilelist(".$id.")\" >".$lang_details['text_see_full_list']."</a></span><span id=\"hidefl\" style=\"display: none;\"><a href=\"javascript: hidefilelist()\">".$lang_details['text_hide_list']."</a></span>";
 		}
 		function hex_esc($matches) {
 			return sprintf("%02x", ord($matches[0]));
@@ -545,7 +576,7 @@ echo "</script>";
 			$thanksby = get_username($CURUSER['id'])." ".$thanksby;
 		}
 		$thanksbutton = "<input class=\"btn\" type=\"button\" id=\"saythanks\"  onclick=\"saythanks(".$torrentid.");\" ".$buttonvalue." />";
-		tr($lang_details['row_thanks_by'],"<span id=\"thanksadded\" style=\"display: none;\"><input class=\"btn\" type=\"button\" value=\"".$lang_details['text_thanks_added']."\" disabled=\"disabled\" /></span><span id=\"curuser\" style=\"display: none;\">".get_username($CURUSER['id'])." </span><span id=\"thanksbutton\">".$thanksbutton."</span>&nbsp;&nbsp;<span id=\"nothanks\">".$nothanks."</span><span id=\"addcuruser\"></span>".$thanksby.($thanks_all < $thanksCount ? $lang_details['text_and_more'].$thanksCount.$lang_details['text_users_in_total'] : ""),1);
+		tr($lang_details['row_thanks_by'],"<span id=\"thanksadded\" style=\"display: none;\"><input style='background-color: #00a8c6;margin: 5px' class=\"btn\" type=\"button\" value=\"".$lang_details['text_thanks_added']."\" disabled=\"disabled\" /></span><span id=\"curuser\" style=\"display: none;\">".get_username($CURUSER['id'])." </span><span id=\"thanksbutton\">".$thanksbutton."</span>&nbsp;&nbsp;<span id=\"nothanks\">".$nothanks."</span><span id=\"addcuruser\"></span>".$thanksby.($thanks_all < $thanksCount ? $lang_details['text_and_more'].$thanksCount.$lang_details['text_users_in_total'] : ""),1);
 		// ------------- end thanked-by block--------------//
 
 		print("</table>\n");
@@ -575,7 +606,7 @@ if ($CURUSER['showcomment'] != 'no'){
 	}
 }
 print("<br /><br />");
-print ("<table style='border:1px solid #000000;'><tr><td class=\"text\" align=\"center\"><b>".$lang_details['text_quick_comment']."</b><br /><br /><form id=\"compose\" name=\"comment\" method=\"post\" action=\"".htmlspecialchars("comment.php?action=add&type=torrent")."\" onsubmit=\"return postvalid(this);\"><input type=\"hidden\" name=\"pid\" value=\"".$id."\" /><br />");
+print ("<table style='border:1px solid ;' class='pinlun'><tr><td class=\"text\" align=\"center\"><b>".$lang_details['text_quick_comment']."</b><br /><br /><form id=\"compose\" name=\"comment\" method=\"post\" action=\"".htmlspecialchars("comment.php?action=add&type=torrent")."\" onsubmit=\"return postvalid(this);\"><input type=\"hidden\" name=\"pid\" value=\"".$id."\" /><br />");
 quickreply('comment', 'body', $lang_details['submit_add_comment']);
 print("</form></td></tr></table>");
 print("<p align=\"center\"><a class=\"index\" href=\"".htmlspecialchars("comment.php?action=add&pid=".$id."&type=torrent")."\">".$lang_details['text_add_a_comment']."</a></p>\n");

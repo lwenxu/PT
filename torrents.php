@@ -4,6 +4,7 @@ dbconn(true);
 require_once(get_langfile_path("torrents.php"));
 loggedinorreturn();
 parked();
+
 if ($showextinfo['imdb'] == 'yes')
 	require_once ("imdb/imdb.class.php");
 //check searchbox
@@ -889,6 +890,10 @@ if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showin
 			font-weight: 300;
 			color: #00a8c6;
 		}
+		p{
+			margin-left: 39%;
+			margin-top: 5px;
+		}
 	</style>
 <form method="get" name="searchbox" action="?">
 	<table  class="searchbox tablept" cellspacing="0" cellpadding="5" width="100%" >
@@ -896,108 +901,7 @@ if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showin
 		<tr>
 		<td class="colhead" align="center" colspan="2"><a href="javascript: klappe_news('searchboxmain')"><?php echo  "<span style='font-size: 35px;font-family: \"Microsoft yahei\";color: white;'>".$lang_torrents['text_search_box']."</span>" ?></a></td>
 		</tr></tbody>
-		<tbody id="ksearchboxmain">
-		<tr>
-			<td class="rowfollow" align="left">
-				<table>
-					<?php
-						function printcat($name, $listarray, $cbname, $wherelistina, $btname, $showimg = false)
-						{
-							global $catpadding,$catsperrow,$lang_torrents,$CURUSER,$CURLANGDIR,$catimgurl;
 
-							print("<tr><td class=\"embedded\" colspan=\"".$catsperrow."\" align=\"left\"><b>".$name."</b></td></tr><tr>");
-							$i = 0;
-							foreach($listarray as $list){
-								if ($i && $i % $catsperrow == 0){
-									print("</tr><tr>");
-								}
-								print("<td align=\"left\" class=\"bottom\" style=\"padding-bottom: 4px; padding-left: ".$catpadding."px;\"><input type=\"checkbox\" id=\"".$cbname.$list[id]."\" name=\"".$cbname.$list[id]."\"" . (in_array($list[id],$wherelistina) ? " checked=\"checked\"" : "") . " value=\"1\" />".($showimg ? return_category_image($list[id], "?") : "<a title=\"" .$list[name] . "\" href=\"?".$cbname."=".$list[id]."\">".$list[name]."</a>")."</td>\n");
-								$i++;
-							}
-							$checker = "<input name=\"".$btname."\" value='" .  $lang_torrents['input_check_all'] . "' class=\"btn medium\" type=\"button\" onclick=\"javascript:SetChecked('".$cbname."','".$btname."','". $lang_torrents['input_check_all'] ."','" . $lang_torrents['input_uncheck_all'] . "',-1,10)\" />";
-							print("<td colspan=\"2\" class=\"bottom\" align=\"left\" style=\"padding-left: 15px\">".$checker."</td>\n");
-							print("</tr>");
-						}
-					printcat($lang_torrents['text_category'],$cats,"cat",$wherecatina,"cat_check",true);
-
-					if ($showsubcat){
-						if ($showsource)
-							printcat($lang_torrents['text_source'], $sources, "source", $wheresourceina, "source_check");
-						if ($showmedium)
-							printcat($lang_torrents['text_medium'], $media, "medium", $wheremediumina, "medium_check");
-						if ($showcodec)
-							printcat($lang_torrents['text_codec'], $codecs, "codec", $wherecodecina, "codec_check");
-						if ($showaudiocodec)
-							printcat($lang_torrents['text_audio_codec'], $audiocodecs, "audiocodec", $whereaudiocodecina, "audiocodec_check");
-						if ($showstandard)
-							printcat($lang_torrents['text_standard'], $standards, "standard", $wherestandardina, "standard_check");
-						if ($showprocessing)
-							printcat($lang_torrents['text_processing'], $processings, "processing", $whereprocessingina, "processing_check");
-						if ($showteam)
-							printcat($lang_torrents['text_team'], $teams, "team", $whereteamina, "team_check");
-					}
-					?>
-				</table>
-			</td>
-			
-			<td class="rowfollow" valign="middle">
-				<table>
-					<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<font class="medium"><?php echo $lang_torrents['text_show_dead_active'] ?></font>
-						</td>
-				 	</tr>				
-					<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<select class="med" name="incldead" style="width: 100px;">
-								<option value="0"><?php echo $lang_torrents['select_including_dead'] ?></option>
-								<option value="1"<?php print($include_dead == 1 ? " selected=\"selected\"" : ""); ?>><?php echo $lang_torrents['select_active'] ?> </option>
-								<option value="2"<?php print($include_dead == 2 ? " selected=\"selected\"" : ""); ?>><?php echo $lang_torrents['select_dead'] ?></option>
-							</select>
-						</td>
-				 	</tr>
-				 	<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<br />
-						</td>
-				 	</tr>
-					<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<font class="medium"><?php echo $lang_torrents['text_show_special_torrents'] ?></font>
-						</td>
-				 	</tr>
-				 	<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<select class="med" name="spstate" style="width: 100px;">
-								<option value="0"><?php echo $lang_torrents['select_all'] ?></option>
-<?php echo promotion_selection($special_state, 0)?>
-							</select>
-						</td>
-					</tr>
-				 	<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<br />
-						</td>
-					</tr>
-					<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<font class="medium"><?php echo $lang_torrents['text_show_bookmarked'] ?></font>
-						</td>
-				 	</tr>
-				 	<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<select class="med" name="inclbookmarked" style="width: 100px;">
-								<option value="0"><?php echo $lang_torrents['select_all'] ?></option>
-								<option value="1"<?php print($inclbookmarked == 1 ? " selected=\"selected\"" : ""); ?>><?php echo $lang_torrents['select_bookmarked'] ?></option>
-								<option value="2"<?php print($inclbookmarked == 2 ? " selected=\"selected\"" : ""); ?>><?php echo $lang_torrents['select_bookmarked_exclude'] ?></option>
-							</select>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		</tbody>
-		<tbody>
 		<tr>
 			<td class="rowfollow" align="center">
 				<table>
@@ -1080,6 +984,8 @@ echo $Cache->next_row();
 		</tbody>
 	</table>
 	</form>
+
+
 <?php
 }
 	if ($Advertisement->enable_ad()){
@@ -1096,10 +1002,11 @@ elseif($inclbookmarked == 2)
 }
 
 if ($count) {
+
 	print($pagertop);
 	if ($sectiontype == $browsecatmode)
 		torrenttable($res, "torrents");
-	elseif ($sectiontype == $specialcatmode) 
+	elseif ($sectiontype == $specialcatmode)
 		torrenttable($res, "music");
 	else torrenttable($res, "bookmarks");
 	print($pagerbottom);

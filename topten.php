@@ -31,7 +31,7 @@ echo "
 			border: 2px;
 		}
 		
-		table{
+		.datas table{
 			margin-top: 10px;
 			margin-bottom: 15px;
 			width: 80%;
@@ -541,7 +541,7 @@ print("<p align=\"center\" class='menucontrol'>"  .
 //"<a href=\"topten.php?type=5\">".$lang_topten['text_community']."</a>"  .
 //($type == 7 && !$limit ? "<b>".$lang_topten['text_search']."</b>" : "<a href=\"topten.php?type=7\">".$lang_topten['text_search']."</a>")  . " | " .
 //"<a href=\"topten.php?type=6\">".$lang_topten['text_other']."</a>"  .
-
+echo "<div class='datas'>";
 if (!$limit || $limit > 250)
 $limit = 10;
 

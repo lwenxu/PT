@@ -62,8 +62,8 @@ if (mysql_num_rows($res) > 0)
 		$Cache->add_part();
 		if ($news_flag < 1) {
 			print("<a href=\"javascript: klappe_news('a".$array['id']."')\"><img class=\"minus\" src=\"pic/trans.gif\" id=\"pica".$array['id']."\" alt=\"Show/Hide\" title=\"".$lang_index['title_show_or_hide']."\" />&nbsp;" );
-			echo  "<br>"."<b style='font-family: 微软雅黑;font-weight: 450;font-size: 30px;color:black'>". $array['title'] ."</b></a>";
-			print("<div id=\"ka".$array['id']."\" style=\"display: block;\"> <b style='font-family: 微软雅黑;font-weight: 300;font-size: 20px;'>".format_comment($array["body"],0)."</b> </div> ");
+			echo  "<br>"."<b style='font-family:Microsoft JhengHei;font-size: 36px;font-weight: 200;color:crimson'>". $array['title'] ."</b></a>";
+			print("<div id=\"ka".$array['id']."\" style=\"display: block;\"> <b style='font-family: 微软雅黑;font-weight: 300;font-size: 16px;'>".format_comment($array["body"],0)."</b> </div> ");
 			$news_flag = $news_flag + 1;
 		}
 		else
@@ -185,21 +185,21 @@ if ($showfunbox_main == "yes" && (!isset($CURUSER) || $CURUSER['showfb'] == "yes
 //check whether current user has voted
 	$funvoted = get_row_count("funvotes", "WHERE funid = ".sqlesc($row['id'])." AND userid=".sqlesc($CURUSER[id]));
 
-	print ("<h1 style='font-family:Microsoft JhengHei;font-size: 30px;font-weight: 200'>".$lang_index['text_funbox']);
+	print ("<h1 style='font-family:Microsoft JhengHei;font-size: 30px;font-weight: 200;background-color: #0a001f;color: white'>".$lang_index['text_funbox']);
 	if ($CURUSER)
 	{
-		print("<font class=\"small\">".(get_user_class() >= $log_class ? " - [<a class=\"altlink\" href=\"log.php?action=funbox\"><b>".$lang_index['text_more_fun']."</b></a>]": "").($row['neednew'] && get_user_class() >= $newfunitem_class ? " - [<a class=altlink href=\"fun.php?action=new\"><b>".$lang_index['text_new_fun']."</b></a>]" : "" ).( ($CURUSER['id'] == $row['userid'] || get_user_class() >= $funmanage_class) ? " - [<a class=\"altlink\" href=\"fun.php?action=edit&amp;id=".$row['id']."&amp;returnto=index.php\"><b>".$lang_index['text_edit']."</b></a>]" : "").(get_user_class() >= $funmanage_class ? " - [<a class=\"altlink\" href=\"fun.php?action=delete&amp;id=".$row['id']."&amp;returnto=index.php\"><b>".$lang_index['text_delete']."</b></a>] - [<a class=\"altlink\" href=\"fun.php?action=ban&amp;id=".$row['id']."&amp;returnto=index.php\"><b>".$lang_index['text_ban']."</b></a>]" : "")."</font>");
+		print("<font class=\"small\" >".(get_user_class() >= $log_class ? " - [<a class=\"altlink\" href=\"log.php?action=funbox\"><b >".$lang_index['text_more_fun']."</b></a>]": "").($row['neednew'] && get_user_class() >= $newfunitem_class ? " - [<a class=altlink href=\"fun.php?action=new\"><b>".$lang_index['text_new_fun']."</b></a>]" : "" ).( ($CURUSER['id'] == $row['userid'] || get_user_class() >= $funmanage_class) ? " - [<a class=\"altlink\" href=\"fun.php?action=edit&amp;id=".$row['id']."&amp;returnto=index.php\"><b>".$lang_index['text_edit']."</b></a>]" : "").(get_user_class() >= $funmanage_class ? " - [<a class=\"altlink\" href=\"fun.php?action=delete&amp;id=".$row['id']."&amp;returnto=index.php\"><b>".$lang_index['text_delete']."</b></a>] - [<a class=\"altlink\" href=\"fun.php?action=ban&amp;id=".$row['id']."&amp;returnto=index.php\"><b>".$lang_index['text_ban']."</b></a>]" : "")."</font>");
 	}
 	print("</h2>");
 
 	print("<table width=\"100%\"><tr><td class=\"text\">");
-	print("<iframe src=\"fun.php?action=view\" width='900' height='300' frameborder='0' name='funbox' marginwidth='0' marginheight='0'></iframe><br /><br />\n");
+	print("<iframe  src=\"fun.php?action=view\" width='100%' height='300' frameborder='0' name='funbox' marginwidth='0' marginheight='0'></iframe><br /><br />\n");
 
 	if ($CURUSER)
 	{
 		$funonclick = " onclick=\"funvote(".$row['id'].",'fun'".")\"";
 		$dullonclick = " onclick=\"funvote(".$row['id'].",'dull'".")\"";
-		print("<span id=\"funvote\"><b>".$funvote."</b>".$lang_index['text_out_of'].$totalvote.$lang_index['text_people_found_it'].($funvoted ? "" : "<font class=\"striking\">".$lang_index['text_your_opinion']."</font>&nbsp;&nbsp;<input type=\"button\" class='btn' name='fun' id='fun' ".$funonclick." value=\"".$lang_index['submit_fun']."\" />&nbsp;<input type=\"button\" class='btn' name='dull' id='dull' ".$dullonclick." value=\"".$lang_index['submit_dull']."\" />")."</span><span id=\"voteaccept\" style=\"display: none;\">".$lang_index['text_vote_accepted']."</span>");
+		print("<span  style='margin-left: 37%;font-family: Microsoft yahei' id=\"funvote\"><b>".$funvote."</b>".$lang_index['text_out_of'].$totalvote.$lang_index['text_people_found_it'].($funvoted ? "" : "<font class=\"striking\">".$lang_index['text_your_opinion']."</font>&nbsp;&nbsp;<input style='background-color:#32c5d2' type=\"button\"  class='btn' name='fun' id='fun' ".$funonclick." value=\"".$lang_index['submit_fun']."\" />&nbsp;<input style='background-color:crimson' type=\"button\" class='btn' name='dull' id='dull' ".$dullonclick." value=\"".$lang_index['submit_dull']."\" />")."</span><span id=\"voteaccept\" style=\"display: none;\">".$lang_index['text_vote_accepted']."</span>");
 	}
 	print("</td></tr></table>");
 	}
@@ -278,6 +278,14 @@ if ($showlastxtorrents_main == "yes") {
 
 
 // ------------- start: polls ------------------//
+
+echo "
+<style>
+table{
+border: 0px solid #32c5d2; 
+}
+</style>
+";
 if ($CURUSER && $showpolls_main == "yes")
 {
 		// Get current poll
@@ -396,16 +404,16 @@ if ($CURUSER && $showpolls_main == "yes")
 			}
 			else //user has not voted yet
 			{
-				print("<form method=\"post\" action=\"index.php\" style='background-color: lemonchiffon'>\n");
+				print("<form method=\"post\" action=\"index.php\" style='border: 0px'>\n");
 				$i = 0;
 				while ($a = $o[$i])
 				{
-					echo "<input "."style='color: #00a8c6;' type=radio name=choice value=".$i.">".$a."<br />\n";
+					echo "<input  type=radio name=choice value=".$i.">"."<span style='color: #00a8c6'>.$a."."</span>"."<br />\n";
 					++$i;
 				}
 				print("<br />");
-				print("<input type=\"radio\" name=\"choice\" value=\"255\">".$lang_index['radio_blank_vote']."<br />\n");
-				print("<p align=\"center\"><input style='background-color: #00a8c6;color: white;' type=\"submit\" class=\"btn\" value=\"".$lang_index['submit_vote']."\" /></p>");
+//				print("<input  type=\"radio\" name=\"choice\" value=\"255\" >"."<span style=\"color: #00a8c6\"></span>".$lang_index['radio_blank_vote']."</span>"."<br />\n");
+				print("<p align=\"center\"><input style='color: white' type=\"submit\" class=\"btn\" value=\"".$lang_index['submit_vote']."\" /></p>");
 			}
 			print("</td></tr></table>");
 

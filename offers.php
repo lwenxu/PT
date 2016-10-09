@@ -4,6 +4,7 @@ dbconn();
 require_once(get_langfile_path());
 require_once(get_langfile_path("",true));
 loggedinorreturn();
+
 parked();
 if ($enableoffer == 'no')
 permissiondenied();
@@ -14,7 +15,28 @@ function bark($msg) {
 	stdfoot();
 	exit;
 }
+echo "
+<style>
 
+.houxaun{
+margin-left: 14%;
+margin-top: 10px;
+//width: 500px;
+}
+td{
+	color: #00a8c6;
+	border: solid 2px;
+	font-family: 'Microsoft YaHei';
+//	font-size: 17px;
+}
+.pinlun{
+margin-left: 32%;
+}
+.addhou{
+margin-left: 0;
+}
+</style>
+";
 if ($_GET["category"]){
 	$categ = isset($_GET['category']) ? (int)$_GET['category'] : 0;
 	if(!is_valid_id($categ))
@@ -39,8 +61,8 @@ if ($_GET["add_offer"]){
 
 	print("<p>".$lang_offers['text_red_star_required']."</p>");
 
-	print("<div align=\"center\"><form id=\"compose\" action=\"?new_offer=1\" name=\"compose\" method=\"post\">".
-	"<table width=940 border=0 cellspacing=0 cellpadding=5><tr><td class=colhead align=center colspan=2>".$lang_offers['text_offers_open_to_all']."</td></tr>\n");
+	print("<div class='addhou' align=\"center\"><form id=\"compose\" action=\"?new_offer=1\" name=\"compose\" method=\"post\">".
+	"<table width=940px border=0 cellspacing=0 cellpadding=5 class='addhou'><tr><td class=colhead align=center colspan=2>".$lang_offers['text_offers_open_to_all']."</td></tr>\n");
 
 	$s = "<select name=type>\n<option value=0>".$lang_offers['select_type_select']."</option>\n";
 	$cats = genrelist($browsecatmode);
@@ -221,7 +243,7 @@ if ($_GET["off_details"]){
 		commenttable($allrows,"offer",$id);		
 		print($pagerbottom);
 	}
-	print("<table style='border:1px solid #000000;'><tr>".
+	print("<table style='border:1px solid #000000;' class='pinlun'><tr>".
 "<td class=\"text\" align=\"center\"><b>".$lang_offers['text_quick_comment']."</b><br /><br />".
 "<form id=\"compose\" name=\"comment\" method=\"post\" action=\"comment.php?action=add&amp;type=offer\" onsubmit=\"return postvalid(this);\">".
 "<input type=\"hidden\" name=\"pid\" value=\"".$id."\" /><br />");
@@ -731,23 +753,25 @@ else
 			.torrs{
 			border: solid 2px #00a8c6;
 			font-family: 'Microsoft YaHei';
-			font-size: 20px;
-			font-weight: 200;
+			font-size: 17px;
+			font-weight: 100;
 			}
 			.torrs tr,td{
 			border: solid 2px #00a8c6;
-			font-family: 'Microsoft YaHei';
-			font-size: 20px;
-			font-weight: 200;
+			font-family: Arial Black, arial-black;
+			font-size: 17px;
+			font-weight: 100;
 			}
-			
+			.colhead{
+				text-align: center;
+			}
 		</style>
 	";
-	print("<table class=\"torrents torrs\" cellspacing=\"0\" cellpadding=\"5\" width=\"100%\">");
-	print("<tr><td class=\"colhead\" style=\"padding: 0px\"><a href=\"?category=" . $catid . "&amp;sort=cat&amp;type=".$cat_order_type."\">".$lang_offers['col_type']."</a></td>".
+	print("<table class=\"houxaun\" cellspacing=\"0\" cellpadding=\"5\" width=\"77%\">");
+	print("<tr>".
 "<td class=\"colhead\" width=\"60%\"><a href=\"?category=" . $catid . "&amp;sort=name&amp;type=".$name_order_type."\">".$lang_offers['col_title']."</a></td>".
-"<td colspan=\"3\" class=\"colhead\"><a href=\"?category=" . $catid . "&amp;sort=v_res&amp;type=".$v_res_order_type."\">".$lang_offers['col_vote_results']."</a></td>".
-"<td class=\"colhead\"><a href=\"?category=" . $catid . "&amp;sort=comments&amp;type=".$comments_order_type."\"><img class=\"comments\" src=\"pic/trans.gif\" alt=\"comments\" title=\"".$lang_offers['title_comment']."\" />".$lang_offers['col_comment']."</a></td>".
+"<td colspan=\"4\" class=\"colhead\"><a href=\"?category=" . $catid . "&amp;sort=v_res&amp;type=".$v_res_order_type."\">".$lang_offers['col_vote_results']."</a></td>".
+//"<td class=\"colhead\"><a href=\"?category=" . $catid . "&amp;sort=comments&amp;type=".$comments_order_type."\"><img class=\"comments\" src=\"pic/trans.gif\" alt=\"comments\" title=\"".$lang_offers['title_comment']."\" />".$lang_offers['col_comment']."</a></td>".
 "<td class=\"colhead\"><a href=\"?category=" . $catid . "&amp;sort=added&amp;type=".$added_order_type."\"><img class=\"time\" src=\"pic/trans.gif\" alt=\"time\" title=\"".$lang_offers['title_time_added']."\" /></a></td>");
 if ($offervotetimeout_main > 0 && $offeruptimeout_main > 0)
 	print("<td class=\"colhead\">".$lang_offers['col_timeout']."</td>");
@@ -827,9 +851,12 @@ print("<td class=\"colhead\">".$lang_offers['col_offered_by']."</td>".
 	$max_length_of_offer_name = 70;
 	if($count_dispname > $max_length_of_offer_name)
 		$dispname=mb_substr($dispname, 0, $max_length_of_offer_name-2,"UTF-8") . "..";
-	print("<tr><td class=\"rowfollow\" style=\"padding: 0px\"><a href=\"?category=".$arr['cat_id']."\">".return_category_image($arr['cat_id'], "")."</a></td><td style='text-align: left'><a href=\"?id=".$arr[id]."&amp;off_details=1\" title=\"".htmlspecialchars($arr[name])."\"><b>".htmlspecialchars($dispname)."</b></a>".($CURUSER['appendnew'] != 'no' && strtotime($arr["added"]) >= $last_offer ? "<b> (<font class='new'>".$lang_offers['text_new']."</font>)</b>" : "").$allowed."</td><td class=\"rowfollow nowrap\" style='padding: 5px' align=\"center\">".$v_res."</td><td class=\"rowfollow nowrap\" ".(get_user_class() < $againstoffer_class ? " colspan=\"2\" " : "")." style='padding: 5px'><a href=\"?id=".$arr[id]."&amp;vote=yeah\" title=\"".$lang_offers['title_i_want_this']."\"><font color=\"green\"><b>".$lang_offers['text_yep']."</b></font></a></td>".(get_user_class() >= $againstoffer_class ? "<td class=\"rowfollow nowrap\" align=\"center\"><a href=\"?id=".$arr[id]."&amp;vote=against\" title=\"".$lang_offers['title_do_not_want_it']."\"><font color=\"red\"><b>".$lang_offers['text_nah']."</b></font></a></td>" : ""));
+	print("<td style='text-align: left'>
+<a href=\"?id=".$arr[id]."&amp;off_details=1\" title=\"".htmlspecialchars($arr[name])."\"><b>".htmlspecialchars($dispname)."</b></a>
+".($CURUSER['appendnew'] != 'no' && strtotime($arr["added"]) >= $last_offer ? "<b> (<font class='new'>".$lang_offers['text_new']."</font>)</b>" : "").$allowed."</td><td class=\"rowfollow nowrap\" style='padding: 5px' align=\"center\">".$v_res."</td><td class=\"rowfollow nowrap\" ".(get_user_class() < $againstoffer_class ? " colspan=\"2\" " : "")." style='padding: 5px'><a href=\"?id=".$arr[id]."&amp;vote=yeah\" title=\"".$lang_offers['title_i_want_this']."\"><font color=\"green\"><b>".$lang_offers['text_yep']."</b></font></a></td>".(get_user_class() >= $againstoffer_class ? "<td class=\"rowfollow nowrap\" align=\"center\"><a href=\"?id=".$arr[id]."&amp;vote=against\" title=\"".$lang_offers['title_do_not_want_it']."\"><font color=\"red\"><b>".$lang_offers['text_nah']."</b></font></a></td>" : ""));
 
-	print("<td class=\"rowfollow\">".$comment."</td><td class=\"rowfollow nowrap\">" . $addtime. "</td>");
+
+		print("<td class=\"rowfollow\">".$comment."</td><td class=\"rowfollow nowrap\">" . $addtime. "</td>");
 	if ($offervotetimeout_main > 0 && $offeruptimeout_main > 0){
 		if ($arr["allowed"] == 'allowed'){
 			$futuretime = strtotime($arr['allowedtime']) + $offeruptimeout_main;

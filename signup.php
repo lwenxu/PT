@@ -102,14 +102,15 @@ echo "
 		    background-color: #364150!important;
 		}
 		.loginbox{
-			height: 93%;
+			height: 95%;
 			width: 45%;
 			background-color: #fff;
 			margin-left: 28%;
 			border-radius: 9px;
 		}
 		td input{
-			margin: 4px;
+			margin-top: 10px;
+			margin-bottom: 0px;
 		}
 		td{
 			border: 0px;
@@ -119,6 +120,9 @@ echo "
 		}
 			.footer{
 			color: white;
+		}
+		td select{
+			margin-top: 10px;
 		}
 	</style>
 ";
@@ -185,6 +189,11 @@ print("<input type=hidden name=type value='invite'><input type=hidden name=invit
 print("<div class='langselect' align=right valign=top>".$lang_signup['text_select_lang']. $s . "</div>");
 ?>
 </form>
+
+
+
+
+
 <div class="loginbox">
 <p>
 <form method="post" action="takesignup.php">
@@ -193,10 +202,10 @@ print("<div class='langselect' align=right valign=top>".$lang_signup['text_selec
 <?php
 print("<tr><td style='color: rgb(255, 0, 0)' class=text align=center colspan=2>".$lang_signup['text_cookies_note']."</td></tr>");
 ?>
-<tr><td class=rowhead><?php echo $lang_signup['row_desired_username'] ?></td><td class=rowfollow align=left><input type="text" style="width: 200px" name="wantusername" /><br />
-<font class=small><?php echo $lang_signup['text_allowed_characters'] ?></font></td></tr>
+<tr><td class=rowhead width="30px"><?php echo $lang_signup['row_desired_username'] ?></td><td class=rowfollow align=left><input type="text" style="width: 200px" name="wantusername" /><br />
+<!--<font class=small>--><?php //echo $lang_signup['text_allowed_characters'] ?><!--</font></td></tr>-->
 <tr><td class=rowhead><?php echo $lang_signup['row_pick_a_password'] ?></td><td class=rowfollow align=left><input type="password" style="width: 200px" name="wantpassword" /><br />
-	<font class=small><?php echo $lang_signup['text_minimum_six_characters'] ?></font></td></tr>
+<!--	<font class=small>--><?php //echo $lang_signup['text_minimum_six_characters'] ?><!--</font></td></tr>-->
 <tr><td class=rowhead><?php echo $lang_signup['row_enter_password_again'] ?></td><td class=rowfollow align=left><input type="password" style="width: 200px" name="passagain" /></td></tr>
 <?php
 show_image_code ();
@@ -228,7 +237,9 @@ tr($lang_signup['row_school'], "<select name=school>$schools</select>", 1);
 <tr><td class=toolbox colspan="2" align="center"><font color=red><b><?php echo $lang_signup['text_all_fields_required'] ?></b></font><br><input type=submit value=<?php echo $lang_signup['submit_sign_up'] ?> style='height: 35px'></td></tr>
 </table>
 </form>
+	</div>
 </div>
+
 <?php
 echo "<div class='footer' >";
 stdfoot();

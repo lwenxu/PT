@@ -2,6 +2,27 @@
 require_once("include/bittorrent.php");
 dbconn();
 require_once(get_langfile_path());
+echo "
+<style>
+h1{
+color: #0a001f;
+font-family: 'Microsoft YaHei';
+font-size: 30px;
+font-weight: 500;
+text-align: center;
+
+}
+p{
+font-family: 'Microsoft YaHei';
+font-size: 18px;
+color: #00a8c6;
+text-align: center;
+}
+
+</style>
+
+";
+
 if (!mkglobal("type"))
 	die();
 

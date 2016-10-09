@@ -3,6 +3,20 @@ require_once("include/bittorrent.php");
 // Connect to DB & check login
 dbconn();
 require_once(get_langfile_path());
+echo "
+<style>
+#pmboxmenu li{
+		float: left;
+		font-family: 'Microsoft JhengHei UI';
+		font-size: 22px;
+		margin-left: 30%;
+	}
+
+a font{
+font-size: 17px;
+}
+</style>
+";
 loggedinorreturn();
 // Define constants
 define('PM_DELETED',0); // Message was deleted
@@ -51,6 +65,19 @@ else
 stdhead($mailbox_name);
 ?>
 <?php messagemenu($mailbox)?>
+<style>
+	tr td{
+		border: 1px solid;
+		color: #00a8c6;
+		font-family: "Microsoft JhengHei UI";
+	}
+	table{
+		margin-left: 23%;
+	}
+	input {
+		margin: 5px;
+	}
+</style>
 <table border="0" cellpadding="4" cellspacing="0" width="737">
 <tr><td class=colhead align=left><?php echo $lang_messages['col_search_message'] ?></td></tr>
 <tr><td class=toolbox align=center><?php echo insertJumpTo($mailbox);?></td></tr>
@@ -254,6 +281,22 @@ stdhead("PM ($subject)"); ?>
 $mailbox = ($message['sender'] == $CURUSER['id'] ? -1 : $message['location']);
 messagemenu($mailbox);
 ?>
+	<style>
+		h1{
+			text-align: center;
+		}
+		tr td{
+			border: 1px solid;
+			color: #00a8c6;
+			font-family: "Microsoft JhengHei UI";
+		}
+		table{
+			margin-left: 23%;
+		}
+		input {
+			margin: 5px;
+		}
+	</style>
 <table width="737" border="0" cellpadding="4" cellspacing="0">
 <tr>
 <td width="50%" class="colhead" align="left"><?php echo $from?></td>

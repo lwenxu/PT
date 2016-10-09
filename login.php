@@ -106,6 +106,10 @@ echo "
 		.footer{
 			color: white;
 		}
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
 	</style>
 ";
 
@@ -157,8 +161,8 @@ if (!empty($_GET["returnto"])) {
 <p><?php echo $lang_login['p_need_cookies_enables']?><br /> [<b><?php echo $maxloginattempts;?></b>] <?php echo $lang_login['p_fail_ban']?></p>
 <p><?php echo $lang_login['p_you_have']?> <b><?php echo remaining ();?></b> <?php echo $lang_login['p_remaining_tries']?></p>
 <table border="0" cellpadding="5">
-<tr><td class="rowhead"><?php echo $lang_login['rowhead_username']?></td><td class="rowfollow" align="left"><input type="text" name="username" style="width: 180px; border: 1px solid gray" /></td></tr>
-<tr><td class="rowhead"><?php echo $lang_login['rowhead_password']?></td><td class="rowfollow" align="left"><input type="password" name="password" style="width: 180px; border: 1px solid gray"/></td></tr>
+<tr><td width="30px"><?php echo $lang_login['rowhead_username']?></td><td ><input type="text" name="username" style="width: 180px; border: 1px solid gray" /></td></tr>
+<tr><td><?php echo $lang_login['rowhead_password']?></td><td ><input type="password" name="password" style="width: 180px; border: 1px solid gray"/></td></tr>
 <?php
 show_image_code ();
 if ($securelogin == "yes") 

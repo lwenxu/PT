@@ -330,7 +330,13 @@ if (get_user_class() >= UC_PEASANT)
 		.uploadform td{
 		font-size: 18px;
 		font-family: 'Microsoft YaHei';
-			color: #00a8c6;
+		color: #00a8c6;
+		
+		border: 1px solid;
+		}
+		.uploadform{
+			margin-top: 10px;
+//			margin-left: 200px;
 		}
 		#footer{
 			font-size: 13px;
@@ -339,7 +345,7 @@ if (get_user_class() >= UC_PEASANT)
 	";
 	print("<form enctype=multipart/form-data method=post action=? class='forms'>\n");
 	print("<input type=hidden name=action value=upload>");
-	print("<table class=uploadform border=1 cellspacing=0 cellpadding=5 >\n");
+	print("<table class=uploadform cellspacing=0 cellpadding=5 >\n");
 
 	print("<tr><td class=rowhead>".$lang_subtitles['row_file']."<font color=red>*</font></td><td class=rowfollow align=left><input type=file name=file>");
 	if ($maxsubsize_main > 0)
@@ -396,7 +402,11 @@ if(get_user_class() >= UC_PEASANT)
 
 		print("<input type=submit class='btn btnup serchdo serbtn' value=\"".$lang_subtitles['submit_search']."\">\n");
 		print("</form>\n");
-
+echo "<style>
+a b{
+	font-size: 20px;
+}
+</style>";
 		for ($i = 97; $i < 123; ++$i)
 		{
 			$l = chr($i);

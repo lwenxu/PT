@@ -35,14 +35,15 @@ stdhead($lang_upload['head_upload']);
 	.forms{
 		/*border: solid 2px #00a8c6;*/
 
-		font-family: "Microsoft YaHei";
-		font-size: 17px;
-		font-weight: 100;
+		font-family: "Microsoft JhengHei";
+		font-size: 15px;
+
 		margin-left: 16%;
 		/*background-color: #7FB0DA;*/
 		color: #00a8c6;
 	}
 	.forms tr{
+		/*border: 1px;*/
 		border: solid 2px #00a8c6;
 	}
 	.forms tr td{
@@ -52,8 +53,14 @@ stdhead($lang_upload['head_upload']);
 	.require{
 		font-family: "Microsoft YaHei";
 		color: #ff2e19;
-		font-weight: 500;
-		font-size: 25px;
+		font-weight: 200;
+		font-size: 22px;
+	}
+	tr{
+		border: 1px;
+	}
+	td{
+		border: 0;
 	}
 </style>
 <?php
@@ -83,7 +90,7 @@ print("<p align=\"center\" class='require'>".$lang_upload['text_red_star_require
 					tr($lang_upload['row_torrent_name'], "<input type=\"text\" style=\"width: 650px;\" id=\"name\" name=\"name\" /><br /><font class=\"medium\">".$lang_upload['text_torrent_name_note']."</font>", 1);
 				if ($smalldescription_main == 'yes')
 				tr($lang_upload['row_small_description'], "<input type=\"text\" style=\"width: 650px;\" name=\"small_descr\" /><br /><font class=\"medium\">".$lang_upload['text_small_description_note']."</font>", 1);
-				
+
 				get_external_tr();
 				if ($enablenfo_main=='yes')
 					tr($lang_upload['row_nfo_file'], "<input type=\"file\" class=\"file\" name=\"nfo\" /><br /><font class=\"medium\">".$lang_upload['text_only_viewed_by'].get_user_class_name($viewnfo_class,false,true,true).$lang_upload['text_or_above']."</font>", 1);
@@ -141,7 +148,7 @@ print("<p align=\"center\" class='require'>".$lang_upload['text_red_star_require
 						$processing_select = torrent_selection($lang_upload['text_processing'],"processing_sel","processings");
 					}
 					else $processing_select = "";
-				
+
 					tr($lang_upload['row_quality'], $source_select . $medium_select. $codec_select . $audiocodec_select. $standard_select . $processing_select, 1 );
 				}
 

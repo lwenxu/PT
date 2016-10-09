@@ -28,7 +28,7 @@ function logmenu($selected = "dailylog"){
 				#lognav ul li{
 					float: left;
 					font-family: 'Microsoft Yahei';
-					font-size: 20px;
+					font-size: 19px;
 					color: white;
 					height: auto;
 					margin: 20px;
@@ -58,7 +58,7 @@ function searchtable($title, $action, $opts = array()){
 				.logtable tr td{
 					font-family: 'Microsoft Yahei';
 					color: #00a8c6;
-					font-size: 22px;
+					font-size: 17px;
 					border:solid 2px;
 					padding: 5px;
 				}
@@ -87,7 +87,7 @@ function additem($title, $action){
 				.logtable tr td{
 					font-family: 'Microsoft Yahei';
 					color: #00a8c6;
-					font-size: 22px;
+					font-size: 17px;
 					border:solid 2px;
 					padding: 5px;
 				}
@@ -111,7 +111,7 @@ function edititem($title, $action, $id){
 				.logtable tr td{
 					font-family: 'Microsoft Yahei';
 					color: #00a8c6;
-					font-size: 22px;
+					font-size: 17px;
 					border:solid 2px;
 					padding: 5px;
 				}
@@ -190,7 +190,7 @@ else {
 				.logtable tr td{
 					font-family: 'Microsoft Yahei';
 					color: #00a8c6;
-					font-size: 22px;
+					font-size: 17px;
 					border:solid 2px;
 					padding: 5px;
 				}
